@@ -1,12 +1,13 @@
 com\mycompany\multiplayerbiblio\Book.class
-com\mycompany\multiplayerbiblio\Question.class
 servlets\UpdateProfileServlet.class
 servlets\LoginServlet.class
 servlets\ReviseExamServlet.class
-servlets\DisplayExamServlet.class
 com\mycompany\multiplayerbiblio\Career.class
 com\mycompany\multiplayerbiblio\User.class
 com\mycompany\multiplayerbiblio\Utilities.class
 com\mycompany\multiplayerbiblio\ExamsInstances.class
 com\mycompany\multiplayerbiblio\Medal.class
+com\mycompany\multiplayerbiblio\Question.class
+servlets\DisplayExamServlet.class
 com\mycompany\multiplayerbiblio\Exam.class
+db\UserManagement.class
