@@ -1,1 +1,1 @@
-web: java -jar target/Multiplayerbiblio-1.0-SNAPSHOT.war
+web: java -war target/Multiplayerbiblio-1.0-SNAPSHOT.war
