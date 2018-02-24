@@ -13,22 +13,37 @@
     </head>
     <body>
 
-        <div class="p-3 bg-primary text-white sticky-top">
+        <div class="p-2 bg-primary text-white sticky-top">
             <div class="container"><h1>Conoce tu biblioteca</h1></div>
         </div>
 
-
-        <div class="p-3 bg-dark text-white" style="height: 300px"  id="welcomeDiv">
-            <div class="container text-center p-3" id="hideshow" style="margin-top: 100px">
-                <h1>¡Prueba la aplicación!</h1>
-                <button type="button" class="btn btn-success btn-primary btn-lg">Empezar</button>
+        <div class="p-3 bg-dark text-white" id="content">
+            <div class="container">
+                <form action="LoginServlet" onsubmit="return validateLogin(this)">
+                    <div class="form-group">
+                        <label for="yourName">Nombre</label>
+                        <input type="userName" class="form-control" name="name" placeholder="Introduce tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" id="inputPassword1" placeholder="Contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="p-3 bg-dark text-white"  id="welcomeDiv">
+            <div class="container text-center p-3">
+ 
+                <button type="button" class="btn btn-success btn-lg" id="hideshow">Registrarse</button>
             </div>
         </div>
 
-        <div class="p-3 bg-dark text-white" id="chooseNameDiv" style="height: 400px; display: none;">
-            <div class="container text-center p-3">
+        <div class="p-3 bg-dark text-white" id="chooseNameDiv" style="display: none;">
+            <div class="container text-center">
                 <h2>Crea tu usuario:</h2>
-                <form action="LoginServlet">
+                <form action="RegisterServlet" onsubmit="return validateRegister(this)">
                     <div class="form-group">
                         <label for="yourName">Nombre</label>
                         <input type="userName" class="form-control" name="name" placeholder="Introduce tu nombre">
@@ -43,12 +58,21 @@
                             %>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <div class="form-group">
+                        <label for="inputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" id="inputPassword1" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1">Repita la contraseña</label>
+                        <input type="password" class="form-control" id="inputPassword1" placeholder="Contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-primary float-left">Entrar</button>
                 </form>
+                        <button class="btn btn-danger float-left ml-1" id="hideshowCancel">Cancelar</button>
             </div>
         </div>  
 
-        <div class="p-3 bg-dark text-white">
+        <div class="p-3 bg-dark text-white" id="content">
             <div class="container text-center p-3">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non nibh sollicitudin, semper mauris tincidunt, viverra massa. Vestibulum id fermentum nulla, sed mollis ex. Phasellus semper convallis pretium. Curabitur consectetur viverra pellentesque. Etiam eu rhoncus lacus. Aliquam eget urna ac neque auctor iaculis sit amet eu dolor. Proin maximus nibh at neque bibendum, in pretium lorem volutpat. Phasellus ornare fermentum dolor, vitae tincidunt mauris tincidunt ut.
@@ -92,12 +116,62 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-            jQuery(document).ready(function () {
-                jQuery('#hideshow').on('click', function (event) {
-                    jQuery('#chooseNameDiv').show();
-                    jQuery('#welcomeDiv').hide()();
-                });
-            });
+                    jQuery(document).ready(function () {
+                        jQuery('#hideshow').on('click', function () {
+                            jQuery('#chooseNameDiv').show();
+                            jQuery('#welcomeDiv').hide();
+                            jQuery('#content').hide();
+                            jQuery('#carouselExampleControls').hide();
+                        });
+                    });
+        </script>
+        
+        <script>
+                    jQuery(document).ready(function () {
+                        jQuery('#hideshowCancel').on('click', function () {
+                            jQuery('#chooseNameDiv').hide();
+                            jQuery('#welcomeDiv').show();
+                            jQuery('#content').show();
+                            jQuery('#carouselExampleControls').show();
+                        });
+                    });
+        </script>
+
+        <script>
+            function validateRegister(form) {
+                if (form.elements[0].value === "") {
+                    alert("Introduce un nombre de usuario");
+                    return false;
+                }
+
+                if (form.elements[1].value === "") {
+                    alert("Introduce la carrera que estudias");
+                    return false;
+                }
+
+                if (form.elements[2].value !== form.elements[3].value) {
+                    alert("Las contraseñas no coinciden");
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+        
+        <script>
+            function validateLogin(form) {
+                if (form.elements[0].value === "") {
+                    alert("Introduce un nombre de usuario");
+                    return false;
+                }
+
+                if (form.elements[1].value === "") {
+                    alert("Introduce la contraseña");
+                    return false;
+                }
+
+                return true;
+            }
         </script>
     </body>
 </html>

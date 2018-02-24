@@ -15,7 +15,7 @@
         <% User user = (User) request.getSession().getAttribute("user");
             if (user.noob()) {%>
         <div class="alert alert-success alert-dismissible" role="alert">
-            <h4 class="alert-heading">¡Bienvenid@ <%=user.name()%> !</h4>
+            <h4 class="alert-heading">¡Bienvenid@ <%=user.nick()%> !</h4>
             <p>Completa lecciones y realiza las diferentes tareas disponibles para conseguir experiencia y subir de nivel. A medida que progreses desbloquearás nuevas características.</p>
             <hr>
             <p class="mb-0">Esto es una versión de prueba, tu progreso no se guardará cuando abandones la sesión.</p>
@@ -51,7 +51,7 @@
                     <img src="<%=user.image()%>" class="img-fluid" alt="Profile image" style="max-height:75px;width:130px;">
                 </div>
                 <div class="col-sm">
-                    <h4 class="text-center"><%=user.name()%> - <%=user.carreer()%></h4>
+                    <h4 class="text-center"><%=user.nick()%> - <%=user.career()%></h4>
                     <h3 class="text-center">Nv: <%=user.level()%></h3>
                 </div>
             </div>

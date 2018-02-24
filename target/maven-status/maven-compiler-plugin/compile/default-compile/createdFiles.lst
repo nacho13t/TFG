@@ -2,6 +2,7 @@ com\mycompany\multiplayerbiblio\Book.class
 servlets\UpdateProfileServlet.class
 servlets\LoginServlet.class
 servlets\ReviseExamServlet.class
+servlets\RegisterServlet.class
 com\mycompany\multiplayerbiblio\Career.class
 com\mycompany\multiplayerbiblio\User.class
 com\mycompany\multiplayerbiblio\Utilities.class

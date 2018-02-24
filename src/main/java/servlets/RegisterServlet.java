@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import com.mycompany.multiplayerbiblio.User;
 import db.UserManagement;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+
 /**
  *
  * @author nacho
  */
-public class UpdateProfileServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,14 +32,17 @@ public class UpdateProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
-        user.updateInfo(request.getParameter("inputName"), request.getParameter("inputCareer"), request.getParameter("inputImage"));
-        UserManagement.updateDatabaseProfile(user);
-        
-        response.sendRedirect("mainScreen.jsp");
+            
+            User user = UserManagement.registerNewUser(request.getParameter("name"), request.getParameter("career"), request.getParameter("pass"));
+            if(user != null){
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                response.sendRedirect("mainScreen.jsp");
+            }else{
+                response.sendRedirect("WarningUserExists.jsp");
+            }
+            
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,7 +60,7 @@ public class UpdateProfileServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +78,7 @@ public class UpdateProfileServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -5,8 +5,9 @@
 %>   
 
 <div id="profileInfo">
-    <h5>Nombre: <%=user.name()%></h5>
-    <h5>Carrera: <%=user.carreer()%></h5>
+    <h5>Nombre de usuario: <%=user.username()%></h5>
+    <h5>Nick: <%=user.nick()%></h5>
+    <h5>Carrera: <%=user.career()%></h5>
     <h5>Cuestionarios completados: <%=user.examStats()%></h5>
     <h5>Medallas obtenidas: <%=user.medalStats()%></h5>
 </div>
@@ -15,13 +16,13 @@
     <h4>Edita tu perfil</h4>
     <form action="UpdateProfileServlet">
         <div class="form-group">
-            <label for="inputName">Nombre</label>
-            <input type="userName" class="form-control" id="inputName" name="inputName" aria-describedby="nameHelp" value="<%=user.name()%>">
-            <small id="nameHelp" class="form-text text-muted">Este es tu nombre de usuario</small>
+            <label for="inputName">Nick</label>
+            <input type="userName" class="form-control" id="inputName" name="inputName" aria-describedby="nameHelp" value="<%=user.nick()%>">
+            <small id="nameHelp" class="form-text text-muted">Este es tu Nick</small>
         </div>
         <div class="form-group">
             <label for="inputCareer">Carrera</label>
-            <select id="inputCareer" name="inputCareer" class="form-control" aria-describedby="careerHelp" value="<%=user.carreer()%>">
+            <select id="inputCareer" name="inputCareer" class="form-control" aria-describedby="careerHelp" value="<%=user.career()%>">
                 <%
                     for (String career : Utilities.careers()) {
                 %><option><%=career%></option><%

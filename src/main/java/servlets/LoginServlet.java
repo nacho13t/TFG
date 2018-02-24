@@ -1,8 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
-import com.mycompany.multiplayerbiblio.User;
 import db.UserManagement;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
 
 /**
  *
@@ -28,18 +31,23 @@ public class LoginServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-            
-            User user = new User(request.getParameter("name"), request.getParameter("career"),"Images/Medals/medal1.png");
+        
+        String username = request.getParameter("name");
+        String pass = request.getParameter("pass");
+        
+        if(UserManagement.validateUser(username, pass)){
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-       
-            UserManagement.registerUser(request.getParameter("name"), request.getParameter("career"));
-            
+            session.setAttribute("user", UserManagement.getUser(username));
             response.sendRedirect("mainScreen.jsp");
+        }else{
+            response.sendRedirect("WarningLoginError.jsp");
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
