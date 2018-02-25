@@ -32,10 +32,10 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-            
             User user = UserManagement.registerNewUser(request.getParameter("name"), request.getParameter("career"), request.getParameter("pass"));
             if(user != null){
                 HttpSession session = request.getSession();
+                
                 session.setAttribute("user", user);
                 response.sendRedirect("mainScreen.jsp");
             }else{

@@ -43,7 +43,7 @@
         <div class="p-3 bg-dark text-white" id="chooseNameDiv" style="display: none;">
             <div class="container text-center">
                 <h2>Crea tu usuario:</h2>
-                <form action="RegisterServlet" onsubmit="return validateRegister(this)">
+                <form action="RegisterServlet" onsubmit="return validateRegister(this)" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="yourName">Nombre</label>
                         <input type="userName" class="form-control" name="name" placeholder="Introduce tu nombre">

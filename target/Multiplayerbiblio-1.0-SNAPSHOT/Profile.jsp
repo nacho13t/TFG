@@ -14,7 +14,7 @@
 
 <div id="editProfile" style="display: none">
     <h4>Edita tu perfil</h4>
-    <form action="UpdateProfileServlet">
+    <form action="UpdateProfileServlet" accept-charset="UTF-8">
         <div class="form-group">
             <label for="inputName">Nick</label>
             <input type="userName" class="form-control" id="inputName" name="inputName" aria-describedby="nameHelp" value="<%=user.nick()%>">
