@@ -148,6 +148,11 @@
                     alert("Introduce la carrera que estudias");
                     return false;
                 }
+                
+                if (form.elements[2].value === "") {
+                    alert("Introduce una contraseña");
+                    return false;
+                }
 
                 if (form.elements[2].value !== form.elements[3].value) {
                     alert("Las contraseñas no coinciden");

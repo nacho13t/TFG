@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="content container" id="skill1Div">
+        <div class="content container" id="skill1Div" style="display: none">
             <jsp:include page="Content.jsp" />
         </div>
 
@@ -75,6 +75,10 @@
 
         <div class="content container" id="skill5Div" style="display: none">
             <jsp:include page="RecommendedBooks.jsp" />
+        </div>
+        
+        <div class="content container" id="skill6Div">
+            <jsp:include page="Rankings.jsp" />
         </div>
 
 
@@ -99,10 +103,12 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
+                    Menú
                 </button>
 
                 <div class="collapse navbar-collapse" role="toolbar" aria-label="Toolbar with button groups" id="navbarSupportedContent">
                     <div class="btn-group  btn-group-lg navbar-nav mr-auto" role="group" aria-label="First group">
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Rankings" onClick="displayDiv(this.id)" id="skill6"><i class="fas fa-list-ol"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Contenido" onClick="displayDiv(this.id)" id="skill1"><i class="fas fa-book"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Cuestionarios" onClick="displayDiv(this.id)" id="skill2"><i class="fas fa-flag-checkered"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Medallas" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>

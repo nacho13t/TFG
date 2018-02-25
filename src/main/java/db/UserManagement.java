@@ -7,8 +7,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +28,29 @@ public class UserManagement {
         con = DriverManager.getConnection(sURL, "sql11222096", "ds5BMvYtIk");
 
         return con;
+    }
+
+    public static Map<String, Integer> getTopLvlUsers() {
+        try {
+            Map<String, Integer> allUsers = new HashMap<>();
+
+            con = connection();
+            String query = "select name, lvl from Users";
+            Statement stmt = con.prepareStatement(query);
+            ResultSet result = stmt.executeQuery(query);
+
+            while (result.next()) {
+                allUsers.put(result.getString("name"), result.getInt("lvl"));
+            }
+            
+            con.close();
+            return MapSort.sortByValue(allUsers);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
     }
 
     public static void updateExperienceAndLevelInDatabase(User user) {
@@ -78,7 +108,7 @@ public class UserManagement {
 
         setId(user);
         retrieveProgressFromDatabase(user);
-                
+
         return user;
     }
 
@@ -173,7 +203,7 @@ public class UserManagement {
             }
 
             con.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }

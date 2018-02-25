@@ -3,11 +3,13 @@ servlets\UpdateProfileServlet.class
 servlets\LoginServlet.class
 servlets\ReviseExamServlet.class
 servlets\RegisterServlet.class
+db\MapSort.class
 com\mycompany\multiplayerbiblio\Career.class
 com\mycompany\multiplayerbiblio\User.class
 com\mycompany\multiplayerbiblio\Utilities.class
 com\mycompany\multiplayerbiblio\ExamsInstances.class
 com\mycompany\multiplayerbiblio\Medal.class
+db\MapSort$1.class
 com\mycompany\multiplayerbiblio\Question.class
 servlets\DisplayExamServlet.class
 com\mycompany\multiplayerbiblio\Exam.class
