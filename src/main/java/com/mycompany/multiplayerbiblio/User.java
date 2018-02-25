@@ -4,14 +4,17 @@ import db.UserManagement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class User {
 
     private String username, nick, photo, career, pass, email;
 
-    private int experience, level, experienceLeft;
+    private int experience, level, experienceLeft, id;
     private boolean noob;
-    private Medal[] medals;
+    private List<Medal> medals;
     private boolean[] completedExams;
 
     public User(String name, String career, String pass) {
@@ -26,16 +29,22 @@ public final class User {
         experienceLeft = 50;
         completedExams = new boolean[]{false, false, false, false};
 
-        medals = new Medal[10];
-        medals[0] = new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png");
+        medals = new ArrayList<>();
+        medals.add(new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png"));
     }
 
     public User() {
         noob = false;
         completedExams = new boolean[]{false, false, false, false};
-        medals = new Medal[10];
-        medals[0] = new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png");
-
+        medals = new ArrayList<>();
+    }
+    
+    public int id(){
+        return id;
+    }
+    
+    public void id(int id){
+        this.id = id;
     }
 
     public void setEmail(String email) {
@@ -78,7 +87,7 @@ public final class User {
   
 
     public void setMedals(Medal[] medals) {
-        this.medals = medals;
+        this.medals.addAll(Arrays.asList(medals));
     }
 
     public void setCompletedExams(boolean[] completedExams) {
@@ -98,12 +107,7 @@ public final class User {
     }
 
     public void addMedal(Medal medal) {
-        for (Medal medal1 : medals) {
-            if (medal1 == null) {
-                medal1 = medal;
-                break;
-            }
-        }
+        medals.add(medal);
     }
 
     public void updateInfo(String nick, String career, String image) {
@@ -133,8 +137,9 @@ public final class User {
 
     public void completeExam(int id) {
         completedExams[id] = true;
+        UserManagement.completeNewExam(this, id+1);
         if (checkIfAllExamCompleted()) {
-            medals[1] = new Medal("¡Estudiante!", "Completa todos los exámenes con la máxima nota", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal2.png");
+            UserManagement.obtainNewMedal(this, 2);
         }
     }
 
@@ -148,7 +153,7 @@ public final class User {
         return true;
     }
 
-    public Medal[] medals() {
+    public List<Medal> medals() {
         return medals;
     }
 
