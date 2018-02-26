@@ -43,6 +43,7 @@
         <div class="p-3 bg-dark text-white" id="chooseNameDiv" style="display: none;">
             <div class="container text-center">
                 <h2>Crea tu usuario:</h2>
+                <h1 style="background-color: white; color: black"> Importante: las contraseñas no están cifradas aún, no uses una contraseña que uses en otros sitios o que proporcione información importante</h1>
                 <form action="RegisterServlet" onsubmit="return validateRegister(this)" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="yourName">Nombre</label>
