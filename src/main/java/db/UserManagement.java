@@ -2,6 +2,9 @@ package db;
 
 import com.mycompany.multiplayerbiblio.Medal;
 import com.mycompany.multiplayerbiblio.User;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,11 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,7 +71,7 @@ public class UserManagement {
         }
     }
 
-    public static User registerNewUser(String name, String career, String pass) {
+    public static User registerNewUser(String name, String career, String pass) throws NoSuchAlgorithmException {
         User user = new User(name, career, pass);
 
         if (UserManagement.registerUserInDatabase(user)) {
@@ -100,7 +99,7 @@ public class UserManagement {
             System.out.println(result.getInt("lvl"));
             user.setExperienceLeft(result.getInt("expleft"));
             user.setPhoto(result.getString("image"));
-            user.setPass(result.getString("pass"));
+            user.setPass(result.getString("password"));
             user.setNick(result.getString("name"));
             user.setEmail(result.getString("email"));
         }
@@ -232,15 +231,18 @@ public class UserManagement {
         }
     }
 
-    public static boolean validateUser(String username, String pass) throws SQLException {
+    public static boolean validateUser(String username, String pass) throws SQLException, NoSuchAlgorithmException {
         try {
             con = connection();
 
-            String query = "select * from Users WHERE username = ? and pass = ?";
+            String query = "select * from Users WHERE username = ? and password = ?";
 
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
+            
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, username);
-            preparedStmt.setString(2, pass);
+            preparedStmt.setBytes(2, hash);
             ResultSet result = preparedStmt.executeQuery();
 
             boolean exists = result.next();
@@ -295,7 +297,7 @@ public class UserManagement {
         }
     }
 
-    public static boolean registerUserInDatabase(User user) {
+    public static boolean registerUserInDatabase(User user) throws NoSuchAlgorithmException {
 
         try {
             if (userExists(user.username())) {
@@ -304,15 +306,18 @@ public class UserManagement {
 
             con = connection();
 
-            String query = " insert into Users (username, career, lvl, name, pass, expleft)"
+            String query = " insert into Users (username, career, lvl, name, password, expleft)"
                     + " values (?, ?, ?, ?, ?, ?)";
 
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(user.pass().getBytes(StandardCharsets.UTF_8));
+            
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, user.username());
             preparedStmt.setString(2, user.career());
             preparedStmt.setInt(3, 1);
             preparedStmt.setString(4, user.nick());
-            preparedStmt.setString(5, user.pass());
+            preparedStmt.setBytes(5, hash);
             preparedStmt.setInt(6, 50);
 
             preparedStmt.execute();

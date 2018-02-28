@@ -111,7 +111,7 @@
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Rankings" onClick="displayDiv(this.id)" id="skill6"><i class="fas fa-list-ol"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Contenido" onClick="displayDiv(this.id)" id="skill1"><i class="fas fa-book"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Cuestionarios" onClick="displayDiv(this.id)" id="skill2"><i class="fas fa-flag-checkered"></i></button>
-                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Medallas" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Insignias" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Perfil" onClick="displayDiv(this.id)" id="skill4"><i class="fas fa-user"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Libros recomendados" onClick="displayDiv(this.id)" id="skill5"><i class="fas fa-graduation-cap"></i></button>
                     </div>

@@ -1,4 +1,4 @@
-<%@page import="com.mycompany.multiplayerbiblio.Utilities"%>
+<%@page import="db.CareerManagement"%>
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,7 +16,7 @@
         <div class="p-2 bg-primary text-white sticky-top">
             <div class="container"><h1>Conoce tu biblioteca</h1></div>
         </div>
-
+        <h2 style="background-color: white; color: black">28/02/2018: Borrado de usuarios para hacer cambios en la base de datos, regístrate de nuevo.</h2>
         <div class="p-3 bg-dark text-white" id="content">
             <div class="container">
                 <form action="LoginServlet" onsubmit="return validateLogin(this)">
@@ -43,7 +43,6 @@
         <div class="p-3 bg-dark text-white" id="chooseNameDiv" style="display: none;">
             <div class="container text-center">
                 <h2>Crea tu usuario:</h2>
-                <h1 style="background-color: white; color: black"> Importante: las contraseñas no están cifradas aún, no uses una contraseña que uses en otros sitios o que proporcione información importante</h1>
                 <form action="RegisterServlet" onsubmit="return validateRegister(this)" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="yourName">Nombre</label>
@@ -53,7 +52,7 @@
                         <label for="inputCareer">Carrera</label>
                         <select id="inputCareer" name="career" class="form-control">
                             <%
-                                for (String career : Utilities.careers()) {
+                                for (String career : CareerManagement.getCareerNames()) {
                             %><option><%=career%></option><%
                                 }
                             %>

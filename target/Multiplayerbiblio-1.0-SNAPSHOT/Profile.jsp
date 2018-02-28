@@ -1,4 +1,4 @@
-<%@page import="com.mycompany.multiplayerbiblio.Utilities"%>
+<%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <%
     User user = (User) session.getAttribute("user");
@@ -24,7 +24,7 @@
             <label for="inputCareer">Carrera</label>
             <select id="inputCareer" name="inputCareer" class="form-control" aria-describedby="careerHelp" value="<%=user.career()%>">
                 <%
-                    for (String career : Utilities.careers()) {
+                    for (String career : CareerManagement.getCareerNames()) {
                 %><option><%=career%></option><%
                                 }
                 %>
