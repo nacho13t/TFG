@@ -15,14 +15,14 @@ import java.util.logging.Logger;
 public class CareerManagement {
     private static Connection con;
 
-    public static Connection connection() throws SQLException {
+    public static Connection connection() throws SQLException, ClassNotFoundException {
         String sURL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11222096";
         con = DriverManager.getConnection(sURL, "sql11222096", "ds5BMvYtIk");
 
         return con;
     }
     
-    public static List<String> getCareerNames(){
+    public static List<String> getCareerNames() throws ClassNotFoundException{
         try {
             List<String> careerNames = new ArrayList<>();
             con = connection();
@@ -34,7 +34,7 @@ public class CareerManagement {
             while (result.next()) {
                 careerNames.add(result.getString("name"));
             }
-            
+            con.close();
             return careerNames;
             
         } catch (SQLException ex) {
@@ -43,7 +43,7 @@ public class CareerManagement {
         }
     }
 
-    public static String[] getCareerRecommendedBooks(String career){
+    public static String[] getCareerRecommendedBooks(String career) throws SQLException, ClassNotFoundException{
         try {
             List<String> careerNames = new ArrayList<>();
             con = connection();
@@ -55,12 +55,14 @@ public class CareerManagement {
             ResultSet result = preparedStmt.executeQuery();
             if(result.next()){
                 String rawBooks = result.getString("recbooks");
+                con.close();
                 if(rawBooks != null)return rawBooks.split("¼");
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(CareerManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
+        con.close();
         return null;
     }
     

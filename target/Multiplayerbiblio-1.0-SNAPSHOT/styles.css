@@ -1,0 +1,21 @@
+.profileImageContainer{
+margin-top: 9px;
+    object-fit: cover;
+    width:90px;
+    height:90px;
+}
+
+.top-bar{
+    background-color: #B42929;
+}
+
+@media screen and (max-width: 767px) {  
+    .profileImageContainer{
+        margin-top: 5px;
+        object-fit: cover;
+        width:65px;
+        height:65px;
+
+    }
+
+}

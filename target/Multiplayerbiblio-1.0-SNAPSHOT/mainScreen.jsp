@@ -8,7 +8,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="styles.css">
         <title>TFG</title>
     </head>
     <body>
@@ -45,15 +45,17 @@
 
 
 
-        <div class="container p-3 mb-2 bg-primary text-white">
+        <div class="mb-2 text-white top-bar container-fluid">
             <div class="row">
-                <div class="col-sm">
-                    <img src="<%=user.image()%>" class="img-fluid" alt="Profile image" style="max-height:75px;width:130px;">
+                <div class="col text-center">
+                    <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                    <h5><%=user.nick()%></h5>
+                </div> 
+                <div class="text-center col d-flex">
+                    <div class=" justify-content-center align-self-center"><h5><%=user.career()%></h5>
+                    <h5>Nivel <%=user.level()%></h5></div>
                 </div>
-                <div class="col-sm">
-                    <h4 class="text-center"><%=user.nick()%> - <%=user.career()%></h4>
-                    <h3 class="text-center">Nv: <%=user.level()%></h3>
-                </div>
+                
             </div>
         </div>
 
@@ -76,7 +78,7 @@
         <div class="content container" id="skill5Div" style="display: none">
             <jsp:include page="RecommendedBooks.jsp" />
         </div>
-        
+
         <div class="content container" id="skill6Div">
             <jsp:include page="Rankings.jsp" />
         </div>
