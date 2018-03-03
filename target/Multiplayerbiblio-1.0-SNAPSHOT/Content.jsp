@@ -1,5 +1,6 @@
-
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
+
+<h3 class="text-center">Contenido</h3>
 <%
     User user = (User)session.getAttribute("user");    
 %>   

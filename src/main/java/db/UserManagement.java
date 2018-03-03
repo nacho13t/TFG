@@ -271,7 +271,7 @@ public class UserManagement {
             preparedStmt.setBoolean(6, false);
 
             preparedStmt.execute();
-
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -326,6 +326,7 @@ public class UserManagement {
 
             setId(user);
             createProgressRegisterForUser(user);
+            CareerManagement.recalculateStats(user.career());
 
             return true;
 
@@ -349,6 +350,8 @@ public class UserManagement {
         preparedStmt.executeUpdate();
 
         con.close();
+        
+        CareerManagement.recalculateStats(user.career());
     }
 
     public static boolean userExists(String username) {

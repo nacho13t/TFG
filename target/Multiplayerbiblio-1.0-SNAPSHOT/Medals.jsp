@@ -2,8 +2,7 @@
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <%@page import="com.mycompany.multiplayerbiblio.Medal"%>
 <div class=" clearfix">
-    <h4>¡Consigue insignias completando retos!</h4>
-
+<h3 class="text-center">¡Consigue insignias completando retos!</h3>
     <%
         User user = (User) session.getAttribute("user");
         for (Medal medal : user.medals()) {

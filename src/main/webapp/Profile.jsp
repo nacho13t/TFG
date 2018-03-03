@@ -1,5 +1,6 @@
 <%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
+<h3 class="text-center">Tu perfil</h3>
 <%
     User user = (User) session.getAttribute("user");
 %>   

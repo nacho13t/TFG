@@ -6,6 +6,7 @@
 package servlets;
 
 import com.mycompany.multiplayerbiblio.User;
+import db.CareerManagement;
 import db.UserManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,9 +40,12 @@ public class UpdateProfileServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        String oldCareer = user.career();
         
         user.updateInfo(request.getParameter("inputName"), request.getParameter("inputCareer"), request.getParameter("inputImage"));
         UserManagement.updateDatabaseProfile(user);
+        
+        CareerManagement.recalculateStats(oldCareer);
         
         response.sendRedirect("mainScreen.jsp");
     }

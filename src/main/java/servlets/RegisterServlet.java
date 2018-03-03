@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
             User user = UserManagement.registerNewUser(request.getParameter("name"), request.getParameter("career"), request.getParameter("pass"));
             if(user != null){
                 HttpSession session = request.getSession();

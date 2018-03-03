@@ -1,5 +1,5 @@
-
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
+<h3 class="text-center">Cuestionarios</h3>
 <%
     User user = (User)session.getAttribute("user");    
 %>    

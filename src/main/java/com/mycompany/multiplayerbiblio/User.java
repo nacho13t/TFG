@@ -1,5 +1,6 @@
 package com.mycompany.multiplayerbiblio;
 
+import db.CareerManagement;
 import db.UserManagement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -114,6 +115,7 @@ public final class User {
         this.nick = nick;
         this.career = career;
         this.photo = image;
+        
     }
 
     public String image() {
@@ -178,6 +180,7 @@ public final class User {
             experienceBuffer -= experienceLeft();
             experience += experienceLeft();
             level++;
+            CareerManagement.recalculateStats(career);
             experienceLeft = level * 100;
             gainExperience(experienceBuffer);
         }
