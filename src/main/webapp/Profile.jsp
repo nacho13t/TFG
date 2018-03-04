@@ -1,5 +1,6 @@
 <%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
+
 <h3 class="text-center">Tu perfil</h3>
 <%
     User user = (User) session.getAttribute("user");
@@ -27,17 +28,24 @@
                 <%
                     for (String career : CareerManagement.getCareerNames()) {
                 %><option><%=career%></option><%
-                                }
+                    }
                 %>
             </select>
             <small id="careerHelp" class="form-text text-muted">La carrera que estudias</small>
         </div>
-        <div class="form-group">
-            <label for="inputImage">Imagen</label>
-            <input type="userImage" class="form-control" id="inputImage" name="inputImage"  aria-describedby="imageHelp" value="<%=user.image()%>">
-            <small id="imageHelp" class="form-text text-muted">Tu imagen de perfil, añade la ruta al archivo en tu pc</small>
-        </div>
 
+            
+        <div class="form-group">
+            <label>
+                <input type="radio" name="img-select" value="Images/avatar.png"/>
+                <img class="img-responsive profileImageContainer rounded-circle" src="Images/avatar.png">
+            </label>
+            <label>
+                <input type="radio" name="img-select" value="Images/virus.png" />
+                <img class="img-responsive profileImageContainer rounded-circle" src="Images/virus.png">
+            </label>
+         <small id="imageHelp" class="form-text text-muted">Tu imagen de perfil, desbloquea más subiendo de nivel</small>
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 </div>

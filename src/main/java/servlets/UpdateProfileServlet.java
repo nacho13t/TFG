@@ -42,7 +42,7 @@ public class UpdateProfileServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String oldCareer = user.career();
         
-        user.updateInfo(request.getParameter("inputName"), request.getParameter("inputCareer"), request.getParameter("inputImage"));
+        user.updateInfo(request.getParameter("inputName"), request.getParameter("inputCareer"), request.getParameter("img-select"));
         UserManagement.updateDatabaseProfile(user);
         
         CareerManagement.recalculateStats(oldCareer);

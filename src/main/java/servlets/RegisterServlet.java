@@ -37,7 +37,6 @@ public class RegisterServlet extends HttpServlet {
             User user = UserManagement.registerNewUser(request.getParameter("name"), request.getParameter("career"), request.getParameter("pass"));
             if(user != null){
                 HttpSession session = request.getSession();
-                
                 session.setAttribute("user", user);
                 response.sendRedirect("mainScreen.jsp");
             }else{
