@@ -1,17 +1,16 @@
 <%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 
-<h3 class="text-center">Tu perfil</h3>
 <%
     User user = (User) session.getAttribute("user");
 %>   
 
-<div id="profileInfo">
-    <h5>Nombre de usuario: <%=user.username()%></h5>
-    <h5>Nick: <%=user.nick()%></h5>
-    <h5>Carrera: <%=user.career()%></h5>
-    <h5>Cuestionarios completados: <%=user.examStats()%></h5>
-    <h5>Medallas obtenidas: <%=user.medalStats()%></h5>
+<h3 class="text-center"><%=user.username()%></h3><hr>
+<div id="profileInfo" class="text-center">
+    <h5><i> <%=user.nick()%></i></h5>
+    <h5><i><%=user.career()%></i></h5>
+    <h5><i><%=user.examStats()%> cuestionarios completados</i></h5>
+    <h5><i><%=user.medalStats()%> medallas obtenidas</i></h5>
 </div>
 
 <div id="editProfile" style="display: none">
@@ -50,7 +49,7 @@
     </form>
 </div>
 
-<div class="mt-2">
+<div class="mt-2 text-center" id="editProfileButtonContainer">
     <button type="button" class="btn btn-secondary" id="editProfileButton" onClick="toggleEdit()">Editar</button>
 </div>
 
@@ -61,8 +60,10 @@
         jQuery('#profileInfo').toggle();
         if ($('#editProfile').is(':visible')) {
             jQuery('#editProfileButton').text("Cancelar");
+            jQuery('#editProfileButtonContainer').removeClass("text-center");
         } else {
             jQuery('#editProfileButton').text("Editar");
+            jQuery('#editProfileButtonContainer').addClass("text-center");
         }
     }
 </script>

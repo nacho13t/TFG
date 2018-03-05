@@ -54,9 +54,9 @@
                 </div> 
                 <div class="text-center col d-flex">
                     <div class=" justify-content-center align-self-center"><h5><%=user.career()%></h5>
-                    <h5>Nivel <%=user.level()%></h5></div>
+                        <h5>Nivel <%=user.level()%></h5></div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -135,6 +135,11 @@
                                 jQuery('.content').hide();
                                 jQuery('#' + buttonId + 'Div').show();
                             }
+        </script>
+        <script>
+            $(document).on('click', function () {
+                $('.collapse').collapse('hide');
+            });
         </script>
         <script>
             $(document).ready(function () {
