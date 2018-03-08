@@ -13,7 +13,7 @@
     <body>
         <div class="container">
             <h5>Ya existe un usuario con ese nombre</h5>
-            <a href="newIndex.jsp"> Volver </a>
+            <a href="index.jsp"> Volver </a>
         </div>
 
         <!-- Optional JavaScript -->
