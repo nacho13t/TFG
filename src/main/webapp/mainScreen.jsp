@@ -52,11 +52,19 @@
                     <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     <h5><%=user.nick()%></h5>
                 </div> 
-                <div class="text-center col d-flex">
-                    <div class=" justify-content-center align-self-center"><h5><%=user.career()%></h5>
-                        <h5>Nivel <%=user.level()%></h5></div>
+                <div class="text-center col d-inline-flex justify-content-center align-self-center">
+                    <div>
+                        <h5><%=user.career()%></h5>
+                        <h5>Nivel <%=user.level()%></h5>
+                    </div>
                 </div>
-
+                <div class="text-center col d-inline-flex justify-content-center align-self-center">
+                    
+                    <form action="LogoutServlet">
+                            <button class="btn btn-outline-light" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
+                        </form>
+                    
+                </div>
             </div>
         </div>
 

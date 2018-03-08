@@ -8,7 +8,7 @@
 <h3 class="text-center">Rankings</h3>
 <div class="container">
     <div class="row">
-        <div class="col-sm">
+        <div class="col-sm mt-2">
         <h5 class="text-center">Usuarios</h5>
             <ul class="list-group">
                 <ul class="list-group">
@@ -30,7 +30,7 @@
                 </ul>
             </ul>
         </div>
-        <div class="col-sm">
+        <div class="col-sm mt-2">
             <h5 class="text-center">Carreras</h5>
             <ul class="list-group">
                 <ul class="list-group">

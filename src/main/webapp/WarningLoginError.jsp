@@ -13,7 +13,7 @@
     <body>
         <div class="container">
             <h5>Error en el inicio de sesión</h5>
-            <a href="index.jsp"> Volver </a>
+            <a href="newIndex.jsp"> Volver </a>
         </div>
 
         <!-- Optional JavaScript -->

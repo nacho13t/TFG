@@ -5,8 +5,8 @@ body {
 .profileImageContainer{
     margin-top: 9px;
     object-fit: cover;
-    width:90px;
-    height:90px;
+    width:75px;
+    height:75px;
 }
 
 .top-bar{
