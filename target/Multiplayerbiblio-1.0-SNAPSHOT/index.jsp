@@ -18,6 +18,7 @@
             <div class="row">
                 <div class="col text-center">
                     <h1>Conoce tu biblioteca</h1>
+                    
                 </div> 
 
                 <div class="text-center col d-inline-flex justify-content-center align-self-center">
@@ -27,6 +28,9 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div  class="bg-warning">
+            <h2>09/03/2018: Borrado de usuarios para hacer cambios en la base de datos. Regístrate de nuevo</h2>
         </div>
 
         <div class="content container" id="skill6Div">

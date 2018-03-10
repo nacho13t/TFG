@@ -19,7 +19,6 @@
             <h4 class="alert-heading">¡Bienvenid@ <%=user.nick()%> !</h4>
             <p>Completa lecciones y realiza las diferentes tareas disponibles para conseguir experiencia y subir de nivel. A medida que progreses desbloquearás nuevas características.</p>
             <hr>
-            <p class="mb-0">Esto es una versión de prueba, tu progreso no se guardará cuando abandones la sesión.</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -61,7 +60,7 @@
                 <div class="text-center col d-inline-flex justify-content-center align-self-center">
                     
                     <form action="LogoutServlet">
-                            <button class="btn btn-outline-light" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
+                            <button class="btn btn-outline-light mb-2 btn-sm" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
                         </form>
                     
                 </div>
@@ -91,8 +90,10 @@
         <div class="content container" id="skill6Div">
             <jsp:include page="Rankings.jsp" />
         </div>
-
-
+        
+        <div class="content container" id="skill7Div" style="display: none">
+            <jsp:include page="Forum.jsp" />
+        </div>
 
         <div class=" container fixed-bottom justify-content-center">
 
@@ -125,6 +126,7 @@
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Insignias" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Perfil" onClick="displayDiv(this.id)" id="skill4"><i class="fas fa-user"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Libros recomendados" onClick="displayDiv(this.id)" id="skill5"><i class="fas fa-graduation-cap"></i></button>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="displayDiv(this.id)" id="skill7"><i class="fas fa-comment-alt"></i></button>
                     </div>
                 </div>
             </nav>

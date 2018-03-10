@@ -23,6 +23,7 @@ public final class User {
         this.career = career;
         this.pass = pass;
         this.nick = name;
+        photo = "Images/avatar.png";
 
         experience = 50;
         level = 1;

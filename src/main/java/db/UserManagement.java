@@ -28,6 +28,25 @@ public class UserManagement {
 
         return con;
     }
+    
+    public static String getUserNick(int user_id){
+        try {
+            con = connection();
+            String query = "select name from Users WHERE idUsers = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1, user_id);
+            ResultSet result = preparedStmt.executeQuery();
+            
+            if(result.next()){
+                return result.getString("name");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 
     public static Map<String, Integer> getTopLvlUsers() {
         try {
