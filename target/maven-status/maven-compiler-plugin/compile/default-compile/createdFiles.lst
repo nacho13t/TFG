@@ -1,7 +1,10 @@
 servlets\UpdateProfileServlet.class
+com\mycompany\multiplayerbiblio\ForumThread.class
 servlets\LoginServlet.class
 servlets\ReviseExamServlet.class
 servlets\RegisterServlet.class
+servlets\CreateThreadServlet.class
+servlets\CreatePostServlet.class
 db\CareerManagement.class
 db\MapSort.class
 com\mycompany\multiplayerbiblio\User.class
@@ -9,7 +12,9 @@ com\mycompany\multiplayerbiblio\ExamsInstances.class
 com\mycompany\multiplayerbiblio\Medal.class
 db\MapSort$1.class
 com\mycompany\multiplayerbiblio\Question.class
+com\mycompany\multiplayerbiblio\ForumPost.class
 servlets\LogoutServlet.class
 servlets\DisplayExamServlet.class
+db\ForumManagement.class
 com\mycompany\multiplayerbiblio\Exam.class
 db\UserManagement.class
