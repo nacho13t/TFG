@@ -24,46 +24,73 @@ public class ForumManagement {
         return con;
     }
 
+    public static void deleteThread(int thread_id) {
+        try {
+            con = connection();
+            PreparedStatement st = con.prepareStatement("DELETE FROM Threads WHERE thread_id = ?");
+            st.setInt(1, thread_id);
+            st.executeUpdate();
+
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void deletePost(int post_id) {
+        try {
+            con = connection();
+            PreparedStatement st = con.prepareStatement("UPDATE Posts SET body = ? WHERE post_id = ?");
+            st.setString(1, "Mensaje borrado por el autor");
+            st.setInt(2, post_id);
+
+            st.executeUpdate();
+
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void createThread(int user_id, String title, String post) {
         try {
             con = connection();
             String query = " insert into Threads (user_id, title) values (?, ?)";
-            
-            PreparedStatement preparedStmt = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+
+            PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt.setInt(1, user_id);
             preparedStmt.setString(2, title);
-            
+
             preparedStmt.execute();
             ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
-            if(generatedKeys.next()){
+            if (generatedKeys.next()) {
                 createPost(user_id, post, generatedKeys.getInt(1));
             }
-            
+
             con.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void createPost(int user_id, String body, int thread_id){
+
+    public static void createPost(int user_id, String body, int thread_id) {
         try {
             con = connection();
             String query = " insert into Posts (user_id, thread_id, body) values (?, ?, ?)";
-            
+
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, user_id);
             preparedStmt.setInt(2, thread_id);
             preparedStmt.setString(3, body);
-            
+
             preparedStmt.execute();
             con.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public static List<ForumPost> getPosts(int thread_id) {
         try {
@@ -79,6 +106,8 @@ public class ForumManagement {
                 post.add(new ForumPost(result.getInt("post_id"), result.getInt("thread_id"), result.getInt("user_id"), result.getTimestamp("date"), result.getString("body")));
             }
 
+            con.close();
+            
             return post;
 
         } catch (SQLException ex) {

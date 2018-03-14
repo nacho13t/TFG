@@ -13,6 +13,11 @@
         <title>TFG</title>
     </head>
     <body>
+        <%
+            if(request.getSession().getAttribute("user") == null){
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        %>    
         <% User user = (User) request.getSession().getAttribute("user");
             if (user.noob()) {%>
         <div class="alert alert-success alert-dismissible" role="alert">

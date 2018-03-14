@@ -9,6 +9,7 @@ db\CareerManagement.class
 db\MapSort.class
 com\mycompany\multiplayerbiblio\User.class
 com\mycompany\multiplayerbiblio\ExamsInstances.class
+servlets\DeleteThreadServlet.class
 com\mycompany\multiplayerbiblio\Medal.class
 db\MapSort$1.class
 com\mycompany\multiplayerbiblio\Question.class

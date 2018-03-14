@@ -47,11 +47,22 @@
                 for (ForumPost post : ForumManagement.getPosts(Integer.parseInt(request.getParameter("threadid")))) {
             %>
             <hr>
+            <div class="float-right">
+                <%if (post.getUser_id() == user.id()) {%>
+                <form action="DeletePostServlet">
+                    <input type="hidden" name="postid" value="<%=post.getPost_id()%>">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+                <%
+                    }%>
+            </div>
             <h5><%=UserManagement.getUserNick(post.getUser_id())%> - <%= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(post.getDate())%></h5>
-            <p><%= post.getBody()%></p><hr>
+
+            <p><%= post.getBody()%></p>
+
             <%
-                }
-            %>
+                }%>
+            <hr>
             <a href="mainScreen.jsp">Volver</a>
         </div>            
 

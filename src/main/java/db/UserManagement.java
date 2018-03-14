@@ -29,7 +29,7 @@ public class UserManagement {
         return con;
     }
     
-    public static String getUserNick(int user_id){
+    public static String getUserNick(int user_id) throws SQLException{
         try {
             con = connection();
             String query = "select name from Users WHERE idUsers = ?";
@@ -38,17 +38,18 @@ public class UserManagement {
             ResultSet result = preparedStmt.executeQuery();
             
             if(result.next()){
+                
                 return result.getString("name");
             }
-            
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        con.close();
         return null;
     }
 
-    public static Map<String, Integer> getTopLvlUsers() {
+    public static Map<String, Integer> getTopLvlUsers() throws SQLException {
         try {
             Map<String, Integer> allUsers = new HashMap<>();
 
@@ -66,12 +67,13 @@ public class UserManagement {
 
         } catch (SQLException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            con.close();
             return null;
         }
 
     }
 
-    public static void updateExperienceAndLevelInDatabase(User user) {
+    public static void updateExperienceAndLevelInDatabase(User user) throws SQLException {
         try {
             con = connection();
 
@@ -86,11 +88,12 @@ public class UserManagement {
 
             con.close();
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static User registerNewUser(String name, String career, String pass) throws NoSuchAlgorithmException {
+    public static User registerNewUser(String name, String career, String pass) throws NoSuchAlgorithmException, SQLException {
         User user = new User(name, career, pass);
 
         if (UserManagement.registerUserInDatabase(user)) {
@@ -130,7 +133,7 @@ public class UserManagement {
         return user;
     }
 
-    public static void retrieveProgressFromDatabase(User user) {
+    public static void retrieveProgressFromDatabase(User user) throws SQLException {
         try {
             con = connection();
 
@@ -150,11 +153,12 @@ public class UserManagement {
             retrieveMedalsFromDatabase(user, medalsRaw);
 
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static Medal getMedalInfo(int id) {
+    public static Medal getMedalInfo(int id) throws SQLException {
         try {
 
             Medal medal = null;
@@ -177,7 +181,7 @@ public class UserManagement {
         return null;
     }
 
-    public static void completeNewExam(User user, int examNumber) {
+    public static void completeNewExam(User user, int examNumber) throws SQLException {
         try {
             String colName = "exm" + examNumber + "_completed";
             con = connection();
@@ -192,11 +196,12 @@ public class UserManagement {
             con.close();
 
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void obtainNewMedal(User user, int id) {
+    public static void obtainNewMedal(User user, int id) throws SQLException {
         try {
             con = connection();
             String query = "select medals from Progress WHERE user_id = ?";
@@ -223,12 +228,13 @@ public class UserManagement {
             con.close();
 
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public static void retrieveMedalsFromDatabase(User user, String medalsRaw) {
+    public static void retrieveMedalsFromDatabase(User user, String medalsRaw) throws SQLException {
         try {
             con = connection();
 
@@ -244,8 +250,10 @@ public class UserManagement {
                     Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"));
                     user.addMedal(medal);
                 }
+                con.close();
             }
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -269,12 +277,13 @@ public class UserManagement {
 
             return exists;
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public static void createProgressRegisterForUser(User user) {
+    public static void createProgressRegisterForUser(User user) throws SQLException {
         try {
             con = connection();
 
@@ -292,11 +301,12 @@ public class UserManagement {
             preparedStmt.execute();
             con.close();
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void setId(User user) {
+    public static void setId(User user) throws SQLException {
         try {
             con = connection();
 
@@ -312,11 +322,12 @@ public class UserManagement {
             con.close();
 
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static boolean registerUserInDatabase(User user) throws NoSuchAlgorithmException {
+    public static boolean registerUserInDatabase(User user) throws NoSuchAlgorithmException, SQLException {
 
         try {
             if (userExists(user.username())) {
@@ -350,6 +361,7 @@ public class UserManagement {
             return true;
 
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -373,7 +385,7 @@ public class UserManagement {
         CareerManagement.recalculateStats(user.career());
     }
 
-    public static boolean userExists(String username) {
+    public static boolean userExists(String username) throws SQLException {
         try {
             con = connection();
 
@@ -385,10 +397,10 @@ public class UserManagement {
 
             boolean exists = result.next();
             con.close();
-            System.out.println(exists);
 
             return exists;
         } catch (SQLException ex) {
+            con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;

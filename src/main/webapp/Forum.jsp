@@ -1,7 +1,12 @@
+<%@page import="com.mycompany.multiplayerbiblio.User"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="db.UserManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.ForumThread"%>
 <%@page import="db.ForumManagement"%>
+
+<%
+    User user = (User) session.getAttribute("user");
+%>   
 
 <h3 class="text-center">Foro</h3>
 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#postModal">
@@ -13,8 +18,14 @@
         <%
             for (ForumThread thread : ForumManagement.getThreads()) {
         %>
-        <li class="list-group-item"><a href="ThreadDisplay.jsp?name=<%=thread.getTitle()%>&threadid=<%=thread.getId()%>"><%=thread.getTitle()%> - <%=UserManagement.getUserNick(thread.getUser_id())%> - <%=new SimpleDateFormat("dd/MM/yyyy").format(thread.getDate())%></a></li>
+        <li class="list-group-item"><a href="ThreadDisplay.jsp?name=<%=thread.getTitle()%>&threadid=<%=thread.getId()%>"><%=thread.getTitle()%> - <%=UserManagement.getUserNick(thread.getUser_id())%> - <%=new SimpleDateFormat("dd/MM/yyyy").format(thread.getDate())%></a><% if (thread.getUser_id()== user.id()) {%>
+            <form action="DeleteThreadServlet">
+                <input type="hidden" name="threadid" value="<%=thread.getId()%>">
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
             <%}%>
+        </li>
+        <%}%>
     </ul>
 </div>
 
