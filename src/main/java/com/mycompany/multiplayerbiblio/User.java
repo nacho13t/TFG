@@ -2,6 +2,7 @@ package com.mycompany.multiplayerbiblio;
 
 import db.CareerManagement;
 import db.UserManagement;
+import inventory.Inventory;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,11 +13,12 @@ import java.util.List;
 public final class User {
 
     private String username, nick, photo, career, pass, email;
-
+    private Inventory inventory;
     private int experience, level, experienceLeft, id;
     private boolean noob;
     private List<Medal> medals;
     private boolean[] completedExams;
+    private List<LevelUnlocks> newUnlocks;
 
     public User(String name, String career, String pass) {
         this.username = name;
@@ -30,8 +32,10 @@ public final class User {
         noob = true;
         experienceLeft = 50;
         completedExams = new boolean[]{false, false, false, false};
-
+        inventory = new Inventory(this);
+        
         medals = new ArrayList<>();
+        newUnlocks = new ArrayList<>();
         medals.add(new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png"));
     }
 
@@ -39,6 +43,31 @@ public final class User {
         noob = false;
         completedExams = new boolean[]{false, false, false, false};
         medals = new ArrayList<>();
+        newUnlocks = new ArrayList<>();
+    }
+    
+    public Inventory inventory(){
+        return inventory;
+    }
+    
+    public void inventory(Inventory inventory){
+        this.inventory = inventory;
+    }
+    
+    public List<LevelUnlocks> levelUnlocks(){
+        return newUnlocks;
+    }
+    
+    public void checkNewRewards() throws SQLException{
+        newUnlocks.add(LevelUnlocks.newLootBoxObtained(this));
+        
+        if(this.level == 2){
+            newUnlocks.add(LevelUnlocks.LevelTwoUnlockVirusImage(this));
+        }
+    }
+    
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
     }
     
     public int id(){
@@ -138,7 +167,7 @@ public final class User {
         return completed + "/4";
     }
 
-    public void completeExam(int id) {
+    public void completeExam(int id) throws SQLException, SQLException {
         completedExams[id] = true;
         UserManagement.completeNewExam(this, id+1);
         if (checkIfAllExamCompleted()) {
@@ -181,6 +210,7 @@ public final class User {
             experienceBuffer -= experienceLeft();
             experience += experienceLeft();
             level++;
+            checkNewRewards();
             CareerManagement.recalculateStats(career);
             experienceLeft = level * 100;
             gainExperience(experienceBuffer);

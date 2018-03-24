@@ -1,3 +1,4 @@
+<%@page import="com.mycompany.multiplayerbiblio.LevelUnlocks"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <!doctype html>
 <html lang="en">
@@ -48,7 +49,20 @@
         %>
 
 
+        <% if(!user.levelUnlocks().isEmpty()){%>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <h2 class="alert-heading">Nuevas recompensas</h2>
+            <% for (LevelUnlocks reward : user.levelUnlocks()) {
+                    out.write("<p>"+reward.info()+"</p>");
+                }
+            user.levelUnlocks().clear();
+                %>
 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+                <%}%>
 
         <div class="mb-2 text-white top-bar container-fluid">
             <div class="row">
@@ -123,15 +137,20 @@
                     Menú
                 </button>
 
-                <div class="collapse navbar-collapse" role="toolbar" aria-label="Toolbar with button groups" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse skillbar" role="toolbar" aria-label="Toolbar with button groups" id="navbarSupportedContent">
                     <div class="btn-group  btn-group-lg navbar-nav mr-auto" role="group" aria-label="First group">
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Rankings" onClick="displayDiv(this.id)" id="skill6"><i class="fas fa-list-ol"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Contenido" onClick="displayDiv(this.id)" id="skill1"><i class="fas fa-book"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Cuestionarios" onClick="displayDiv(this.id)" id="skill2"><i class="fas fa-flag-checkered"></i></button>
-                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Insignias" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Medallas" onClick="displayDiv(this.id)" id="skill3"><i class="fas fa-trophy"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Perfil" onClick="displayDiv(this.id)" id="skill4"><i class="fas fa-user"></i></button>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Inventario" onClick="location.href = 'Inventario.jsp';"><i class="fas fa-archive"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Libros recomendados" onClick="displayDiv(this.id)" id="skill5"><i class="fas fa-graduation-cap"></i></button>
-                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="displayDiv(this.id)" id="skill7"><i class="fas fa-comment-alt"></i></button>
+                        <% if(user.level() >= 4){%>
+                            <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="displayDiv(this.id)" id="skill7"><i class="fas fa-comment-alt"></i></button>
+                        <%}else{%>
+                            <button type="button" class="mr-2 btn btn-secondary nav-item active disabled" data-toggle="tooltip" data-placement="top" title="Foro (Nivel 4 requerido)"><i class="fas fa-comment-alt"></i></button>
+                            <%}%>
                     </div>
                 </div>
             </nav>
@@ -153,7 +172,7 @@
         </script>
         <script>
             $(document).on('click', function () {
-                $('.collapse').collapse('hide');
+                $('.skillbar').collapse('hide');
             });
         </script>
         <script>

@@ -32,7 +32,7 @@
                 <p>En este cuestionario evaluarás tus conocimientos sobre el Tema 3. ¡Complétalo con la máxima nota para obtener 250 puntos de experiencia!</p>
                 <form name="loginForm" method="post" action="DisplayExamServlet">
                     <input type="hidden" name="exam" value="tema3Exam">
-                    <input type="hidden" name="points" value="250">
+                    <input type="hidden" name="points" value="1500">
                     <button type="submit" class="btn btn-success">Comenzar</button>
                 </form>
             </div>
@@ -40,7 +40,7 @@
                 <p>En este cuestionario evaluarás tus conocimientos sobre el Tema 4. ¡Complétalo con la máxima nota para obtener 300 puntos de experiencia!</p>
                 <form name="loginForm" method="post" action="DisplayExamServlet">
                     <input type="hidden" name="exam" value="tema4Exam">
-                    <input type="hidden" name="points" value="300">
+                    <input type="hidden" name="points" value="1000">
                     <button type="submit" class="btn btn-success">Comenzar</button>
                 </form>
             </div>

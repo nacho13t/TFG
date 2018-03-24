@@ -2,6 +2,7 @@ package db;
 
 import com.mycompany.multiplayerbiblio.Medal;
 import com.mycompany.multiplayerbiblio.User;
+import inventory.Inventory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,16 +30,83 @@ public class UserManagement {
         return con;
     }
     
-    public static String getUserNick(int user_id) throws SQLException{
+    public static void unlock(int user_id, String image) throws SQLException{
+        String[] lockedImages = lockedImages(user_id);
+        String lockedStringImages = "";
+        for (int i = 0; i < lockedImages.length; i++) {
+            if(!lockedImages[i].equals(image)){
+                lockedStringImages += lockedImages[i] +"½";
+            }
+        }
+
+        con = connection();
+        String query = "update Progress set lock_imgs = ? WHERE user_id = ? ";
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, lockedStringImages);
+        preparedStmt.setInt(2, user_id);
+
+        preparedStmt.executeUpdate();
+
+        String[] unlockedImages = unlockedImages(user_id);
+        String unlockedStringImages = "";
+        for (String newUnlockedImage : unlockedImages) {
+            unlockedStringImages += newUnlockedImage+"½";
+        }
+        unlockedStringImages += image+"½";
+        con.close();
+        String query2 = "update Progress set unlock_imgs = ? WHERE user_id = ? ";
+
+        con = connection();
+        PreparedStatement preparedStmt2 = con.prepareStatement(query2);
+        preparedStmt2.setString(1, unlockedStringImages);
+        preparedStmt2.setInt(2, user_id);
+
+        preparedStmt2.executeUpdate();
+        
+        con.close();
+    }
+
+    public static String[] unlockedImages(int user_id) throws SQLException {
+        con = connection();
+        String query = "select unlock_imgs from Progress WHERE user_id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, user_id);
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            String[] imgs = result.getString("unlock_imgs").split("½");
+            con.close();
+            return imgs;
+        }
+        con.close();
+        return null;
+    }
+    
+    public static String[] lockedImages(int user_id) throws SQLException {
+        con = connection();
+        String query = "select lock_imgs from Progress WHERE user_id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, user_id);
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            String[] imgs = result.getString("lock_imgs").split("½");
+            con.close();
+            return imgs; 
+        }
+        con.close();
+        return null;
+    }
+
+    public static String getUserNick(int user_id) throws SQLException {
         try {
             con = connection();
             String query = "select name from Users WHERE idUsers = ?";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, user_id);
             ResultSet result = preparedStmt.executeQuery();
-            
-            if(result.next()){
-                
+
+            if (result.next()) {
+
                 return result.getString("name");
             }
             con.close();
@@ -61,7 +129,7 @@ public class UserManagement {
             while (result.next()) {
                 allUsers.put(result.getString("name"), result.getInt("lvl"));
             }
-            
+
             con.close();
             return MapSort.sortByValue(allUsers);
 
@@ -118,7 +186,6 @@ public class UserManagement {
             user.setUsername(username);
             user.setCareer(result.getString("career"));
             user.setLevel(result.getInt("lvl"));
-            System.out.println(result.getInt("lvl"));
             user.setExperienceLeft(result.getInt("expleft"));
             user.setPhoto(result.getString("image"));
             user.setPass(result.getString("password"));
@@ -129,7 +196,8 @@ public class UserManagement {
 
         setId(user);
         retrieveProgressFromDatabase(user);
-
+        Inventory.retrieveInventoryFromDB(user);
+        
         return user;
     }
 
@@ -250,8 +318,9 @@ public class UserManagement {
                     Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"));
                     user.addMedal(medal);
                 }
-                con.close();
+
             }
+            con.close();
         } catch (SQLException ex) {
             con.close();
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
@@ -266,7 +335,7 @@ public class UserManagement {
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
-            
+
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, username);
             preparedStmt.setBytes(2, hash);
@@ -341,7 +410,7 @@ public class UserManagement {
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(user.pass().getBytes(StandardCharsets.UTF_8));
-            
+
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, user.username());
             preparedStmt.setString(2, user.career());
@@ -381,7 +450,7 @@ public class UserManagement {
         preparedStmt.executeUpdate();
 
         con.close();
-        
+
         CareerManagement.recalculateStats(user.career());
     }
 

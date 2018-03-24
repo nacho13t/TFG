@@ -1,3 +1,4 @@
+<%@page import="db.UserManagement"%>
 <%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 
@@ -33,20 +34,32 @@
             <small id="careerHelp" class="form-text text-muted">La carrera que estudias</small>
         </div>
 
-            
+
         <div class="form-group">
+            <%
+                for (String image : UserManagement.unlockedImages(user.id())) {%>
             <label>
-                <input type="radio" name="img-select" value="Images/avatar.png"/>
-                <img class="img-responsive profileImageContainer rounded-circle" src="Images/avatar.png">
+                <input type="radio" name="img-select" <% if (user.image().equals("Images/" + image)) {
+                        out.write("checked");
+                    }%> value="Images/<%=image%>"/>
+                <img class="img-responsive profileImageContainer rounded-circle" src="Images/<%=image%>">
             </label>
-            <label>
-                <input type="radio" name="img-select" value="Images/virus.png" />
-                <img class="img-responsive profileImageContainer rounded-circle" src="Images/virus.png">
-            </label>
-         <small id="imageHelp" class="form-text text-muted">Tu imagen de perfil, desbloquea más subiendo de nivel</small>
+            <%}%>  
+            <small id="imageHelp" class="form-text text-muted">Tu imagen de perfil.</small>
+            <div>
+                <%
+                for (String image : UserManagement.lockedImages(user.id())) {%>
+
+                <img src="Images/<%=image%>" class="img-responsive profileImageContainer lockImg rounded-circle" alt="Todas las imágenes desbloqueadas">
+
+                <%}%>
+            </div>
+            <small id="imageHelp" class="form-text text-muted">Desbloquea imágenes subiendo de nivel, consiguiendo medallas o abriendo cajas de recompensa.</small>
         </div>
+
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+
 </div>
 
 <div class="mt-2 text-center" id="editProfileButtonContainer">

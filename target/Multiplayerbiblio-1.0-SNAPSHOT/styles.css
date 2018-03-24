@@ -9,6 +9,17 @@ body {
     height:75px;
 }
 
+.inventoryImageContainer{
+    margin-top: 9px;
+    object-fit: cover;
+    width:125px;
+    height:125px;
+}
+
+.lockImg{
+    opacity: 0.3;
+}
+
 .top-bar{
     background-color: #B42929;
 }
@@ -31,7 +42,13 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
         object-fit: cover;
         width:65px;
         height:65px;
+    }
 
+    .invenotryImageContainer{
+        margin-top: 9px;
+        object-fit: cover;
+        width:80px;
+        height:80px;
     }
 
 }
