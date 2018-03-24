@@ -63,10 +63,10 @@
         <div class="container">
 
             <h5>Consigue objetos abriendo cajas de recompensa.</h5>
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-wrap">
                 <%  int a = 0;
                 for (InventoryItem item : user.inventory().getItems()) {%>
-                <div class="p-2 d-flex flex-column">
+                <div class="p-2">
                     <img src="Images/<%=item.image()%>" id="img<%=a%>" onclick="displayOpenBoxButton(<%=a%>)" class="img-responsive inventoryImageContainer rounded-circle p-2" alt="Item" title="<%=item.description()%>">
                     <form style="text-align: center" action="OpenItemServlet" onsubmit="return checkJoker(<%=a%>)">
                         <button type="submit" id="btn<%=a%>" class="btn btn-outline-secondary btn-sm <%if(item.type().equals("Joker")){out.write("disabled");}%>" style="display: none">Abrir</button>
