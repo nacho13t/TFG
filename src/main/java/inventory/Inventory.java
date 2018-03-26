@@ -28,6 +28,15 @@ public class Inventory {
     public List<InventoryItem> getItems (){
         return items;
     }
+    
+    
+    public int getJokers(){
+        int count = 0;
+        for (InventoryItem item : items) {
+            if(item.type.equals("Joker"))count++;
+        }
+        return count;
+    }
 
     public Inventory(User user) {
         owner = user;

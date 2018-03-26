@@ -42,8 +42,17 @@ public class ImageToken extends InventoryItem{
     @Override
     public void use(User user) {
         try {
-            UserManagement.unlock(user.id(), this.path);
+            boolean repeated = false;
+            for (String unlockedImage : UserManagement.unlockedImages(user.id())) {
+                if(unlockedImage.equals(this.image)){
+                    user.gainExperience(50);
+                    repeated = true;
+                    break;
+                }
+            }
+            if(!repeated)UserManagement.unlock(user.id(), this.path);
             user.inventory().removeItem(this);
+            
         } catch (SQLException ex) {
             Logger.getLogger(ImageToken.class.getName()).log(Level.SEVERE, null, ex);
         }

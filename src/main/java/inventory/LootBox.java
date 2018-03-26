@@ -37,7 +37,7 @@ public class LootBox extends InventoryItem{
             }else if(randomNum == 2){
                 String[] images = {"avion.png","sello.png","desierto.png"};
                 LevelUnlocks.newImageObtained(user);
-                item = new ImageToken("Desbloquea una imagen de perfil.", images[ThreadLocalRandom.current().nextInt(0, 2 + 1)]);
+                item = new ImageToken("Desbloquea una imagen de perfil. Si ya tienes una imagen ganarás experiencia en su lugar.", images[ThreadLocalRandom.current().nextInt(0, 2 + 1)]);
             }else{
                 item = new JokerToken("Úsalo durante un cuestionario para resolver una pregunta.");
                 LevelUnlocks.newJokerbtained(user);

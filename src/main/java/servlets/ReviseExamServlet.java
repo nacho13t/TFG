@@ -6,6 +6,7 @@
 package servlets;
 
 import com.mycompany.multiplayerbiblio.User;
+import inventory.InventoryItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,10 +41,19 @@ public class ReviseExamServlet extends HttpServlet {
         for (int i = 1; i < answersCount; i++) {
             mark += Integer.parseInt(request.getParameter("options"+i));
         }
+        
         HttpSession session = request.getSession();
         session.setAttribute("note", mark+"/"+(answersCount-1));
         if(mark==answersCount-1){
             User user = (User) session.getAttribute("user");
+            if(request.getParameter("jokerUsed").equals("true")){
+                InventoryItem joker = null;
+                for (InventoryItem item : user.inventory().getItems()) {
+                    if(item.type().equals("Joker")) joker = item;
+                }
+                joker.use(user);
+            }
+            
             if(!user.getCompletedExams()[Integer.parseInt(request.getParameter("examId"))]){
                 user.completeExam(Integer.parseInt(request.getParameter("examId")));
                 user.gainExperience(Integer.parseInt(request.getParameter("points")));

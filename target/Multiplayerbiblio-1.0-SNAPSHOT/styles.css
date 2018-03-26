@@ -9,6 +9,15 @@ body {
     height:75px;
 }
 
+.examJoker{
+    object-fit: cover;
+    width:40px;
+    height:40px;
+    border-color: red;
+    border: 1px solid;
+}
+
+
 .inventoryImageContainer{
     margin-top: 9px;
     object-fit: cover;

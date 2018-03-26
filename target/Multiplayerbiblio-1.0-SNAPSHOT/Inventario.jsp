@@ -63,7 +63,7 @@
         <div class="container">
 
             <h5>Consigue objetos abriendo cajas de recompensa.</h5>
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap justify-content-center">
                 <%  int a = 0;
                 for (InventoryItem item : user.inventory().getItems()) {%>
                 <div class="p-2">
