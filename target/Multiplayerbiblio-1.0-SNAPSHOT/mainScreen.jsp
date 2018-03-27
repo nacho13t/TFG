@@ -15,7 +15,7 @@
     </head>
     <body>
         <%
-            if(request.getSession().getAttribute("user") == null){
+            if (request.getSession().getAttribute("user") == null) {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         %>    
@@ -49,20 +49,20 @@
         %>
 
 
-        <% if(!user.levelUnlocks().isEmpty()){%>
+        <% if (!user.levelUnlocks().isEmpty()) {%>
         <div class="alert alert-info alert-dismissible" role="alert">
             <h2 class="alert-heading">Nuevas recompensas</h2>
             <% for (LevelUnlocks reward : user.levelUnlocks()) {
-                    out.write("<p>"+reward.info()+"</p>");
+                    out.write("<p>" + reward.info() + "</p>");
                 }
-            user.levelUnlocks().clear();
-                %>
+                user.levelUnlocks().clear();
+            %>
 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-                <%}%>
+        <%}%>
 
         <div class="mb-2 text-white top-bar container-fluid">
             <div class="row">
@@ -77,15 +77,25 @@
                     </div>
                 </div>
                 <div class="text-center col d-inline-flex justify-content-center align-self-center">
-                    
+
                     <form action="LogoutServlet">
-                            <button class="btn btn-outline-light mb-2 btn-sm" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
-                        </form>
-                    
+                        <button class="btn btn-outline-light mb-2 btn-sm" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
+                    </form>
+
                 </div>
             </div>
         </div>
 
+        <div class="container">
+            <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-2">
+                <div class="form-group mb-2">
+                    <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-info mb-2">Buscar</button>
+            </form>
+            <hr>
+        </div>
+                    
         <div class="content container" id="skill1Div" style="display: none">
             <jsp:include page="Content.jsp" />
         </div>
@@ -109,7 +119,7 @@
         <div class="content container" id="skill6Div">
             <jsp:include page="Rankings.jsp" />
         </div>
-        
+
         <div class="content container" id="skill7Div" style="display: none">
             <jsp:include page="Forum.jsp" />
         </div>
@@ -146,10 +156,10 @@
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Perfil" onClick="displayDiv(this.id)" id="skill4"><i class="fas fa-user"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Inventario" onClick="location.href = 'Inventario.jsp';"><i class="fas fa-archive"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Libros recomendados" onClick="displayDiv(this.id)" id="skill5"><i class="fas fa-graduation-cap"></i></button>
-                        <% if(user.level() >= 4){%>
-                            <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="displayDiv(this.id)" id="skill7"><i class="fas fa-comment-alt"></i></button>
-                        <%}else{%>
-                            <button type="button" class="mr-2 btn btn-secondary nav-item active disabled" data-toggle="tooltip" data-placement="top" title="Foro (Nivel 4 requerido)"><i class="fas fa-comment-alt"></i></button>
+                            <% if (user.level() >= 4) {%>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="displayDiv(this.id)" id="skill7"><i class="fas fa-comment-alt"></i></button>
+                            <%} else {%>
+                        <button type="button" class="mr-2 btn btn-secondary nav-item active disabled" data-toggle="tooltip" data-placement="top" title="Foro (Nivel 4 requerido)"><i class="fas fa-comment-alt"></i></button>
                             <%}%>
                     </div>
                 </div>
@@ -181,5 +191,15 @@
             });
         </script>
         <div class="d-inline-block" style="height: 130px"></div>
+
+        <script>
+            function validateSearch(form) {
+                if (form.elements[0].value === "") {
+                    alert("Introduce algún texto en el campo de búsqueda");
+                    return false;
+                }
+            }
+        </script>
+
     </body>
 </html>

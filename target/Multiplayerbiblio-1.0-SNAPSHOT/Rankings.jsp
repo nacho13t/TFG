@@ -6,10 +6,11 @@
 <!DOCTYPE html>
 
 <h3 class="text-center">Rankings</h3>
+
 <div class="container">
     <div class="row">
         <div class="col-sm mt-2">
-        <h5 class="text-center">Usuarios</h5>
+            <h5 class="text-center">Usuarios</h5>
             <ul class="list-group">
                 <ul class="list-group">
 
@@ -54,3 +55,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function validateSearch(form) {
+        if (form.elements[0].value === "") {
+            alert("Introduce algún texto en el campo de búsqueda");
+            return false;
+        }
+    }
+</script>

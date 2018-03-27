@@ -40,6 +40,10 @@
         <servlet-name>OpenItemServlet</servlet-name>
         <servlet-class>servlets.OpenItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <servlet-class>servlets.SearchUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>OpenItemServlet</servlet-name>
         <url-pattern>/OpenItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <url-pattern>/SearchUserServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,7 +22,7 @@
                         <%
                             User user = (User) request.getSession().getAttribute("user");
                             int avaiableJokers = 0;
-                            if (user.inventory().getJokers() > 0) {
+                            if ((user.inventory().getJokers() > 0) && ((request.getSession().getAttribute("examInProgress") == null) || (request.getSession().getAttribute("examInProgress").equals("false")))) {
                                 avaiableJokers = 1;
                             }
                             int count = 1;
@@ -35,7 +35,7 @@
                             %><img src="Images/joker.png" class="img-responsive examJoker rounded-circle p-2" alt="joker" id="<%="jkr" + count%>" onclick="showJokerButton(<%="btn" + count%>)">
                             <button style="display: none" type="button" id="<%="btn" + count%>" class="btn btn-info btn-sm jokerButton" onclick="useJoker(<%="spn" + count%>)">Usar comodín</button>
                             <%}%>
-                            <span style="color: blueviolet; display: none" id="<%="spn" + count%>">Respuesta correcta: <%=question.correctOption()+1%> </span>
+                            <span style="color: blueviolet; display: none" id="<%="spn" + count%>">Respuesta correcta: <%=question.correctOption() + 1%> </span>
                         </p>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="<%="options" + count%>" id="<%="question" + count + "first"%>" value="<% if (question.correctOption() == 0) {%><%= 1%><% } else {%><%= 0%><% }%>" checked>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-3 mt-2">
                     Comodines totales: <%=user.inventory().getJokers()%><br>
-                    Puedes usar 1 comodín en este cuestionario.
+                    Puedes usar <%=avaiableJokers%> comodín(es) en este cuestionario.
                 </div>
             </div>
             <input type="hidden" name="answersCount" value="<%=count%>">
@@ -80,21 +80,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-        function showJokerButton(id){
-            jQuery(".jokerButton").hide();
-            jQuery(id).show();
-            
-        }
+                                function showJokerButton(id) {
+                                    jQuery(".jokerButton").hide();
+                                    jQuery(id).show();
+
+                                }
     </script>
-    
+
     <script>
-        function useJoker(id){
+        function useJoker(id) {
             jQuery(".jokerButton").hide();
             jQuery(".examJoker").hide();
             jQuery(id).show();
             $('input[name="jokerUsed"]').val("true");
         }
-    </script>
 
+
+    </script>
+    <%
+        request.getSession().setAttribute("examInProgress", true);
+    %>
 </body>
 </html>

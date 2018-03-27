@@ -29,13 +29,13 @@ public class UserManagement {
 
         return con;
     }
-    
-    public static void unlock(int user_id, String image) throws SQLException{
+
+    public static void unlock(int user_id, String image) throws SQLException {
         String[] lockedImages = lockedImages(user_id);
         String lockedStringImages = "";
         for (int i = 0; i < lockedImages.length; i++) {
-            if(!lockedImages[i].equals(image)){
-                lockedStringImages += lockedImages[i] +"½";
+            if (!lockedImages[i].equals(image)) {
+                lockedStringImages += lockedImages[i] + "½";
             }
         }
 
@@ -51,9 +51,9 @@ public class UserManagement {
         String[] unlockedImages = unlockedImages(user_id);
         String unlockedStringImages = "";
         for (String newUnlockedImage : unlockedImages) {
-            unlockedStringImages += newUnlockedImage+"½";
+            unlockedStringImages += newUnlockedImage + "½";
         }
-        unlockedStringImages += image+"½";
+        unlockedStringImages += image + "½";
         con.close();
         String query2 = "update Progress set unlock_imgs = ? WHERE user_id = ? ";
 
@@ -63,7 +63,7 @@ public class UserManagement {
         preparedStmt2.setInt(2, user_id);
 
         preparedStmt2.executeUpdate();
-        
+
         con.close();
     }
 
@@ -81,7 +81,7 @@ public class UserManagement {
         con.close();
         return null;
     }
-    
+
     public static String[] lockedImages(int user_id) throws SQLException {
         con = connection();
         String query = "select lock_imgs from Progress WHERE user_id = ?";
@@ -91,7 +91,7 @@ public class UserManagement {
         if (result.next()) {
             String[] imgs = result.getString("lock_imgs").split("½");
             con.close();
-            return imgs; 
+            return imgs;
         }
         con.close();
         return null;
@@ -115,6 +115,31 @@ public class UserManagement {
         }
         con.close();
         return null;
+    }
+
+    public static Map<String, Integer> searchUsers(String search) throws SQLException {
+        try {
+            Map<String, Integer> searching = new HashMap<>();
+            con = connection();
+
+            String query = "select name, lvl from Users where name like ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, "%" + search + "%");
+
+            ResultSet result = preparedStmt.executeQuery();
+            
+            while (result.next()) {
+                searching.put(result.getString("name"), result.getInt("lvl"));
+            }
+            
+            con.close();
+            return searching;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+            con.close();
+            return null;
+        }
     }
 
     public static Map<String, Integer> getTopLvlUsers() throws SQLException {
@@ -197,7 +222,7 @@ public class UserManagement {
         setId(user);
         retrieveProgressFromDatabase(user);
         Inventory.retrieveInventoryFromDB(user);
-        
+
         return user;
     }
 

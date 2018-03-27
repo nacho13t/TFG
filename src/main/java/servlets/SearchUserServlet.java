@@ -5,11 +5,11 @@
  */
 package servlets;
 
-import com.mycompany.multiplayerbiblio.User;
-import inventory.InventoryItem;
+import db.UserManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nacho
  */
-public class ReviseExamServlet extends HttpServlet {
+public class SearchUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,32 +36,12 @@ public class ReviseExamServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        int answersCount = Integer.parseInt(request.getParameter("answersCount"));
-        int mark = 0;
-        for (int i = 1; i < answersCount; i++) {
-            mark += Integer.parseInt(request.getParameter("options"+i));
-        }
+        String search = request.getParameter("search");
         
+        Map<String, Integer> searching = UserManagement.searchUsers(search);
         HttpSession session = request.getSession();
-        session.setAttribute("note", mark+"/"+(answersCount-1));
-        if(mark==answersCount-1){
-            User user = (User) session.getAttribute("user");
-            if(request.getParameter("jokerUsed").equals("true")){
-                InventoryItem joker = null;
-                for (InventoryItem item : user.inventory().getItems()) {
-                    if(item.type().equals("Joker")) joker = item;
-                }
-                joker.use(user);
-                }
-            
-            if(!user.getCompletedExams()[Integer.parseInt(request.getParameter("examId"))]){
-                user.completeExam(Integer.parseInt(request.getParameter("examId")));
-                user.gainExperience(Integer.parseInt(request.getParameter("points")));
-            }
-            session.setAttribute("lessonCompleted", "true");
-        }
-        session.setAttribute("examInProgress", "false");
-        response.sendRedirect("mainScreen.jsp");
+        session.setAttribute("search", searching);
+        response.sendRedirect("SearchResult.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +59,7 @@ public class ReviseExamServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ReviseExamServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -97,7 +77,7 @@ public class ReviseExamServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ReviseExamServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
