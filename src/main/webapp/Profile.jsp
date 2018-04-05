@@ -1,11 +1,14 @@
 <%@page import="db.UserManagement"%>
 <%@page import="db.CareerManagement"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
+<!doctype html>
+<html lang="en">
 
-<%
-    User user = (User) session.getAttribute("user");
-%>   
+    <jsp:include page="header.jsp" />
 
+    <% User user = (User) request.getSession().getAttribute("user");%>
+
+    <div class="container">
 <h3 class="text-center"><%=user.username()%></h3><hr>
 <div id="profileInfo" class="text-center">
     <h5><i> <%=user.nick()%></i></h5>
@@ -66,7 +69,7 @@
     <button type="button" class="btn btn-secondary" id="editProfileButton" onClick="toggleEdit()">Editar</button>
 </div>
 
-
+    </div>
 <script>
     function toggleEdit() {
         jQuery('#editProfile').toggle();
@@ -80,3 +83,8 @@
         }
     }
 </script>
+
+    <jsp:include page="footer.jsp" />
+
+</body>
+</html>

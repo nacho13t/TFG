@@ -44,6 +44,14 @@
         <servlet-name>SearchUserServlet</servlet-name>
         <servlet-class>servlets.SearchUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendItemServlet</servlet-name>
+        <servlet-class>servlets.SendItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <servlet-class>servlets.SendMessageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>SearchUserServlet</servlet-name>
         <url-pattern>/SearchUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendItemServlet</servlet-name>
+        <url-pattern>/SendItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <url-pattern>/SendMessageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,6 +1,7 @@
 package db;
 
 import com.mycompany.multiplayerbiblio.Medal;
+import com.mycompany.multiplayerbiblio.Message;
 import com.mycompany.multiplayerbiblio.User;
 import inventory.Inventory;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +15,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +31,51 @@ public class UserManagement {
         con = DriverManager.getConnection(sURL, "sql11222096", "ds5BMvYtIk");
 
         return con;
+    }
+    
+
+    
+    public static List<Message> getRecievedMessages(User user) throws SQLException{
+        con = connection();
+        String query = "SELECT * from Messages where target = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, user.username());
+        ResultSet result = preparedStmt.executeQuery();
+        
+        List<Message> messages = new ArrayList<>();
+        while (result.next()) {
+            messages.add(new Message(result.getString("message"), result.getString("origin"), result.getString("target"), result.getTimestamp("date"), result.getInt("id")));
+        }
+        con.close();
+        return messages;
+    }
+    
+    public static List<Message> getSentMessages(User user) throws SQLException{
+        con = connection();
+        String query = "SELECT * from Messages where origin = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, user.username());
+        ResultSet result = preparedStmt.executeQuery();
+        
+        List<Message> messages = new ArrayList<>();
+        while (result.next()) {
+            messages.add(new Message(result.getString("message"), result.getString("origin"), result.getString("target"), result.getTimestamp("date"), result.getInt("id")));
+        }
+        con.close();
+        return messages;
+    }
+    
+    public static void sendMessage(String origin, String target, String message) throws SQLException{
+        con = connection();
+        String query = "INSERT into Messages (origin, target, message) VALUES (?,?,?)";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, origin);
+        preparedStmt.setString(2, target);
+        preparedStmt.setString(3, message);
+        
+        preparedStmt.execute();
+        
+        con.close();
     }
 
     public static void unlock(int user_id, String image) throws SQLException {
@@ -117,19 +165,19 @@ public class UserManagement {
         return null;
     }
 
-    public static Map<String, Integer> searchUsers(String search) throws SQLException {
+    public static List<User> searchUsers(String search) throws SQLException {
         try {
-            Map<String, Integer> searching = new HashMap<>();
+            List<User> searching = new ArrayList<>();
             con = connection();
 
-            String query = "select name, lvl from Users where name like ?";
+            String query = "select idUsers, username, name, lvl from Users where name like ?";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, "%" + search + "%");
 
             ResultSet result = preparedStmt.executeQuery();
             
             while (result.next()) {
-                searching.put(result.getString("name"), result.getInt("lvl"));
+                searching.add(new User(result.getString("name"),result.getInt("idUsers"),result.getInt("lvl"),result.getString("username")));
             }
             
             con.close();

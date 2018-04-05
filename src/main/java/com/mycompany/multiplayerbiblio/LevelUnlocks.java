@@ -18,6 +18,10 @@ public class LevelUnlocks {
         return description;
     }
     
+    public static LevelUnlocks UserDoNotExists(User user){
+        return new LevelUnlocks("El usuario no existe.");
+    }
+    
     public static LevelUnlocks LevelTwoUnlockVirusImage(User user) throws SQLException{
         UserManagement.unlock(user.id(),"virus.png");
         return new LevelUnlocks("¡Has subido a nivel 2! Tienes una nueva imagen de perfil disponible.");

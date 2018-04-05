@@ -63,7 +63,7 @@
             <%
                 }%>
             <hr>
-            <a href="mainScreen.jsp">Volver</a>
+            <a href="Forum.jsp">Volver</a>
         </div>            
 
         <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalCenterTitle" aria-hidden="true">

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.mycompany.multiplayerbiblio.LevelUnlocks"%>
@@ -57,18 +58,15 @@
             </div>
         </div>
         <div class="container">
-            <ul class="list-group">
-                <%
-                    Map<String, Integer> searching = (Map<String, Integer>) request.getSession().getAttribute("search");
+            Resultados de la búsqueda:<br>
+            <%List<User> searching = (List<User> ) request.getSession().getAttribute("search");%>
 
-                    for (Entry<String, Integer> entry : searching.entrySet()) {%>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <%=entry.getKey()%>
-                    <span class="badge badge-primary badge-pill bg-danger">Nv. <%=entry.getValue()%></span>
-                </li>  
-                <%}
-                %>
-            </ul>
+            <div class="list-group">
+                <%for (User result : searching) {%>
+                <a href="ExploreProfile.jsp?username=<%=result.username()%>" class="list-group-item list-group-item-action"><%=result.nick()%>
+                    <span class="badge badge-primary badge-pill bg-danger">Nv. <%=result.level()%></span></a>
+                    <%}%>
+            </div>
         </div>
         <div class=" container fixed-bottom justify-content-center">
 
@@ -91,7 +89,8 @@
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Perfil" onClick="location.href = 'mainScreen.jsp';"><i class="fas fa-user"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Inventario" onClick="location.href = 'Inventario.jsp';"><i class="fas fa-archive"></i></button>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Libros recomendados" onClick="location.href = 'mainScreen.jsp';"><i class="fas fa-graduation-cap"></i></button>
-                            <% if (user.level() >= 4) {%>
+                            <% if (user.level()
+                                        >= 4) {%>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active" data-toggle="tooltip" data-placement="top" title="Foro" onClick="location.href = 'mainScreen.jsp';"><i class="fas fa-comment-alt"></i></button>
                             <%} else {%>
                         <button type="button" class="mr-2 btn btn-secondary nav-item active disabled" data-toggle="tooltip" data-placement="top" title="Foro (Nivel 4 requerido)"><i class="fas fa-comment-alt"></i></button>

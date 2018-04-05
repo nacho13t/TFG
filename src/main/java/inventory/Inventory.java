@@ -2,6 +2,7 @@ package inventory;
 
 import com.mycompany.multiplayerbiblio.User;
 import static db.ForumManagement.createPost;
+import db.UserManagement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -59,6 +60,22 @@ public class Inventory {
     
     public void retrieveSingleItem(InventoryItem item){
         items.add(item);
+    }
+    
+    public static void giveItem(String username, InventoryItem item) throws SQLException{
+        User user = UserManagement.getUser(username);
+        String query = "INSERT into Items (user_id, description, value, image, type) VALUES (?,?,?,?,?)";
+        
+        con = connection();
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, user.id());
+        preparedStmt.setString(2, item.description());
+        preparedStmt.setString(3, item.value());
+        preparedStmt.setString(4, item.image());
+        preparedStmt.setString(5, item.type());
+        preparedStmt.execute();
+        
+        con.close();
     }
     
 

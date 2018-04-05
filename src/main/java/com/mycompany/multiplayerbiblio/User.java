@@ -46,6 +46,13 @@ public final class User {
         newUnlocks = new ArrayList<>();
     }
     
+    public User(String nick, int id, int lvl, String username){
+        this.nick = nick;
+        this.id = id;
+        this.level = lvl;
+        this.username = username;
+    }
+    
     public Inventory inventory(){
         return inventory;
     }
@@ -64,6 +71,10 @@ public final class User {
         if(this.level == 2){
             newUnlocks.add(LevelUnlocks.LevelTwoUnlockVirusImage(this));
         }
+    }
+    
+    public void sendItemUserNotExists(){
+        newUnlocks.add(LevelUnlocks.UserDoNotExists(this));
     }
     
     public void setInventory(Inventory inventory){
