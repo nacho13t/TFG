@@ -1,3 +1,4 @@
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SendItemServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Medal.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DeletePostServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\ForumManagement.java
@@ -8,11 +9,14 @@ D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\ReviseEx
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\JokerToken.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\MapSort.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\CreateThreadServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SearchUserServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\RegisterServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\UpdateProfileServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Message.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\CareerManagement.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\ImageToken.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\LoginServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SendMessageServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\ForumPost.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\InventoryItem.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\User.java

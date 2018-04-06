@@ -1,9 +1,11 @@
 inventory\JokerToken.class
 com\mycompany\multiplayerbiblio\ForumThread.class
+servlets\SendMessageServlet.class
 inventory\Inventory.class
 servlets\ReviseExamServlet.class
 servlets\RegisterServlet.class
 servlets\CreateThreadServlet.class
+servlets\SendItemServlet.class
 db\CareerManagement.class
 db\MapSort.class
 com\mycompany\multiplayerbiblio\ExamsInstances.class
@@ -11,6 +13,7 @@ com\mycompany\multiplayerbiblio\LevelUnlocks.class
 inventory\ExperienceToken.class
 db\MapSort$1.class
 servlets\OpenItemServlet.class
+servlets\SearchUserServlet.class
 inventory\LootBox.class
 db\UserManagement.class
 servlets\UpdateProfileServlet.class
@@ -22,6 +25,7 @@ com\mycompany\multiplayerbiblio\Medal.class
 inventory\InventoryItem.class
 com\mycompany\multiplayerbiblio\Question.class
 com\mycompany\multiplayerbiblio\ForumPost.class
+com\mycompany\multiplayerbiblio\Message.class
 servlets\LogoutServlet.class
 inventory\ImageToken.class
 servlets\DisplayExamServlet.class
