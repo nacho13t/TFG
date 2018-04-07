@@ -4,8 +4,44 @@
     <jsp:include page="header.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    
+
     <h3 class="text-center">Contenido</h3>
+
+
+    <div class="container-fluid p-2 text-center" style="background-color: #333333">
+        <img src="Images/tema-uno-1.jpg" width="75%" border="0" usemap="#map" />
+
+        <map name="map">
+            <!-- #$-:Image map file created by GIMP Image Map plug-in -->
+            <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+            <!-- #$-:Please do not edit lines starting with "#$" -->
+            <!-- #$VERSION:2.3 -->
+            <!-- #$AUTHOR:nacho -->
+            <area shape="poly" coords="92,99,248,74,257,96,420,113,578,79,592,87,582,286,565,282,565,268,546,266,465,310,466,367,463,763,453,1020,424,1045,349,1057,230,1062,104,1042,93,1022,93,768,90,423,85,229,86,103,86,105" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="img-tema-1-1.png"/>
+            <area shape="poly" coords="953,471,962,369,948,368,953,251,977,271,1047,279,1170,273,1176,251,1281,298,1284,331,1276,737,1266,1053,1217,1062,1131,1078,1012,1066,997,1062,982,1034,964,937,956,885" href="tema-1-2" />
+            <area shape="poly" coords="1547,1025,1620,1050,1740,1056,1858,1041,1860,305,1858,141,1876,99,1824,84,1692,78,1675,62,1676,48,1679,44,1689,48,1676,35,1647,42,1636,59,1640,74,1655,84,1660,106,1567,103,1568,96,1431,80,1431,223,1457,227,1557,267,1550,879,1551,879,1553,881,1553,879,1552,906" href="tema-1-3" />
+        </map>
+
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tema 1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="Images/book.png" width="100%" border="0" class="img-responsive" id="bookImg"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
 
@@ -102,6 +138,16 @@
     </div>
 
     <jsp:include page="footer.jsp" />
-    
+
+    <script>
+        $(document).ready(function () {
+            $('map').imageMapResize();
+        });
+        
+        function updateImg(id){
+            document.getElementById("bookImg").src="Images/books/" + id;
+        }
+    </script>
+
 </body>
 </html>
