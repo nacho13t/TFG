@@ -69,7 +69,11 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
     }
     
     .book-text{
-        font-size: 7px;
+        font-size: 7.5px;
+    }
+    
+    .img-tema-1{
+        width: 100%;
     }
 
     .invenotryImageContainer{

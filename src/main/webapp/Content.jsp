@@ -9,7 +9,7 @@
 
 
     <div class="container-fluid p-2 text-center" style="background-color: #333333">
-        <img src="Images/tema-uno-1.jpg" width="75%" border="0" usemap="#map" />
+        <img src="Images/tema-uno-1.jpg" width="75%" border="0" usemap="#map" class="img-tema-1"/>
 
         <map name="map">
             <!-- #$-:Image map file created by GIMP Image Map plug-in -->
@@ -17,9 +17,9 @@
             <!-- #$-:Please do not edit lines starting with "#$" -->
             <!-- #$VERSION:2.3 -->
             <!-- #$AUTHOR:nacho -->
-            <area shape="poly" coords="92,99,248,74,257,96,420,113,578,79,592,87,582,286,565,282,565,268,546,266,465,310,466,367,463,763,453,1020,424,1045,349,1057,230,1062,104,1042,93,1022,93,768,90,423,85,229,86,103,86,105" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="img-tema-1-1.png"/>
-            <area shape="poly" coords="953,471,962,369,948,368,953,251,977,271,1047,279,1170,273,1176,251,1281,298,1284,331,1276,737,1266,1053,1217,1062,1131,1078,1012,1066,997,1062,982,1034,964,937,956,885" href="tema-1-2" />
-            <area shape="poly" coords="1547,1025,1620,1050,1740,1056,1858,1041,1860,305,1858,141,1876,99,1824,84,1692,78,1675,62,1676,48,1679,44,1689,48,1676,35,1647,42,1636,59,1640,74,1655,84,1660,106,1567,103,1568,96,1431,80,1431,223,1457,227,1557,267,1550,879,1551,879,1553,881,1553,879,1552,906" href="tema-1-3" />
+            <area shape="poly" coords="92,99,248,74,257,96,420,113,578,79,592,87,582,286,565,282,565,268,546,266,465,310,466,367,463,763,453,1020,424,1045,349,1057,230,1062,104,1042,93,1022,93,768,90,423,85,229,86,103,86,105" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="tema-1-1"/>
+            <area shape="poly" coords="953,471,962,369,948,368,953,251,977,271,1047,279,1170,273,1176,251,1281,298,1284,331,1276,737,1266,1053,1217,1062,1131,1078,1012,1066,997,1062,982,1034,964,937,956,885" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="tema-1-2" />
+            <area shape="poly" coords="1547,1025,1620,1050,1740,1056,1858,1041,1860,305,1858,141,1876,99,1824,84,1692,78,1675,62,1676,48,1679,44,1689,48,1676,35,1647,42,1636,59,1640,74,1655,84,1660,106,1567,103,1568,96,1431,80,1431,223,1457,227,1557,267,1550,879,1551,879,1553,881,1553,879,1552,906" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="tema-1-3" />
         </map>
 
     </div>
@@ -34,15 +34,16 @@
                     </button>
                 </div>
                 <div class="modal-body container image-modal">
-                    <div class="row" style="position: absolute; top: 0; width: 100%; padding-top: 4%; padding-left: 7%; padding-right: 7%;">
+                    <div class="row" style="position: absolute; top: 0; width: 100%; padding-top: 3%; padding-left: 7%; padding-right: 7%;">
                         <div class="col">
-                            <p class="book-text">
-                                La _________________ es una entidad única que está formada por 13 Bibliotecas Temáticas (puntos de servicio especializados que generalmente encontrarás en cada escuela o facultad), la Biblioteca General y los Servicios Técnicos Centralizados (desde los que se mantiene la página web, se compran libros electrónicos, se dan clases para ayudarte a localizar la información que necesitas en cada momento, etc.).
+                            <p class="book-text" id="left-page">
+                                La Biblioteca de la ULPGC es una entidad única que está formada por 13 Bibliotecas Temáticas (puntos de servicio especializados que generalmente encontrarás en cada escuela o facultad), la Biblioteca General y los Servicios Técnicos Centralizados (desde los que se mantiene la página web, se compran libros electrónicos, se dan clases para ayudarte a localizar la información que necesitas en cada momento, etc.).
                             </p>
                         </div>
                         <div class="col">
-                            <p class="book-text">
-                                Hola que tal estamos.
+                            <p class="book-text" id="right-page">
+                                Las Bibliotecas Temáticas ofrecen recursos y servicios comunes que puedes utilizar independientemente de los estudios que estés realizando. Como has visto en el vídeo, en ellas encontrarás la bibliografía que necesites para estudiar las asignaturas propias de tu titulación, no sólo los manuales básicos, sino también otras obras más especializadas.
+                                El carné inteligente y la cuenta institucional que obtienes cuando te matriculas en la ULPGC, te dan acceso a todos los servicios.
                             </p>
                         </div>
                     </div>
@@ -156,8 +157,23 @@
             $('map').imageMapResize();
         });
 
+    </script>
+    <script>
         function updateImg(id) {
-            // document.getElementById("bookImg").src="Images/books/" + id;
+            if (id === "tema-1-1") {
+                $('#left-page').text('La Biblioteca de la ULPGC es una entidad única que está formada por 13 Bibliotecas Temáticas (puntos de servicio especializados que generalmente encontrarás en cada escuela o facultad), la Biblioteca General y los Servicios Técnicos Centralizados (desde los que se mantiene la página web, se compran libros electrónicos, se dan clases para ayudarte a localizar la información que necesitas en cada momento, etc.).');
+                $('#right-page').text('Las Bibliotecas Temáticas ofrecen recursos y servicios comunes que puedes utilizar independientemente de los estudios que estés realizando. Como has visto en el vídeo, en ellas encontrarás la bibliografía que necesites para estudiar las asignaturas propias de tu titulación, no sólo los manuales básicos, sino también otras obras más especializadas. El carné inteligente y la cuenta institucional que obtienes cuando te matriculas en la ULPGC, te dan acceso a todos los servicios.');
+            }
+
+            if (id === "tema-1-2") {
+                $('#left-page').text('La Biblioteca de la ULPGC abre 12 horas y media al día, de 8.15 a 20.45 horas, salvo la Biblioteca de Enfermería en Lanzarote, que tiene un horario específico. En periodos vacacionales, el horario de las bibliotecas se reduce, por lo que se recomienda consultarlo en la página Web de la Biblioteca de la ULPGC y en el Campus Social.');
+                $('#right-page').text('La Biblioteca de la ULPGC pone a tu alcance más de 2000 puestos de lectura, salas de trabajo en grupo. Además, existen salas de estudio abiertas las 24 horas, en los diferentes campus. Dispones de ordenadores personales y portátiles con acceso a Internet, herramientas ofimáticas y software adaptado a las necesidades de cada centro, para su uso dentro del campus o para llevártelo a casa.  También tienes a tu disposición iPads.');
+            }
+
+            if (id === "tema-1-3") {
+                $('#left-page').text('La Biblioteca pone a tu disposición una gran variedad de información, seleccionada y organizada para atender tus necesidades académicas. Puedes encontrar libros, revistas, vídeos, DVDs, CD-ROMs, CDs, mapas, separatas, tesis doctorales, microformas, etc. El catálogo de la Biblioteca te permite localizar todos estos documentos (ver Tema 4).');
+                $('#right-page').text('Nuestro fondo digital te ofrece revistas electrónicas, libros electrónicos, enciclopedias y diccionarios electrónicos, prensa y boletines oficiales, bases de datos y recursos web, etc. Faro es el portal que te da acceso a este fondo (consultar Tema 5)');
+            }
         }
     </script>
 
