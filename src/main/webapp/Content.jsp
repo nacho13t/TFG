@@ -33,8 +33,20 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <img src="Images/book.png" width="100%" border="0" class="img-responsive" id="bookImg"/>
+                <div class="modal-body container image-modal">
+                    <div class="row" style="position: absolute; top: 0; width: 100%; padding-top: 4%; padding-left: 7%; padding-right: 7%;">
+                        <div class="col">
+                            <p class="book-text">
+                                La _________________ es una entidad única que está formada por 13 Bibliotecas Temáticas (puntos de servicio especializados que generalmente encontrarás en cada escuela o facultad), la Biblioteca General y los Servicios Técnicos Centralizados (desde los que se mantiene la página web, se compran libros electrónicos, se dan clases para ayudarte a localizar la información que necesitas en cada momento, etc.).
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="book-text">
+                                Hola que tal estamos.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
@@ -143,9 +155,9 @@
         $(document).ready(function () {
             $('map').imageMapResize();
         });
-        
-        function updateImg(id){
-            document.getElementById("bookImg").src="Images/books/" + id;
+
+        function updateImg(id) {
+            // document.getElementById("bookImg").src="Images/books/" + id;
         }
     </script>
 
