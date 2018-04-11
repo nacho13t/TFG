@@ -20,7 +20,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            Menú
+            Acciones
         </button>
 
         <div class="collapse navbar-collapse skillbar" role="toolbar" aria-label="Toolbar with button groups" id="navbarSupportedContent">
@@ -62,11 +62,11 @@
                         }
                     }
 
-                    $(function () {
-                        $('[data-toggle="popover"]').popover()
-                    })
+//                    $(function () {
+//                        $('[data-toggle="popover"]').popover();
+//                    });
 
-                    $(document).ready(function () {
-                        $('[data-toggle="tooltip"]').tooltip();
-                    });
+//                    $(document).ready(function () {
+//                        $('[data-toggle="tooltip"]').tooltip();
+//                    });
 </script>

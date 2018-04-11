@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="image-map-pro.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title>TFG</title>
 </head>
@@ -19,8 +20,8 @@
         }
     %>    
     <% User user = (User) request.getSession().getAttribute("user");
-            if (user.noob()) {
-    user.noNoob(); %>
+        if (user.noob()) {
+            user.noNoob();%>
     <div class="alert alert-success alert-dismissible" role="alert">
         <h4 class="alert-heading">¡Bienvenid@ <%=user.nick()%> !</h4>
         <p>Completa lecciones y realiza las diferentes tareas disponibles para conseguir experiencia y subir de nivel. A medida que progreses desbloquearás nuevas características.</p>
@@ -64,7 +65,7 @@
     </div>
     <%}%>
 
-    <div class="mb-2 text-white top-bar container-fluid">
+    <div class="mb-2 text-white top-bar container-fluid user-info">
         <div class="row">
             <div class="col text-center">
                 <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
@@ -86,8 +87,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-2">
+    <div class="container search-user">
+        <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-1">
             <div class="form-group mb-2">
                 <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
             </div>

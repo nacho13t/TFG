@@ -5,10 +5,22 @@
 
     <% User user = (User) request.getSession().getAttribute("user");%>
 
-    <h3 class="text-center">Contenido</h3>
+    <div id="image-map-pro-container" class="container"></div>
 
 
-    <div class="container-fluid p-2 text-center" style="background-color: #333333">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="image-map-pro.min.js"></script>
+    <script type="text/javascript">
+        ;
+        (function ($, window, document, undefined) {
+            $(document).ready(function () {
+                $('#image-map-pro-container').imageMapPro({"id": 811, "editor": {"tool": "poly"}, "general": {"name": "Demo", "width": 600, "height": 400, "naturalWidth": 600, "naturalHeight": 400, "pageload_animation": "grow"}, "image": {"url": "https://www.ulpgc.es/sites/default/files/styles/foto_noticia_crop/public/ArchivosULPGC/noticia/2018/Mar/biblioteca.jpg?itok=Cdat-Y2s"}, "spots": [{"id": "poly-8616", "title": "poly-8616", "type": "poly", "x": 76.333, "y": 53.2, "width": 8, "height": 7,"actions":{"click":"follow-link","link":"Content-Hall.jsp","open_link_in_new_window":0}, "default_style": {"fill": "#ff0000", "fill_opacity": 0.16541353383458646}, "tooltip_content": {"plain_text": "Entrar", "squares_settings": {"containers": [{"id": "sq-container-403761", "settings": {"elements": [{"settings": {"name": "Paragraph", "iconClass": "fa fa-paragraph"}}]}}]}}, "points": [{"x": 10.416666666666668, "y": 85.71428571428571}, {"x": 100, "y": 100}, {"x": 100, "y": 3.571428571428571}, {"x": 0, "y": 0}]}]});
+            });
+        })(jQuery, window, document);
+    </script>
+
+
+    <div class="container-fluid p-2 text-center" style="background-color: #333333; display: none">
         <img src="Images/tema-uno-1.jpg" width="75%" border="0" usemap="#map" class="img-tema-1"/>
 
         <map name="map">
@@ -22,6 +34,40 @@
             <area shape="poly" coords="1547,1025,1620,1050,1740,1056,1858,1041,1860,305,1858,141,1876,99,1824,84,1692,78,1675,62,1676,48,1679,44,1689,48,1676,35,1647,42,1636,59,1640,74,1655,84,1660,106,1567,103,1568,96,1431,80,1431,223,1457,227,1557,267,1550,879,1551,879,1553,881,1553,879,1552,906" data-toggle="modal" data-target="#exampleModal" onclick="updateImg(this.id)" id="tema-1-3" />
         </map>
 
+    </div>
+
+    <div class="container" style="display: none">
+        <div class="row">
+            <div class="col-sm">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="Images/shelve-1.png" width="100%" class="img-responsive" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="Images/shelve-2.png" width="100%" class="img-responsive" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="Images/shelve-3.png" width="100%" class="img-responsive" alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="Images/shelve-4.png" width="100%" class="img-responsive" alt="Fourth slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+
+            </div>
+        </div>
     </div>
 
     <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +102,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="display: none">
 
         <div id="accordion">
 
@@ -151,23 +197,27 @@
     </div>
 
     <jsp:include page="footer.jsp" />
-
-    <script>
-        $(document).ready(function () {
-            $('map').imageMapResize();
-        });
-
-    </script>
+    <!--
+        <script>
+                    $(document).ready(function () {
+                        $('map').imageMapResize();
+                    });
+    
+        </script>-->
     <script>
         function updateImg(id) {
+
             if (id === "tema-1-1") {
                 $('#left-page').text('La Biblioteca de la ULPGC es una entidad única que está formada por 13 Bibliotecas Temáticas (puntos de servicio especializados que generalmente encontrarás en cada escuela o facultad), la Biblioteca General y los Servicios Técnicos Centralizados (desde los que se mantiene la página web, se compran libros electrónicos, se dan clases para ayudarte a localizar la información que necesitas en cada momento, etc.).');
                 $('#right-page').text('Las Bibliotecas Temáticas ofrecen recursos y servicios comunes que puedes utilizar independientemente de los estudios que estés realizando. Como has visto en el vídeo, en ellas encontrarás la bibliografía que necesites para estudiar las asignaturas propias de tu titulación, no sólo los manuales básicos, sino también otras obras más especializadas. El carné inteligente y la cuenta institucional que obtienes cuando te matriculas en la ULPGC, te dan acceso a todos los servicios.');
             }
 
+
             if (id === "tema-1-2") {
+
                 $('#left-page').text('La Biblioteca de la ULPGC abre 12 horas y media al día, de 8.15 a 20.45 horas, salvo la Biblioteca de Enfermería en Lanzarote, que tiene un horario específico. En periodos vacacionales, el horario de las bibliotecas se reduce, por lo que se recomienda consultarlo en la página Web de la Biblioteca de la ULPGC y en el Campus Social.');
                 $('#right-page').text('La Biblioteca de la ULPGC pone a tu alcance más de 2000 puestos de lectura, salas de trabajo en grupo. Además, existen salas de estudio abiertas las 24 horas, en los diferentes campus. Dispones de ordenadores personales y portátiles con acceso a Internet, herramientas ofimáticas y software adaptado a las necesidades de cada centro, para su uso dentro del campus o para llevártelo a casa.  También tienes a tu disposición iPads.');
+
             }
 
             if (id === "tema-1-3") {
