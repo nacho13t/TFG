@@ -65,7 +65,7 @@
     </div>
     <%}%>
 
-    <div class="mb-2 text-white top-bar container-fluid user-info">
+    <div class="text-white top-bar container-fluid user-info">
         <div class="row">
             <div class="col text-center">
                 <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <div class="container search-user">
+<!--    <div class="container search-user">
         <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-1">
             <div class="form-group mb-2">
                 <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
@@ -95,4 +95,4 @@
             <button type="submit" class="btn btn-info mb-2">Buscar</button>
         </form>
         <hr>
-    </div>
+    </div>-->

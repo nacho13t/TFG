@@ -1,4 +1,4 @@
-<%@page import="com.mycompany.multiplayerbiblio.User"%>
+    <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <!doctype html>
 <html lang="en">
 

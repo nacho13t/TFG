@@ -27,8 +27,8 @@ public class UserManagement {
     private static Connection con;
 
     public static Connection connection() throws SQLException {
-        String sURL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11222096";
-        con = DriverManager.getConnection(sURL, "sql11222096", "ds5BMvYtIk");
+        String sURL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/x1ndqr8t997qnmok?autoReconnect=true&useSSL=false";
+        con = DriverManager.getConnection(sURL, "y2q1rab10y9ze2gv", "shd02zhmm11i24o2");
 
         return con;
     }
