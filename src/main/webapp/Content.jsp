@@ -6,10 +6,10 @@
     <% User user = (User) request.getSession().getAttribute("user");%>
     <div class="container-fluid" style="background-color: #333333">
         <div class="row">
-            <div class="col-12 col-md-8">
+            <div class="col-sm-12 col-md-8">
                 <div id="image-map-pro-container" class="pt-4 pl-3 pb-4"></div>
             </div>
-            <div class="col-6 col-md-4">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="row mt-4 mr-2">
                     <div class="col-5 text-center">
