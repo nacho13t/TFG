@@ -4,14 +4,13 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #333333">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                <div id="image-map-pro-container" class="pt-4 pl-3 pb-4"></div>
+                <div id="image-map-pro-container" class="pt-4 pl-1 pb-4"></div>
             </div>
             <div class="col-sm-12 col-md-4">
-
-                <div class="row mt-4 mr-2">
+                <div class="row mt-4 mr-1">
                     <div class="col-5 text-center">
                         <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
@@ -21,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="d-flex flex-row justify-content-center pr-3">
+                <div class="d-flex flex-row justify-content-center pr-2">
 
                     <div class="mt-3"><span class="rounded-circle border border-white" style="background-color:#333333; border-width: 3px !important; font-size: 23px; color:white;"><%= user.level()%></span></div>
                     <div class="mt-4 progress w-75">
@@ -32,15 +31,15 @@
                 </div>
 
                 <div class="list-group align-items-center menu-right align-middle mt-4 pr-3">
-                    <a href="mainScreen.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Rankings</a>
-                    <a href="Medals.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Medallas</a>
-                    <a href="Inventario.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Inventario</a>
-                    <a href="RecommendedBooks.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Libros recomendados</a>
-                    <a href="Messages.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light ">Mensajes</a>
+                    <a href="Rankings-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Rankings</a>
+                    <a href="Medals-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Medallas</a>
+                    <a href="Inventario-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Inventario</a>
+                    <a href="RecommendedBooks-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Libros recomendados</a>
+                    <a href="Messages-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light ">Mensajes</a>
                     <% if (user.level() >= 4) { %>
-                    <a href="Forum.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
+                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
+                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
                     <%}%>
                 </div> 
             </div>
@@ -53,7 +52,7 @@
         ;
         (function ($, window, document, undefined) {
             $(document).ready(function () {
-                $('#image-map-pro-container').imageMapPro($('#image-map-pro-container').imageMapPro({"id":811,"editor":{"selected_shape":"rect-5766","tool":"poly"},"general":{"name":"Demo","width":3888,"height":2592,"naturalWidth":3888,"naturalHeight":2592,"preserve_quality":0},"image":{"url":"https://www.denverlibrary.org/sites/dplorg/files/IMG_0849.JPG"},"tooltips":{"tooltip_animation":"grow"},"spots":[{"id":"rect-5766","title":"rect-5766","type":"poly","x":68.161,"y":61.303,"width":12.959,"height":24.946,"actions":{"click":"follow-link","link":"Content-Hall.jsp","open_link_in_new_window":0},"default_style":{"fill":"#8000ff"},"tooltip_style":{"position":"left","auto_width":1},"tooltip_content":{"plain_text":"Entrar","squares_settings":{"containers":[{"id":"sq-container-403761","settings":{"elements":[{"settings":{"name":"Paragraph","iconClass":"fa fa-paragraph"}}]}}]}},"points":[{"x":100,"y":4.545454545454547},{"x":7.5,"y":0},{"x":0,"y":90.25974025974025},{"x":93.33333333333333,"y":100}]}]}););
+                $('#image-map-pro-container').imageMapPro({"id":811,"editor":{"selected_shape":"rect-5766","tool":"poly"},"general":{"name":"Demo","width":3888,"height":2592,"naturalWidth":3888,"naturalHeight":2592,"preserve_quality":0},"image":{"url":"https://www.denverlibrary.org/sites/dplorg/files/IMG_0849.JPG"},"tooltips":{"tooltip_animation":"grow"},"spots":[{"id":"rect-5766","title":"rect-5766","type":"poly","x":68.161,"y":61.303,"width":12.959,"height":24.946,"actions":{"click":"follow-link","link":"Content-Hall.jsp","open_link_in_new_window":0},"default_style":{"fill":"#8000ff"},"tooltip_style":{"position":"left","auto_width":1},"tooltip_content":{"plain_text":"Entrar","squares_settings":{"containers":[{"id":"sq-container-403761","settings":{"elements":[{"settings":{"name":"Paragraph","iconClass":"fa fa-paragraph"}}]}}]}},"points":[{"x":100,"y":4.545454545454547},{"x":7.5,"y":0},{"x":0,"y":90.25974025974025},{"x":93.33333333333333,"y":100}]}]});
             });
         })(jQuery, window, document);
     </script>

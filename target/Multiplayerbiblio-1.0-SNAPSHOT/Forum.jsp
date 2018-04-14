@@ -9,9 +9,12 @@
 
     <jsp:include page="header.jsp" />
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <h3 class="text-center">Foro</h3>
+    
 
     <div class="container">
+        
+        <h3 class="text-center">Foro</h3>
+        
         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#postModal">
             Nuevo tema
         </button><hr>

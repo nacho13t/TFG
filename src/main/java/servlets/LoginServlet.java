@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         if(UserManagement.validateUser(username, pass)){
             HttpSession session = request.getSession();
             session.setAttribute("user", UserManagement.getUser(username));
-            response.sendRedirect("mainScreen.jsp");
+            response.sendRedirect("Content.jsp");
         }else{
             response.sendRedirect("WarningLoginError.jsp");
         }

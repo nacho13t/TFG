@@ -8,7 +8,7 @@
     <% User user = (User) request.getSession().getAttribute("user");%>
 
     <div class="container">
-        <h4>Estos son algunos de los libros recomendados para tu carrera</h4>
+        <h4 style="color: white;">Estos son algunos de los libros recomendados para tu carrera</h4>
         <%
             String[] books = CareerManagement.getCareerRecommendedBooks(user.career());
             if (books != null) {

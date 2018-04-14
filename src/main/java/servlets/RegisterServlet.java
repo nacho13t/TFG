@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
             if(user != null){
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("mainScreen.jsp");
+                response.sendRedirect("Content.jsp");
             }else{
                 response.sendRedirect("WarningUserExists.jsp");
             }
