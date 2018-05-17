@@ -7,8 +7,12 @@ package servlets;
 
 import com.mycompany.multiplayerbiblio.User;
 import db.ForumManagement;
+import db.UserManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,14 +35,17 @@ public class CreatePostServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
         ForumManagement.createPost(user.id(), request.getParameter("body"), Integer.parseInt(request.getParameter("threadid")));
-        response.sendRedirect("ThreadDisplay.jsp?name="+request.getParameter("threadtitle")+"&threadid="+Integer.parseInt(request.getParameter("threadid")));
+        if(!user.hasMedal(5)){
+            UserManagement.obtainNewMedal(user, 5);
+        }
+        response.sendRedirect("ThreadDisplay-v2.jsp?name="+request.getParameter("threadtitle")+"&threadid="+Integer.parseInt(request.getParameter("threadid")));
         
     }
 
@@ -54,7 +61,11 @@ public class CreatePostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreatePostServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,7 +79,11 @@ public class CreatePostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreatePostServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

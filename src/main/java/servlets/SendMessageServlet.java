@@ -36,7 +36,7 @@ public class SendMessageServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             user.sendItemUserNotExists();
         }
-        response.sendRedirect("Messages.jsp");
+        response.sendRedirect("Messages-v2.jsp");
 
     }
 

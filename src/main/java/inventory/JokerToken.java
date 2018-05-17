@@ -5,6 +5,7 @@
  */
 package inventory;
 
+import com.mycompany.multiplayerbiblio.LevelUnlocks;
 import com.mycompany.multiplayerbiblio.User;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,6 +33,13 @@ public class JokerToken extends InventoryItem {
     @Override
     public void send(String username) {
         //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void changeForExperienceToken(User user) throws SQLException{
+        user.inventory().removeItem(this);
+        InventoryItem expToken = new ExperienceToken("Úsalo para obtener 50 puntos de experiencia", 50);
+        user.inventory().addItem(expToken);
+        LevelUnlocks.newExperienceTokenObtained(user);
     }
 
     @Override

@@ -1,4 +1,4 @@
-<%@page import="com.mycompany.multiplayerbiblio.User"%>
+    <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <div class=" container fixed-bottom justify-content-center">
     <% User user = (User) request.getSession().getAttribute("user");%>
 
@@ -15,11 +15,29 @@
 
 
 <script>
-                    function validateSearch(form) {
-                        if (form.elements[0].value === "") {
-                            alert("Introduce algún texto en el campo de búsqueda");
-                            return false;
-                        }
-                    }
+    function validateSearch(form) {
+        if (form.elements[0].value === "") {
+            alert("Introduce algún texto en el campo de búsqueda");
+            return false;
+        }
+    }
 
 </script>
+
+<footer style="background-color: black; color:white; height: 100px">
+    <!--    <div class="container">
+            <p>2018 I.A.B.</p>
+        </div>-->
+
+    <div class="search-user p-4">
+        <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-1">
+            <div class="form-group mb-2">
+                <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-info mb-2">Buscar</button>
+        </form>
+
+    </div>
+
+</footer>
+

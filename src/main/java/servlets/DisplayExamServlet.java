@@ -40,7 +40,7 @@ public class DisplayExamServlet extends HttpServlet {
         Exam exam = (Exam) method.invoke(c.newInstance());
 
         request.setAttribute("questionnaire", exam);
-        request.getRequestDispatcher("ExamTemplate.jsp").forward(request, response);
+        request.getRequestDispatcher("ExamTemplate-v2.jsp").forward(request, response);
 
     }
 

@@ -1,3 +1,4 @@
+<%@page import="com.mycompany.multiplayerbiblio.Book"%>
 <%@page import="com.mycompany.multiplayerbiblio.Medal"%>
 <%@page import="db.UserManagement"%>
 <%@page import="db.CareerManagement"%>
@@ -8,25 +9,22 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container">
                     <h4 style="color:white;">Estos son algunos de los libros recomendados para tu carrera</h4>
-                    <%
-                        String[] books = CareerManagement.getCareerRecommendedBooks(user.career());
-                        if (books != null) {
-                            for (String book : books) {
-                                %><p style="color:white;"><%=book.split("½")[0]%> - <a target="_blank" onclick="checkBook()" href="<%=book.split("½")[1]%>">Ver en la biblioteca</a></p>
-                    <%}
-            }%>
+                    <%for (Book book : CareerManagement.getCareerRecommendedBooks(user.career())) {
+                    %><p style="color:white;"><%=book.getName()%> - <a target="_blank" onclick="checkBook()" href="<%=book.getUrl()%>">Ver en la biblioteca</a></p>
+
+                    <%}%>
 
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1">
+                <div class="row mt-4 mr-1" style="cursor: pointer">
                     <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
                     <div class="col-7">
                         <h5 style="color: white" mt-2><%= user.nick()%></h5>
@@ -53,8 +51,7 @@
                     <% if (user.level() >= 4) { %>
                     <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
-                    <%}%>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
                 </div> 
             </div>
         </div>

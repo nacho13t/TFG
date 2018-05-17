@@ -43,7 +43,7 @@ public class OpenItemServlet extends HttpServlet {
         InventoryItem item = inventory.Inventory.getSingleItem(Integer.parseInt(request.getParameter("item")));
         item.use(user);
         
-        response.sendRedirect("Inventario.jsp");
+        response.sendRedirect("Inventario-v2.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

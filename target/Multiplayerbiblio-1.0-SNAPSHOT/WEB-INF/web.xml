@@ -52,6 +52,18 @@
         <servlet-name>SendMessageServlet</servlet-name>
         <servlet-class>servlets.SendMessageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddItemServlet</servlet-name>
+        <servlet-class>servlets.AddItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeForExperienceServlet</servlet-name>
+        <servlet-class>servlets.ChangeForExperienceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviseQuestionServlet</servlet-name>
+        <servlet-class>servlets.ReviseQuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -103,6 +115,18 @@
     <servlet-mapping>
         <servlet-name>SendMessageServlet</servlet-name>
         <url-pattern>/SendMessageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddItemServlet</servlet-name>
+        <url-pattern>/AddItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeForExperienceServlet</servlet-name>
+        <url-pattern>/ChangeForExperienceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviseQuestionServlet</servlet-name>
+        <url-pattern>/ReviseQuestionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

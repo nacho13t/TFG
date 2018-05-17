@@ -13,7 +13,7 @@
     <title>TFG</title>
 </head>
 
-<body>
+<body bgcolor="#000000">
     <%
         if (request.getSession().getAttribute("user") == null) {
             request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -68,7 +68,7 @@
     <div class="text-white top-bar container-fluid user-info">
         <div class="row p-2">
             <div class="col pt-1">
-                <h3>Conoce tu biblioteca</h3>
+                <h3 class="page-title">Conoce tu biblioteca</h3>
             </div>
             <div class="col pt-1" style="text-align: right">
                 <form action="LogoutServlet">

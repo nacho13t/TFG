@@ -9,14 +9,14 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container" style="color:white;">
                     <div class="row p-3">
                         <button id="buttonSend" type="button" class="btn btn-outline-primary" onclick="displaySend()">Nuevo mensaje</button>
                     </div>
-                    <div class="row p-3 w-50" style="display: none" id="sendDiv">
+                    <div class="row p-3" style="display: none" id="sendDiv">
                         <div class="container" id="sendItemDiv">
                             <form action="SendMessageServlet" onsubmit="return validateMessage(this)">
                                 <div class="form-group">
@@ -46,7 +46,7 @@
                                 <div class="card">
                                     <div class="card-header" id="heading<%=message.getId()%>" style="background-color: #444444"> 
                                         <h5 class="mb-0">
-                                            <button style="color:white;" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=message.getId()%>" aria-expanded="false" aria-controls="collapse<%=message.getId()%>">
+                                            <button style="color:white;" class="btn btn-link collapsed messages" data-toggle="collapse" data-target="#collapse<%=message.getId()%>" aria-expanded="false" aria-controls="collapse<%=message.getId()%>">
                                                 De: <%=message.getOrigin()%> Fecha: <%=message.getDate()%>
                                             </button>
                                         </h5>
@@ -68,7 +68,7 @@
                                 <div class="card">
                                     <div class="card-header" id="heading<%=msg.getId()%>" style="background-color: #444444">
                                         <h5 class="mb-0">
-                                            <button style="color:white;" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=msg.getId()%>" aria-expanded="false" aria-controls="collapse<%=msg.getId()%>">
+                                            <button style="color:white;" class="btn btn-link collapsed messages" data-toggle="collapse" data-target="#collapse<%=msg.getId()%>" aria-expanded="false" aria-controls="collapse<%=msg.getId()%>">
                                                 Para: <%=msg.getTarget()%> Fecha: <%=msg.getDate()%>
                                             </button>
                                         </h5>
@@ -87,9 +87,9 @@
                 </div>  
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1">
+                <div class="row mt-4 mr-1" style="cursor: pointer">
                     <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
                     <div class="col-7">
                         <h5 style="color: white" mt-2><%= user.nick()%></h5>
@@ -112,12 +112,11 @@
                     <a href="Rankings-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Rankings</a>
                     <a href="Inventario-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Inventario</a>
                     <a href="RecommendedBooks-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Libros recomendados</a>
-                    <a href="Medallas-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light ">Medallas</a>
+                    <a href="Medals-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light ">Medallas</a>
                     <% if (user.level() >= 4) { %>
                     <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
-                    <%}%>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
                 </div> 
             </div>
         </div>

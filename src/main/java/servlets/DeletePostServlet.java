@@ -33,7 +33,7 @@ public class DeletePostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         ForumManagement.deletePost(Integer.parseInt(request.getParameter("postid")));
-        response.sendRedirect("mainScreen.jsp");
+        response.sendRedirect("Forum-v2.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

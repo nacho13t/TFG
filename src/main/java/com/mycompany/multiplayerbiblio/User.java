@@ -36,7 +36,7 @@ public final class User {
         
         medals = new ArrayList<>();
         newUnlocks = new ArrayList<>();
-        medals.add(new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png"));
+        medals.add(new Medal("Usuario de la aplicación", "Crea un usuario y accede a la aplicación", DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), "Images/Medals/medal1.png",1));
     }
 
     public User() {
@@ -51,6 +51,20 @@ public final class User {
         this.id = id;
         this.level = lvl;
         this.username = username;
+    }
+    
+    public boolean hasMedal(int id){
+        for (Medal medal : medals) {
+            if(medal.getId() == id)return true;
+        }
+        return false;
+    }
+    
+    public String getMedalDate(int id){
+        for (Medal medal : medals) {
+            if(medal.getId() == id)return medal.getDate();
+        }
+        return "";
     }
     
     public Inventory inventory(){
@@ -70,6 +84,16 @@ public final class User {
         
         if(this.level == 2){
             newUnlocks.add(LevelUnlocks.LevelTwoUnlockVirusImage(this));
+        }
+        
+        if(this.level == 4){
+            UserManagement.obtainNewMedal(this, 3);
+            newUnlocks.add(LevelUnlocks.LevelFourMedal());
+        }
+        
+        if(this.level == 8){
+            UserManagement.obtainNewMedal(this, 8);
+            newUnlocks.add(LevelUnlocks.LevelEightMedal());
         }
     }
     

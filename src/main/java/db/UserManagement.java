@@ -33,15 +33,58 @@ public class UserManagement {
         return con;
     }
     
+    public static void increaseLootBoxCounter(User user) throws SQLException{
+        int count = getOpenLootBoxes(user);
+        count++;
+        System.out.println(count);
+        con = connection();
+        String query = "update Progress set loot_box_open = ? WHERE user_id = ? ";
 
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, count);
+        preparedStmt.setInt(2, user.id());
+
+        preparedStmt.executeUpdate();
+        con.close();
+    }
     
-    public static List<Message> getRecievedMessages(User user) throws SQLException{
+    public static int getOpenLootBoxes(User user) throws SQLException{
+        con = connection();
+        String query = "SELECT loot_box_open from progress where user_id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, user.id());
+        ResultSet result = preparedStmt.executeQuery();
+        int count = 0;
+        if(result.next()){
+            count = result.getInt("loot_box_open");
+        }
+        
+        con.close();
+        return count;
+    }
+
+    public static List<Medal> getAllMedals() throws SQLException {
+        con = connection();
+        List<Medal> medals = new ArrayList<>();
+        String query = "SELECT * from Medals";
+        Statement stmt = con.prepareStatement(query);
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            medals.add(new Medal(result.getString("name"), result.getString("description"), result.getString("image_link"), result.getInt("id")));
+            
+        }
+        con.close();
+        return medals;
+    }
+
+    public static List<Message> getRecievedMessages(User user) throws SQLException {
         con = connection();
         String query = "SELECT * from Messages where target = ?";
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setString(1, user.username());
         ResultSet result = preparedStmt.executeQuery();
-        
+
         List<Message> messages = new ArrayList<>();
         while (result.next()) {
             messages.add(new Message(result.getString("message"), result.getString("origin"), result.getString("target"), result.getTimestamp("date"), result.getInt("id")));
@@ -49,14 +92,14 @@ public class UserManagement {
         con.close();
         return messages;
     }
-    
-    public static List<Message> getSentMessages(User user) throws SQLException{
+
+    public static List<Message> getSentMessages(User user) throws SQLException {
         con = connection();
         String query = "SELECT * from Messages where origin = ?";
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setString(1, user.username());
         ResultSet result = preparedStmt.executeQuery();
-        
+
         List<Message> messages = new ArrayList<>();
         while (result.next()) {
             messages.add(new Message(result.getString("message"), result.getString("origin"), result.getString("target"), result.getTimestamp("date"), result.getInt("id")));
@@ -64,22 +107,22 @@ public class UserManagement {
         con.close();
         return messages;
     }
-    
-    public static void sendMessage(String origin, String target, String message) throws SQLException{
+
+    public static void sendMessage(String origin, String target, String message) throws SQLException {
         con = connection();
         String query = "INSERT into Messages (origin, target, message) VALUES (?,?,?)";
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setString(1, origin);
         preparedStmt.setString(2, target);
         preparedStmt.setString(3, message);
-        
+
         preparedStmt.execute();
-        
+
         con.close();
     }
 
-    public static void unlock(int user_id, String image) throws SQLException {
-        String[] lockedImages = lockedImages(user_id);
+    public static void unlock(User user, String image) throws SQLException {
+        String[] lockedImages = lockedImages(user.id());
         String lockedStringImages = "";
         for (int i = 0; i < lockedImages.length; i++) {
             if (!lockedImages[i].equals(image)) {
@@ -92,11 +135,11 @@ public class UserManagement {
 
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setString(1, lockedStringImages);
-        preparedStmt.setInt(2, user_id);
+        preparedStmt.setInt(2, user.id());
 
         preparedStmt.executeUpdate();
 
-        String[] unlockedImages = unlockedImages(user_id);
+        String[] unlockedImages = unlockedImages(user.id());
         String unlockedStringImages = "";
         for (String newUnlockedImage : unlockedImages) {
             unlockedStringImages += newUnlockedImage + "½";
@@ -108,11 +151,24 @@ public class UserManagement {
         con = connection();
         PreparedStatement preparedStmt2 = con.prepareStatement(query2);
         preparedStmt2.setString(1, unlockedStringImages);
-        preparedStmt2.setInt(2, user_id);
+        preparedStmt2.setInt(2, user.id());
 
         preparedStmt2.executeUpdate();
 
         con.close();
+        
+        if((!user.hasMedal(9))&&(unlockedImages(user.id()).length >= 3)){
+            UserManagement.obtainNewMedal(user, 9);
+        }
+    }
+    
+    public static boolean isUnlocked(int id_user, String image) throws SQLException {
+        for (String img : unlockedImages(id_user)) {
+            if (img.equals(image)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String[] unlockedImages(int user_id) throws SQLException {
@@ -175,14 +231,14 @@ public class UserManagement {
             preparedStmt.setString(1, "%" + search + "%");
 
             ResultSet result = preparedStmt.executeQuery();
-            
+
             while (result.next()) {
-                searching.add(new User(result.getString("name"),result.getInt("idUsers"),result.getInt("lvl"),result.getString("username")));
+                searching.add(new User(result.getString("name"), result.getInt("idUsers"), result.getInt("lvl"), result.getString("username")));
             }
-            
+
             con.close();
             return searching;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
             con.close();
@@ -310,7 +366,7 @@ public class UserManagement {
             ResultSet result = preparedStmt.executeQuery();
 
             if (result.next()) {
-                medal = new Medal(result.getString("name"), result.getString("description"), DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), result.getString("image_link"));
+                medal = new Medal(result.getString("name"), result.getString("description"), DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), result.getString("image_link"),result.getInt("id"));
             }
             con.close();
             return medal;
@@ -352,10 +408,8 @@ public class UserManagement {
 
             if (result.next()) {
                 String rawMedals = result.getString("medals");
-                System.out.println("Medallas actuales " + result.getString("medals"));
                 if (!rawMedals.contains(id + "Sep")) {
-                    rawMedals += "" + id + "Sep" + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now());
-                    System.out.println("Nuevas medallas " + rawMedals);
+                    rawMedals += "" + id + "Sep" + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()) + "End";
                 }
 
                 String updateQuery = "update Progress set medals = ? WHERE user_id = ? ";
@@ -367,6 +421,7 @@ public class UserManagement {
             }
 
             con.close();
+            retrieveProgressFromDatabase(user);
 
         } catch (SQLException ex) {
             con.close();
@@ -388,8 +443,9 @@ public class UserManagement {
                 ResultSet result = preparedStmt.executeQuery();
 
                 if (result.next()) {
-                    Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"));
+                    Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"),result.getInt("id"));
                     user.addMedal(medal);
+                    System.out.println("Añadiendo: " + medal.getName() + "con id: " + medal.getId());
                 }
 
             }

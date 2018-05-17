@@ -1,3 +1,4 @@
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\ChangeForExperienceServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SendItemServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Medal.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DeletePostServlet.java
@@ -17,6 +18,7 @@ D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\CareerManageme
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\ImageToken.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\LoginServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SendMessageServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Book.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\ForumPost.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\InventoryItem.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\User.java
@@ -24,9 +26,11 @@ D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\UserManagement
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\Inventory.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Question.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\LogoutServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\ReviseQuestionServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DeleteThreadServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\ForumThread.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\OpenItemServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\AddItemServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Exam.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\LevelUnlocks.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\LootBox.java

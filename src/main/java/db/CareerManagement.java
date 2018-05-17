@@ -1,5 +1,6 @@
 package db;
 
+import com.mycompany.multiplayerbiblio.Book;
 import static db.UserManagement.connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,20 +25,20 @@ public class CareerManagement {
 
         return con;
     }
-    
+
     public static Map<String, Integer> getTopCareers() throws ClassNotFoundException {
         try {
             Map<String, Integer> allCareers = new HashMap<>();
 
             con = connection();
-            String query = "select name, students from Careers";
+            String query = "select name, students from careersnew";
             Statement stmt = con.prepareStatement(query);
             ResultSet result = stmt.executeQuery(query);
 
             while (result.next()) {
                 allCareers.put(result.getString("name"), result.getInt("students"));
             }
-            
+
             con.close();
             return MapSort.sortByValue(allCareers);
 
@@ -49,8 +50,7 @@ public class CareerManagement {
 
     public static void recalculateStats(String career) {
         try {
-            
-            
+
             con = connection();
             String query = "select * from Users where career = ?";
 
@@ -62,26 +62,25 @@ public class CareerManagement {
             int students = 0;
 
             while (result.next()) {
-                System.out.println("Usuario " + result.getString("name"));
                 totalLevelCareer += result.getInt("lvl");
                 students++;
             }
 
-            
             float avglvl;
-            
+
             if (students == 0) {
                 avglvl = 0.00f;
             } else {
                 avglvl = (float) totalLevelCareer / students;
             }
-            
 
-            String updateQuery = "update Careers set avglvl = ?, students = ? WHERE name = ?";
+            int id = getCareerId(career);
+            con = connection();
+            String updateQuery = "update careersnew set avglvl = ?, students = ? WHERE id = ?";
             PreparedStatement updateStm = con.prepareStatement(updateQuery);
             updateStm.setFloat(1, avglvl);
             updateStm.setInt(2, students);
-            updateStm.setString(3, career);
+            updateStm.setInt(3, id);
 
             updateStm.executeUpdate();
             con.close();
@@ -96,7 +95,7 @@ public class CareerManagement {
             List<String> careerNames = new ArrayList<>();
             con = connection();
 
-            String query = "select name from Careers";
+            String query = "select name from careersnew";
             Statement stmt = con.prepareStatement(query);
             ResultSet result = stmt.executeQuery(query);
 
@@ -112,29 +111,45 @@ public class CareerManagement {
         }
     }
 
-    public static String[] getCareerRecommendedBooks(String career) throws SQLException, ClassNotFoundException {
+    public static List<Book> getCareerRecommendedBooks(String career) throws SQLException, ClassNotFoundException {
         try {
-            List<String> careerNames = new ArrayList<>();
             con = connection();
+            List<Book> books = new ArrayList<>();
+            String query = "select * from recbooks where id_career = ?";
 
-            String query = "select recbooks from Careers where name = ?";
+            int id_career = getCareerId(career);
+            con = connection();
+            
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, career);
+            preparedStmt.setInt(1, id_career);
 
             ResultSet result = preparedStmt.executeQuery();
-            if (result.next()) {
-                String rawBooks = result.getString("recbooks");
-                con.close();
-                if (rawBooks != null) {
-                    return rawBooks.split("¼");
-                }
+            while (result.next()) {
+                books.add(new Book(result.getInt("id"), id_career, result.getString("name"), result.getString("url")));
             }
+            con.close();
+            return books;
 
         } catch (SQLException ex) {
             Logger.getLogger(CareerManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         con.close();
         return null;
+    }
+
+    public static int getCareerId(String name) throws SQLException, ClassNotFoundException {
+        con = connection();
+        String query = "select id from careersnew where name = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, name);
+        int id = 0;
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            id = result.getInt("id");
+        }
+        con.close();
+        return id;
+
     }
 
 }

@@ -8,10 +8,8 @@ package servlets;
 import com.mycompany.multiplayerbiblio.User;
 import db.UserManagement;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -43,7 +41,7 @@ public class SearchUserServlet extends HttpServlet {
         List<User> searching = UserManagement.searchUsers(search);
         HttpSession session = request.getSession();
         session.setAttribute("search", searching);
-        response.sendRedirect("SearchResult.jsp");
+        response.sendRedirect("SearchResult-v2.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

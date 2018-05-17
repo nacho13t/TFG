@@ -8,36 +8,30 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                    <div class="container clearfix">
-                        <h3 class="text-center" style="color: white;">¡Consigue medallas completando retos!</h3>
-        <%
-            for (Medal medal : user.medals()) {
-                if (medal != null) {
-        %>
+                <div class="container clearfix">
+                    <h3 class="text-center" style="color: white;">¡Consigue medallas completando retos!</h3>
+                    <%
+                        for (Medal medal : UserManagement.getAllMedals()) {
+                            if (user.hasMedal(medal.getId())) {
+                    %>
+                    <img id="medals" class="img-responsive" src="<%=medal.getImage()%>" alt="<%=medal.getName()%>" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<h5><%=medal.getName()%></h5><p><%=medal.getDescription()%></p><p><%=user.getMedalDate(medal.getId())%></p>">
+                    <%
+                    } else {%>
+                    <img style="filter: grayscale(100%);-webkit-filter: grayscale(100%);" id="medals" class="img-responsive" src="<%=medal.getImage()%>" alt="<%=medal.getName()%>" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<h4>Bloqueada</h4><h5><%=medal.getName()%></h5><p><%=medal.getDescription()%></p>">      
+                    <%}
+                        }
+                    %>    
+                    <hr>
 
-        <div class="float-left mt-2">
-            <div class="card" style="width: 10rem;">
-                <img class="img-responsive" src="<%=medal.getImage()%>" alt="<%=medal.getName()%>">
-                <div class="card-body">
-                    <h5 class="card-title"><%=medal.getName()%></h5>
-                    <p class="card-text"><%=medal.getDescription()%></p>
-                    <p class="card-text">Conseguido el <%=medal.getDate()%></p>
                 </div>
             </div>
-        </div>
-        <%
-                }
-            }
-        %>    
-    </div>
-            </div>
             <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1">
+                <div class="row mt-4 mr-1" style="cursor: pointer">
                     <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
                     <div class="col-7">
                         <h5 style="color: white" mt-2><%= user.nick()%></h5>
@@ -64,8 +58,7 @@
                     <% if (user.level() >= 4) { %>
                     <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
-                    <%}%>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
                 </div> 
             </div>
         </div>
@@ -75,6 +68,12 @@
     <script src="image-map-pro.min.js"></script>
 
     <jsp:include page="footer-v2.jsp" />
+
+    <script>
+                            $(function () {
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
+    </script>
 
 </body>
 </html>

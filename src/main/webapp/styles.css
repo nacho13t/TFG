@@ -2,6 +2,14 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+#image-game-container{
+    width: 95%;
+}
+
+#medals{
+        width: 8rem;
+    }
+
 .menu-right a{
     text-align: center;
     color:white !important;
@@ -72,34 +80,58 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
 }
 
-@media screen and (max-width: 767px) {  
+@media screen and (max-width: 700px) { 
+    #image-game-container{
+        width: 90%;
+    }
+}    
+
+@media screen and (max-width: 767px) { 
+
+
+    #medals{
+        width: 5rem;
+    }
+
+    #image-game-container{
+        width: 100%;
+    }
+
     .profileImageContainer{
         margin-top: 5px;
         object-fit: cover;
         width:65px;
         height:65px;
     }
-    
+
+    .page-title{
+        font-size: 17px;
+    }
+
+    .messages{
+        font-size: 12px;
+    }
+
     .search-user input{
         font-size: 12px;
     }
-    
+
     .search-user button{
         font-size: 12px;
     }
-    
+
     .user-info h5{
         font-size: 15px;
     }
-    
+
     .user-info button{
         font-size: 12px;
     }
-    
+
     .book-text{
         font-size: 7.5px;
     }
-    
+
     .img-tema-1{
         width: 100%;
     }

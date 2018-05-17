@@ -7,30 +7,28 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="row">
                     <div class="col-sm mt-2">
                         <h5 class="text-center" style="color: white">Usuarios</h5>
                         <ul class="list-group">
-                            <ul class="list-group">
+                            <div class="list-group">
 
                                 <%
                                     int i = 1;
                                     for (Entry<String, Integer> entry : UserManagement.getTopLvlUsers().entrySet()) {%>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <%=entry.getKey()%>
-                                    <span class="badge badge-primary badge-pill bg-danger">Nv. <%=entry.getValue()%></span>
-                                </li>  
-                                <%
-                                        if (i >= 10) {
-                                            break;
+                                <a href="ExploreProfile-v2.jsp?username=<%=entry.getKey()%>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="background-color: #333333; color: white;"><%=entry.getKey()%>
+                                    <span class="badge badge-primary badge-pill bg-danger">Nv. <%=entry.getValue()%></span></a>
+                                    <%
+                                            if (i >= 10) {
+                                                break;
+                                            }
+                                            i++;
                                         }
-                                        i++;
-                                    }
-                                %> 
-                            </ul>
+                                    %> 
+                            </div>
                         </ul>
                     </div>
                     <div class="col-sm mt-2">
@@ -41,7 +39,7 @@
                                 <%
                                     i = 1;
                                     for (Entry<String, Integer> entry : CareerManagement.getTopCareers().entrySet()) {%>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #333333; color: white;">
                                     <%=entry.getKey()%>
                                     <span class="badge badge-primary badge-pill bg-success"><%=entry.getValue()%> usuarios</span>
                                 </li>  
@@ -58,9 +56,9 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1">
+                <div class="row mt-4 mr-1" style="cursor: pointer">
                     <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
                     <div class="col-7">
                         <h5 style="color: white" mt-2><%= user.nick()%></h5>
@@ -87,8 +85,7 @@
                     <% if (user.level() >= 4) { %>
                     <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
-                    <%}%>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
                 </div> 
             </div>
         </div>

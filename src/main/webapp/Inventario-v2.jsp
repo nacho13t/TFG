@@ -9,7 +9,7 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #333333">
+    <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container">
@@ -18,8 +18,20 @@
                     <div class="d-flex flex-wrap justify-content-center mt-2" id="inventoryItems">
                         <%
             for (InventoryItem item : user.inventory().getItems()) {%>
-                        <div class="p-2">
-                            <img src="Images/<%=item.image()%>" id="img<%=item.id()%>" onclick="displayOpenBoxButton(<%=item.id()%>)" class="img-responsive inventoryImageContainer rounded-circle p-2" alt="Item" title="<%=item.description()%>">
+            <%
+                String tipo = "";
+                if(item.type().equals("LootBox")){
+                    tipo = "Caja de recompensa";
+                }else if(item.type().equals("Joker")){
+                    tipo = "Comodín";
+                }else if(item.type().equals("Image")){
+                    tipo = "Ficha de imagen";
+                }else{
+                    tipo = "Ficha de experiencia";
+                }
+                %>
+            <div class="p-2" style="text-align: center">
+                            <img src="Images/<%=item.image()%>" id="img<%=item.id()%>" onclick="displayOpenBoxButton(<%=item.id()%>)" class="img-responsive inventoryImageContainer rounded-circle p-2" alt="Item" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<h5><%=tipo%></h5><p><%=item.description()%></p>">
                             <div class="itemsActions" id="itemsActions<%=item.id()%>" style="display: none">
                                 <form style="text-align: center" action="OpenItemServlet" onsubmit="return checkJoker(<%=item.id()%>)">
                                     <button style="color: white;" type="submit" id="btn<%=item.id()%>" class="btn btn-outline-secondary btn-sm <%if (item.type().equals("Joker")) {
@@ -27,6 +39,12 @@
                                         }%>">Abrir</button>
                                     <input type="hidden" name="item" value="<%=item.id()%>">
                                 </form>
+                                    <%if(item.type().equals("Joker")){%>
+                                <form style="text-align: center" action="ChangeForExperienceServlet" class="mt-2">
+                                    <button style="color: white;" type="submit" id="btn<%=item.id()%>" class="btn btn-outline-secondary btn-sm">Cambiar por experiencia</button>
+                                    <input type="hidden" name="item" value="<%=item.id()%>">
+                                </form>       
+                                    <%}%>
                                 <div style="text-align: center" class="p-2">
                                     <button style="color: white;" id="btnSend<%=item.id()%>" onclick="displaySendDiv(<%=item.id()%>)" class="btn btn-outline-secondary btn-sm mb-2">Enviar</button>
                                 </div>
@@ -58,9 +76,9 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1">
+                <div class="row mt-4 mr-1" style="cursor: pointer">
                     <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
+                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
                     </div> 
                     <div class="col-7">
                         <h5 style="color: white" mt-2><%= user.nick()%></h5>
@@ -87,8 +105,7 @@
                     <% if (user.level() >= 4) { %>
                     <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
                     <% } else { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro</a>
-                    <%}%>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
                 </div> 
             </div>
         </div>
@@ -122,7 +139,13 @@
                         return false;
                     return true;
                 }
+                
+                
     </script>
-
+<script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </body>
 </html>

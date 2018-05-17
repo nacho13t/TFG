@@ -3,8 +3,12 @@ package servlets;
 
 import com.mycompany.multiplayerbiblio.User;
 import db.ForumManagement;
+import db.UserManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +31,15 @@ public class CreateThreadServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
         ForumManagement.createThread(user.id(), request.getParameter("title"), request.getParameter("body"));
-        
-        response.sendRedirect("mainScreen.jsp");
+        UserManagement.obtainNewMedal(user, 5);
+        response.sendRedirect("Forum-v2.jsp");
         
     }
 
@@ -51,7 +55,11 @@ public class CreateThreadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateThreadServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -65,7 +73,11 @@ public class CreateThreadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateThreadServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -7,6 +7,14 @@ import java.sql.SQLException;
 
 
 public class LevelUnlocks {
+
+    public static LevelUnlocks LevelFourMedal() {
+        return new LevelUnlocks("¡Has obtenido una nueva medalla!");
+    }
+    
+    public static LevelUnlocks LevelEightMedal() {
+        return new LevelUnlocks("¡Has obtenido una nueva medalla!");
+    }
     
     private final String description;
     
@@ -18,12 +26,24 @@ public class LevelUnlocks {
         return description;
     }
     
+    public static LevelUnlocks CorrectQuestion(User user){
+        return new LevelUnlocks("¡La respuesta es correcta! Has ganado 50 puntos de experiencia.");
+    }
+    
+    public static LevelUnlocks WrongQuestion(User user){
+        return new LevelUnlocks("La respuesta no es correcta.");
+    }
+    
+    public static LevelUnlocks NewMedal(User user){
+        return new LevelUnlocks("¡Has conseguido una nueva medalla!");
+    }
+    
     public static LevelUnlocks UserDoNotExists(User user){
         return new LevelUnlocks("El usuario no existe.");
     }
     
     public static LevelUnlocks LevelTwoUnlockVirusImage(User user) throws SQLException{
-        UserManagement.unlock(user.id(),"virus.png");
+        UserManagement.unlock(user,"virus.png");
         return new LevelUnlocks("¡Has subido a nivel 2! Tienes una nueva imagen de perfil disponible.");
     }
     

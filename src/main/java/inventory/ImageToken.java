@@ -50,7 +50,7 @@ public class ImageToken extends InventoryItem{
                     break;
                 }
             }
-            if(!repeated)UserManagement.unlock(user.id(), this.path);
+            if(!repeated)UserManagement.unlock(user, this.path);
             user.inventory().removeItem(this);
             
         } catch (SQLException ex) {

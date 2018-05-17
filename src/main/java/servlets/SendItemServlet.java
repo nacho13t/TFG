@@ -42,12 +42,14 @@ public class SendItemServlet extends HttpServlet {
             inventory.Inventory.giveItem(request.getParameter("target"), item);
 
             UserManagement.sendMessage(user.username(), request.getParameter("target"), request.getParameter("message"));
-
+            if(!user.hasMedal(7)){
+                UserManagement.obtainNewMedal(user, 7);
+            }
         }else{
             user.sendItemUserNotExists();
         }
         
-            response.sendRedirect("Inventario.jsp");
+            response.sendRedirect("Inventario-v2.jsp");
         
         
     }
