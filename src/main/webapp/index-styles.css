@@ -1,9 +1,4 @@
-/*body { 
-    background: url(Images/background-image.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+/*
 }*/
 
 .titulo{
@@ -15,16 +10,28 @@
 #title-div-container{
     position: fixed;
     top: 55%;
-    left: 20%;
+    left: 15%;
     margin-top: -100px;
     width: 70%;
     text-align: center;
 }
 
-@media screen and (max-width: 767px) { 
+@media screen and (orientation: portrait) { 
     .titulo{
         color:white;
         background: transparent;
         font-size: 52px;
     } 
+    
+    #image-map-pro-container{
+        display: none;
+    }
+    
+    body { 
+        background: url(Images/background-image.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 }

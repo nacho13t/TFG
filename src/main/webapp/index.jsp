@@ -13,26 +13,19 @@
         <title>TFG</title>
     </head>
     <body>
-        <!--        <div class="m-4"style="text-align: right;">
-                    <button class="btn btn-outline-info mt-2" type="button" data-toggle="modal" data-target="#loginModal"><span class="font-weight-bold" >Iniciar sesión</span></button>
-                    <button class="btn btn-success mt-2" type="button" data-toggle="modal" data-target="#registerModal"><span class="font-weight-bold" >Registrarse</span></button>
-                </div>
-                <div style="text-align: center;" id="title-div-container">
-                    <h1 class="titulo display-1">CONOCE TU BIBLIOTECA</h1>
-                </div>-->
+
         <div class="fixed-top p-4" style="text-align: right">
             <button class="btn btn-outline-info mt-2" type="button" data-toggle="modal" data-target="#loginModal"><span class="font-weight-bold" >Iniciar sesión</span></button>
             <button class="btn btn-success mt-2" type="button" data-toggle="modal" data-target="#registerModal"><span class="font-weight-bold" >Registrarse</span></button>
 
         </div>
         <div style="z-index: 2; position: absolute">
-
             <div id="title-div-container" >
                 <h1 class="titulo display-1">CONOCE TU BIBLIOTECA</h1>
             </div>
         </div>
-        <div id="image-map-pro-container" style="z-index: 1; position: absolute"> </div>
-
+        
+        <div id="image-map-pro-container" style="z-index: 1; position: absolute" > </div>
         <script src="jquery-3.3.1.min.js"></script>
         <script src="image-map-pro.min.js"></script>
         <script type="text/javascript">
