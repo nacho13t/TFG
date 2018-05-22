@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div id="image-map-pro-container" class="pt-4 pl-1 pb-4"></div>
+                <jsp:include page="Reviews-Caroussel.jsp" />
             </div>
             <jsp:include page="Sidebar.jsp" />
         </div>

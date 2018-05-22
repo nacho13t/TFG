@@ -1,8 +1,5 @@
 <%@page import="com.mycompany.multiplayerbiblio.Message"%>
-<%@page import="com.mycompany.multiplayerbiblio.Medal"%>
 <%@page import="db.UserManagement"%>
-<%@page import="db.CareerManagement"%>
-<%@page import="java.util.Map.Entry"%>
 <%@page import="com.mycompany.multiplayerbiblio.User"%>
 <!doctype html>
 <html lang="en">
@@ -28,11 +25,8 @@
                                     <label for="targetMessageLabel">Mensaje para el destinatario.</label>
                                     <textarea class="form-control" id="targetMessage" name="message" rows="3"></textarea>
                                 </div>
-
                                 <input type="hidden" name="origin" value="<%=user.username()%>">
-
                                 <button type="submit" class="btn btn-primary">Enviar</button>
-
                             </form>
                         </div>
                     </div>
@@ -42,7 +36,6 @@
                             <h4>Recibidos</h4>
                             <div id="accordion">
                                 <% for (Message message : UserManagement.getRecievedMessages(user)) {%>
-
                                 <div class="card">
                                     <div class="card-header" id="heading<%=message.getId()%>" style="background-color: #444444"> 
                                         <h5 class="mb-0">
@@ -73,7 +66,6 @@
                                             </button>
                                         </h5>
                                     </div>
-
                                     <div id="collapse<%=msg.getId()%>" class="collapse" aria-labelledby="heading<%=msg.getId()%>" data-parent="#accordion2">
                                         <div class="card-body" style="color:black">
                                             <%=msg.getContent()%>
@@ -86,71 +78,34 @@
                     </div>
                 </div>  
             </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="row mt-4 mr-1" style="cursor: pointer">
-                    <div class="col-5 text-center">
-                        <img src="<%=user.image()%>" onClick="location.href = 'Profile-v2.jsp'" class="img-responsive profileImageContainer rounded-circle" alt="Profile image">
-                    </div> 
-                    <div class="col-7">
-                        <h5 style="color: white" mt-2><%= user.nick()%></h5>
-                        <h5 style="color: white" mt-2><%= user.career()%></h5>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-row justify-content-center pr-2">
-
-                    <div class="mt-3"><span class="rounded-circle border border-white" style="background-color:#333333; border-width: 3px !important; font-size: 23px; color:white;"><%= user.level()%></span></div>
-                    <div class="mt-4 progress w-75">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: <%=user.percetage()%>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=user.percetage()%> %</div>
-                    </div>
-                    <div class="mt-3"><span class="rounded-circle border border-white" style=" background-color:#333333; border-width: 3px !important; font-size: 23px; color:white;"><%= user.level() + 1%></span></div>
-
-                </div>
-
-                <div class="list-group align-items-center menu-right align-middle mt-4 pr-3">
-                    <a href="Content.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Biblioteca</a>
-                    <a href="Rankings-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Rankings</a>
-                    <a href="Inventario-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Inventario</a>
-                    <a href="RecommendedBooks-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Libros recomendados</a>
-                    <a href="Medals-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light ">Medallas</a>
-                    <% if (user.level() >= 4) { %>
-                    <a href="Forum-v2.jsp" class="list-group-item list-group-item-action list-group-item-dark border border-light">Foro</a>
-                    <% } else { %>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-dark border border-light disabled">Foro (Nivel 4)</a><%}%>
-                </div> 
-            </div>
+            <jsp:include page="Sidebar.jsp" />
         </div>
     </div>
 
-    <script src="jquery-3.3.1.min.js"></script>
-    <script src="image-map-pro.min.js"></script>
-
     <jsp:include page="footer-v2.jsp" />
-
     <script>
-                function displaySend() {
-                    jQuery('#sendDiv').toggle();
-                    if ($('#buttonSend').text() === "Nuevo mensaje") {
-                        $('#buttonSend').text("Cancelar");
-                    } else if ($('#buttonSend').text() === "Cancelar") {
-                        $('#buttonSend').text("Nuevo mensaje");
-                    }
-                }
+        function displaySend() {
+            jQuery('#sendDiv').toggle();
+            if ($('#buttonSend').text() === "Nuevo mensaje") {
+                $('#buttonSend').text("Cancelar");
+            } else if ($('#buttonSend').text() === "Cancelar") {
+                $('#buttonSend').text("Nuevo mensaje");
+            }
+        }
 
-                function validateMessage(form) {
-                    if (form.elements[0].value === "") {
-                        alert("Introduce un nombre de usuario");
-                        return false;
-                    }
+        function validateMessage(form) {
+            if (form.elements[0].value === "") {
+                alert("Introduce un nombre de usuario");
+                return false;
+            }
 
-                    if (form.elements[1].value === "") {
-                        alert("Escribe algo en el mensaje");
-                        return false;
-                    }
+            if (form.elements[1].value === "") {
+                alert("Escribe algo en el mensaje");
+                return false;
+            }
 
-                    return true;
-                }
+            return true;
+        }
     </script>
-
 </body>
 </html>

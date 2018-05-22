@@ -2,6 +2,7 @@ package db;
 
 import com.mycompany.multiplayerbiblio.Medal;
 import com.mycompany.multiplayerbiblio.Message;
+import com.mycompany.multiplayerbiblio.Review;
 import com.mycompany.multiplayerbiblio.User;
 import inventory.Inventory;
 import java.nio.charset.StandardCharsets;
@@ -33,10 +34,209 @@ public class UserManagement {
         return con;
     }
     
-    public static void increaseLootBoxCounter(User user) throws SQLException{
+    public static void removeLike(Review review, int id_user) throws SQLException{
+        con = connection();
+        String like_array = review.getLike_array();
+        like_array = like_array.replace("'" + id_user + "'", "");
+        String query = "update reviews set likes_array = ? WHERE id = ? ";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, like_array);
+        preparedStmt.setInt(2, review.getId());
+
+        preparedStmt.executeUpdate();
+        con.close();
+        
+        int currentLikes = getReviewLikes(review.getId());
+        con = connection();
+        query = "update reviews set likes = ? WHERE id = ? ";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, currentLikes-1);
+        preparedStmt.setInt(2, review.getId());
+
+        preparedStmt.executeUpdate();
+        con.close();
+    }
+
+    public static void giveLike(Review review, int id_user) throws SQLException {
+        con = connection();
+
+        String like_array = review.getLike_array();
+        like_array += "'" + id_user + "'";
+
+        String query = "update reviews set likes_array = ? WHERE id = ? ";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, like_array);
+        preparedStmt.setInt(2, review.getId());
+
+        preparedStmt.executeUpdate();
+        con.close();
+        
+        int currentLikes = getReviewLikes(review.getId());
+        con = connection();
+        query = "update reviews set likes = ? WHERE id = ? ";
+        preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, currentLikes+1);
+        preparedStmt.setInt(2, review.getId());
+
+        preparedStmt.executeUpdate();
+        con.close();
+    }
+
+    public static Review getReview(int id) throws SQLException {
+        con = connection();
+        Review review = null;
+
+        String query = "SELECT * from reviews where id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            review = new Review(id, result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array"));
+        }
+
+        con.close();
+        return review;
+    }
+
+    public static void removeReview(int id, int id_user) throws SQLException {
+        int last_user_review = getLastReviewId(id_user);
+
+        con = connection();
+        PreparedStatement st = con.prepareStatement("DELETE FROM reviews WHERE id = ?");
+        st.setInt(1, id);
+        st.executeUpdate();
+
+        con.close();
+        if (last_user_review == id) {
+            List<Review> reviews = getUserReviews(id_user);
+            if (reviews.isEmpty()) {
+                updateLastReviewId(id_user, 0);
+            } else {
+                updateLastReviewId(id_user, reviews.get(reviews.size() - 1).getId());
+            }
+        }
+
+    }
+
+    public static List<Review> getUserReviews(int id_user) throws SQLException {
+        con = connection();
+        List<Review> reviews = new ArrayList<>();
+
+        String query = "SELECT * from reviews where id_user = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id_user);
+        ResultSet result = preparedStmt.executeQuery();
+        while (result.next()) {
+            reviews.add(new Review(result.getInt("id"), id_user, result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array")));
+        }
+
+        con.close();
+        return reviews;
+    }
+
+    public static List<Review> getAllReviews() throws SQLException {
+        con = connection();
+        List<Review> reviews = new ArrayList<>();
+
+        String query = "SELECT * from reviews";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        ResultSet result = preparedStmt.executeQuery();
+        while (result.next()) {
+            reviews.add(new Review(result.getInt("id"), result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array")));
+        }
+
+        con.close();
+        return reviews;
+    }
+
+    public static int getLastReviewId(int id_user) throws SQLException {
+        con = connection();
+        int last_review_id = 0;
+
+        String query = "SELECT last_review_id from progress where user_id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id_user);
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            last_review_id = result.getInt("last_review_id");
+        }
+        con.close();
+        return last_review_id;
+    }
+
+    public static int getReviewLikes(int id) throws SQLException {
+
+        String query = "SELECT likes from reviews where id = ?";
+    con = connection();
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        int likes = 0;
+        if (result.next()) {
+            likes = result.getInt("likes");
+        }
+        con.close();
+        return likes;
+    }
+
+    public static int getLastReviewLikes(int id_user) throws SQLException {
+        int last_review_id = getLastReviewId(id_user);
+        con = connection();
+
+        if (last_review_id == 0) {
+            con.close();
+            return 10;
+        }
+
+        String query = "SELECT * from reviews where id = ?";
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, last_review_id);
+        ResultSet result = preparedStmt.executeQuery();
+        int likes = 0;
+        if (result.next()) {
+            likes = result.getInt("likes");
+        }
+
+        con.close();
+        return likes;
+
+    }
+
+    public static void createReview(Review review) throws SQLException {
+        con = connection();
+        String query = "INSERT into reviews (id_user, review_content, book_name, quote) VALUES (?,?,?,?)";
+        PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStmt.setInt(1, review.getUser_id());
+        preparedStmt.setString(2, review.getReview_content());
+        preparedStmt.setString(3, review.getBook_name());
+        preparedStmt.setString(4, review.getQuote());
+
+        preparedStmt.execute();
+        ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+        int review_id = 0;
+        if (generatedKeys.next()) {
+            review_id = generatedKeys.getInt(1);
+        }
+
+        con.close();
+        updateLastReviewId(review.getUser_id(), review_id);
+    }
+
+    public static void updateLastReviewId(int user_id, int review_id) throws SQLException {
+        con = connection();
+        String query = "update Progress set last_review_id = ? WHERE user_id = ? ";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, review_id);
+        preparedStmt.setInt(2, user_id);
+
+        preparedStmt.executeUpdate();
+        con.close();
+    }
+
+    public static void increaseLootBoxCounter(User user) throws SQLException {
         int count = getOpenLootBoxes(user);
         count++;
-        System.out.println(count);
         con = connection();
         String query = "update Progress set loot_box_open = ? WHERE user_id = ? ";
 
@@ -47,18 +247,18 @@ public class UserManagement {
         preparedStmt.executeUpdate();
         con.close();
     }
-    
-    public static int getOpenLootBoxes(User user) throws SQLException{
+
+    public static int getOpenLootBoxes(User user) throws SQLException {
         con = connection();
         String query = "SELECT loot_box_open from progress where user_id = ?";
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setInt(1, user.id());
         ResultSet result = preparedStmt.executeQuery();
         int count = 0;
-        if(result.next()){
+        if (result.next()) {
             count = result.getInt("loot_box_open");
         }
-        
+
         con.close();
         return count;
     }
@@ -72,7 +272,7 @@ public class UserManagement {
 
         while (result.next()) {
             medals.add(new Medal(result.getString("name"), result.getString("description"), result.getString("image_link"), result.getInt("id")));
-            
+
         }
         con.close();
         return medals;
@@ -156,12 +356,12 @@ public class UserManagement {
         preparedStmt2.executeUpdate();
 
         con.close();
-        
-        if((!user.hasMedal(9))&&(unlockedImages(user.id()).length >= 3)){
+
+        if ((!user.hasMedal(9)) && (unlockedImages(user.id()).length >= 3)) {
             UserManagement.obtainNewMedal(user, 9);
         }
     }
-    
+
     public static boolean isUnlocked(int id_user, String image) throws SQLException {
         for (String img : unlockedImages(id_user)) {
             if (img.equals(image)) {
@@ -366,7 +566,7 @@ public class UserManagement {
             ResultSet result = preparedStmt.executeQuery();
 
             if (result.next()) {
-                medal = new Medal(result.getString("name"), result.getString("description"), DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), result.getString("image_link"),result.getInt("id"));
+                medal = new Medal(result.getString("name"), result.getString("description"), DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDate.now()), result.getString("image_link"), result.getInt("id"));
             }
             con.close();
             return medal;
@@ -443,7 +643,7 @@ public class UserManagement {
                 ResultSet result = preparedStmt.executeQuery();
 
                 if (result.next()) {
-                    Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"),result.getInt("id"));
+                    Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"), result.getInt("id"));
                     user.addMedal(medal);
                     System.out.println("Añadiendo: " + medal.getName() + "con id: " + medal.getId());
                 }

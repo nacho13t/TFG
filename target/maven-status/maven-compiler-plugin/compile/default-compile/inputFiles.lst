@@ -3,6 +3,7 @@ D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\SendItem
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Medal.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DeletePostServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\ForumManagement.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\AddReviewServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\ExamsInstances.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DisplayExamServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\ExperienceToken.java
@@ -22,9 +23,13 @@ D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\mul
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\ForumPost.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\InventoryItem.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\User.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\RemoveLikeServlet.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Review.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\db\UserManagement.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\inventory\Inventory.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\GiveLikeServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\com\mycompany\multiplayerbiblio\Question.java
+D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\RemoveReviewServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\LogoutServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\ReviseQuestionServlet.java
 D:\Documentos\NetBeansProjects\Multiplayerbiblio\src\main\java\servlets\DeleteThreadServlet.java

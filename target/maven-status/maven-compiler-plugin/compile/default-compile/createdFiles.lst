@@ -14,12 +14,14 @@ com\mycompany\multiplayerbiblio\LevelUnlocks.class
 inventory\ExperienceToken.class
 db\MapSort$1.class
 servlets\OpenItemServlet.class
+com\mycompany\multiplayerbiblio\Review.class
 servlets\SearchUserServlet.class
 inventory\LootBox.class
 servlets\ChangeForExperienceServlet.class
 db\UserManagement.class
 servlets\ReviseQuestionServlet.class
 servlets\UpdateProfileServlet.class
+servlets\AddReviewServlet.class
 servlets\LoginServlet.class
 servlets\CreatePostServlet.class
 com\mycompany\multiplayerbiblio\User.class

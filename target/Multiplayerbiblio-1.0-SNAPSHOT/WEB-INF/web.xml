@@ -64,6 +64,22 @@
         <servlet-name>ReviseQuestionServlet</servlet-name>
         <servlet-class>servlets.ReviseQuestionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddReviewServlet</servlet-name>
+        <servlet-class>servlets.AddReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveReviewServlet</servlet-name>
+        <servlet-class>servlets.RemoveReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GiveLikeServlet</servlet-name>
+        <servlet-class>servlets.GiveLikeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveLikeServlet</servlet-name>
+        <servlet-class>servlets.RemoveLikeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -127,6 +143,22 @@
     <servlet-mapping>
         <servlet-name>ReviseQuestionServlet</servlet-name>
         <url-pattern>/ReviseQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddReviewServlet</servlet-name>
+        <url-pattern>/AddReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveReviewServlet</servlet-name>
+        <url-pattern>/RemoveReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GiveLikeServlet</servlet-name>
+        <url-pattern>/GiveLikeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveLikeServlet</servlet-name>
+        <url-pattern>/RemoveLikeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
