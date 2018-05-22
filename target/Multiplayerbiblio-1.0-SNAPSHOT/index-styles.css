@@ -1,5 +1,3 @@
-/*
-}*/
 
 .titulo{
     color:white;
@@ -16,34 +14,35 @@
     text-align: center;
 }
 
-@media screen and (orientation: landscape) { 
-    .buttons-center{
-        display: none;
-    }
-}    
-
-@media screen and (orientation: portrait) { 
-   
-    
-    .titulo{
-        color:white;
-        background: transparent;
-        font-size: 52px;
-    } 
-    
-    .buttons-top{
-        display: none;
-    }
-    
-    #image-map-pro-container{
-        display: none;
-    }
-    
-    body { 
-        background: url(Images/background-image.jpg) no-repeat center fixed; 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
+.buttons-center{
+    display: none;
 }
+
+    @media screen and (max-aspect-ratio: 2/1) { 
+
+        .buttons-center{
+    display: block;
+}
+        
+        .titulo{
+            color:white;
+            background: transparent;
+            font-size: 52px;
+        } 
+
+        .buttons-top{
+            display: none;
+        }
+
+        #image-map-pro-container{
+            display: none;
+        }
+
+        body { 
+            background: url(Images/background-image.jpg) no-repeat center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    }
