@@ -18,31 +18,36 @@
     display: none;
 }
 
-    @media screen and (max-aspect-ratio: 2/1) { 
+@media screen and (max-aspect-ratio: 2/1) { 
 
-        .buttons-center{
-    display: block;
-}
-        
-        .titulo{
-            color:white;
-            background: transparent;
-            font-size: 52px;
-        } 
-
-        .buttons-top{
-            display: none;
-        }
-
-        #image-map-pro-container{
-            display: none;
-        }
-
-        body { 
-            background: url(Images/background-image.jpg) no-repeat center fixed; 
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
+    .buttons-center{
+        display: block;
     }
+
+    .titulo{
+        color:white;
+        background: transparent;
+        font-size: 52px;
+    } 
+
+    .buttons-top{
+        display: none;
+    }
+
+    #image-map-pro-container{
+        display: none;
+    }
+
+    body { 
+        background: url(Images/background-image.jpg) no-repeat center fixed; 
+        background-repeat: no-repeat; 
+        background-position: center;
+        background-attachment: fixed;       
+        webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        height:100%;
+        width:100%; 
+    }
+}
