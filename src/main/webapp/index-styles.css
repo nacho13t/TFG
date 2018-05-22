@@ -18,6 +18,22 @@
     display: none;
 }
 
+@media screen and (max-width: 600px) { 
+    .titulo{
+        color:white;
+        background: transparent;
+        font-size: 40px;
+    } 
+
+    #title-div-container{
+        position: fixed;
+        top: 75%;
+        left: 15%;
+        margin-top: -100px;
+        width: 70%;
+        text-align: center;
+    }
+}    
 @media screen and (max-aspect-ratio: 2/1) { 
 
     .buttons-center{
@@ -42,7 +58,7 @@
         height:100%;
         width:100%;
     }
-    
+
     body { 
         background: url(Images/background-image.jpg) no-repeat center fixed; 
         background-repeat: no-repeat; 
