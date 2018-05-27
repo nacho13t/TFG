@@ -56,6 +56,19 @@ public class UserManagement {
         preparedStmt.executeUpdate();
         con.close();
     }
+    
+    public static void giveTenLikesExperience(Review review) throws SQLException{
+        User userTarget = getUser(review.getUser_id());
+        userTarget.gainExperience(50);
+        
+        con = connection();
+        
+        String query = "update reviews set exp_given = 1 WHERE id = ? ";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, review.getId());
+        preparedStmt.executeUpdate();
+        con.close();
+    }
 
     public static void giveLike(Review review, int id_user) throws SQLException {
         con = connection();
@@ -72,14 +85,21 @@ public class UserManagement {
         con.close();
         
         int currentLikes = getReviewLikes(review.getId());
+        currentLikes++;
+        System.out.println("LIKES: " + currentLikes);
         con = connection();
         query = "update reviews set likes = ? WHERE id = ? ";
         preparedStmt = con.prepareStatement(query);
-        preparedStmt.setInt(1, currentLikes+1);
+        preparedStmt.setInt(1, currentLikes);
         preparedStmt.setInt(2, review.getId());
 
         preparedStmt.executeUpdate();
         con.close();
+        
+        if((currentLikes >= 10)&&(!review.expGiven())){
+            System.out.println("DANDO EXPERIENCIA");
+            giveTenLikesExperience(review);
+        }
     }
 
     public static Review getReview(int id) throws SQLException {
@@ -91,7 +111,7 @@ public class UserManagement {
         preparedStmt.setInt(1, id);
         ResultSet result = preparedStmt.executeQuery();
         if (result.next()) {
-            review = new Review(id, result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array"));
+            review = new Review(id, result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array"), result.getBoolean("exp_given"));
         }
 
         con.close();
@@ -127,7 +147,7 @@ public class UserManagement {
         preparedStmt.setInt(1, id_user);
         ResultSet result = preparedStmt.executeQuery();
         while (result.next()) {
-            reviews.add(new Review(result.getInt("id"), id_user, result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array")));
+            reviews.add(new Review(result.getInt("id"), id_user, result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array"), result.getBoolean("exp_given")));
         }
 
         con.close();
@@ -142,7 +162,7 @@ public class UserManagement {
         PreparedStatement preparedStmt = con.prepareStatement(query);
         ResultSet result = preparedStmt.executeQuery();
         while (result.next()) {
-            reviews.add(new Review(result.getInt("id"), result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array")));
+            reviews.add(new Review(result.getInt("id"), result.getInt("id_user"), result.getInt("likes"), result.getString("book_name"), result.getString("review_content"), result.getString("quote"), result.getString("likes_array"), result.getBoolean("exp_given")));
         }
 
         con.close();
@@ -529,6 +549,37 @@ public class UserManagement {
 
         return user;
     }
+    
+    public static User getUser(int id) throws SQLException { 
+        User user = new User();
+
+        con = connection();
+
+        String query = "select * from Users WHERE idUsers = ?";
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+
+        ResultSet result = preparedStmt.executeQuery();
+
+        if (result.next()) {
+            user.setUsername(result.getString("username"));
+            user.setCareer(result.getString("career"));
+            user.setLevel(result.getInt("lvl"));
+            user.setExperienceLeft(result.getInt("expleft"));
+            user.setPhoto(result.getString("image"));
+            user.setPass(result.getString("password"));
+            user.setNick(result.getString("name"));
+            user.setEmail(result.getString("email"));
+            user.id(id);
+        }
+        con.close();
+        
+        retrieveProgressFromDatabase(user);
+        Inventory.retrieveInventoryFromDB(user);
+
+        return user;
+    }
 
     public static void retrieveProgressFromDatabase(User user) throws SQLException {
         try {
@@ -584,7 +635,6 @@ public class UserManagement {
             con = connection();
 
             String query = "update Progress set " + colName + " = ? WHERE user_id = ? ";
-            System.out.println(query);
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setBoolean(1, true);
             preparedStmt.setInt(2, user.id());
@@ -645,7 +695,6 @@ public class UserManagement {
                 if (result.next()) {
                     Medal medal = new Medal(result.getString("name"), result.getString("description"), allMedal.split("Sep")[1], result.getString("image_link"), result.getInt("id"));
                     user.addMedal(medal);
-                    System.out.println("Añadiendo: " + medal.getName() + "con id: " + medal.getId());
                 }
 
             }

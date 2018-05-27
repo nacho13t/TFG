@@ -9,7 +9,6 @@
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container">
-
                     <h5 style="color: white;">Consigue objetos abriendo cajas de recompensa.</h5>
                     <div class="d-flex flex-wrap justify-content-center mt-2" id="inventoryItems">
                         <%

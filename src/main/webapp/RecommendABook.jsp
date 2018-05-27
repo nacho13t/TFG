@@ -8,7 +8,6 @@
     <%
         User user = (User) request.getSession().getAttribute("user");
         int last_review_likes = UserManagement.getLastReviewLikes(user.id());
-        System.out.println(last_review_likes);
     %>
     <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
@@ -49,6 +48,7 @@
                         <p class="lead"><%=review.getQuote()%></p>
                         <hr class="my-4" style="border-color: white;">
                         <p><%=review.getReview_content()%></p>
+                        <p style="text-align: right"><%=review.getLikes()%> <i class="fas fa-heart"></i></p>
                         <p class="lead">
                             <a class="btn btn-danger"  onclick='confirmDelete(<%=review.getId()%>)' role="button">Eliminar análisis</a>
                         </p>

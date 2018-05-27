@@ -21,12 +21,12 @@
     <script src="jquery-3.3.1.min.js"></script>
     <script src="image-map-pro.min.js"></script>
     <script type="text/javascript">
-                                        ;
-                                        (function ($, window, document, undefined) {
-                                            $(document).ready(function () {
-                                                $('#image-map-pro-container').imageMapPro({"id": 811, "editor": {"selected_shape": "rect-5766", "tool": "poly"}, "general": {"name": "Demo", "width": 3888, "height": 2592, "naturalWidth": 3888, "naturalHeight": 2592, "preserve_quality": 0}, "image": {"url": "https://www.denverlibrary.org/sites/dplorg/files/IMG_0849.JPG"}, "tooltips": {"tooltip_animation": "grow"}, "spots": [{"id": "rect-5766", "title": "rect-5766", "type": "poly", "x": 68.161, "y": 61.303, "width": 12.959, "height": 24.946, "actions": {"click": "follow-link", "link": "Entrada.jsp", "open_link_in_new_window": 0}, "default_style": {"fill": "#8000ff"}, "tooltip_style": {"position": "left", "auto_width": 1}, "tooltip_content": {"plain_text": "Entrar", "squares_settings": {"containers": [{"id": "sq-container-403761", "settings": {"elements": [{"settings": {"name": "Paragraph", "iconClass": "fa fa-paragraph"}}]}}]}}, "points": [{"x": 100, "y": 4.545454545454547}, {"x": 7.5, "y": 0}, {"x": 0, "y": 90.25974025974025}, {"x": 93.33333333333333, "y": 100}]}]});
-                                            });
-                                        })(jQuery, window, document);
+        ;
+        (function ($, window, document, undefined) {
+            $(document).ready(function () {
+                $('#image-map-pro-container').imageMapPro({"id": 4145, "editor": {"previewMode": 1, "selected_shape": "rect-237", "tool": "select"}, "general": {"name": "Untitled", "width": 2048, "height": 1417, "naturalWidth": 2048, "naturalHeight": 1417}, "image": {"url": "Images/exterior.jpg"}, "layers": {"layers_list": [{"id": 0, "title": "Main Floor", "image_url": "https://webcraftplugins.com/uploads/image-map-pro/demo.jpg", "image_width": 1280, "image_height": 776}]}, "spots": [{"id": "rect-237", "title": "rect-237", "type": "poly", "x": -0.09, "y": 21.559, "width": 87.149, "height": 62.744, "actions": {"click": "follow-link", "link": "Entrada.jsp", "open_link_in_new_window": 0}, "default_style": {"fill": "#8000ff", "fill_opacity": 0.06907894736842106}, "tooltip_content": {"plain_text": "Acceder", "squares_settings": {"containers": [{"id": "sq-container-403761", "settings": {"elements": [{"settings": {"name": "Paragraph", "iconClass": "fa fa-paragraph"}}]}}]}}, "points": [{"x": 3.0979429987608436, "y": 36.069137476679124}, {"x": 6.071871127633209, "y": 27.86069651741294}, {"x": 7.187112763320942, "y": 10.696517412935327}, {"x": 10.90458488228005, "y": 0.7462686567164173}, {"x": 34.572490706319705, "y": 17.661691542288565}, {"x": 48.57496902106567, "y": 0}, {"x": 100, "y": 49.50248756218906}, {"x": 98.88475836431226, "y": 49.75124378109454}, {"x": 99.62825278810409, "y": 51.49253731343284}, {"x": 99.38042131350682, "y": 84.57711442786072}, {"x": 94.17596034696406, "y": 86.318407960199}, {"x": 91.69764560099131, "y": 89.80099502487563}, {"x": 88.59970260223048, "y": 93.2831963910914}, {"x": 86.36910037174722, "y": 96.26801388564988}, {"x": 49.31848327137547, "y": 100}, {"x": 15.241635687732341, "y": 99.50248756218907}, {"x": 0, "y": 98.2587064676617}]}]});
+            });
+        })(jQuery, window, document);
     </script>
 
     <jsp:include page="footer-v2.jsp" />

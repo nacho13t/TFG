@@ -6,16 +6,17 @@ public class Review {
 
     private int id, user_id, likes;
     private String book_name, review_content, quote, like_array;
-
+    private boolean expGiven;
     
     public Review(int user_id, String book_name, String review_content, String quote){
         this.user_id = user_id;
         this.book_name = book_name;
         this.quote = quote;
         this.review_content = review_content;
+        this.expGiven = false;
     }
 
-    public Review(int id, int user_id, int likes, String book_name, String review_content, String quote, String like_array) {
+    public Review(int id, int user_id, int likes, String book_name, String review_content, String quote, String like_array, boolean expGiven) {
         this.id = id;
         this.user_id = user_id;
         this.likes = likes;
@@ -23,6 +24,15 @@ public class Review {
         this.book_name = book_name;
         this.review_content = review_content;
         this.like_array = like_array;
+        this.expGiven = expGiven;
+    }
+    
+    public boolean expGiven(){
+        return expGiven;
+    }
+    
+    public void expGiven(boolean expGiven){
+        this.expGiven = expGiven;
     }
     
     public boolean likeByUser(int user){
@@ -38,8 +48,6 @@ public class Review {
     public void setLike_array(String like_array) {
         this.like_array = like_array;
     }
-    
-    
     
     public int getId() {
         return id;

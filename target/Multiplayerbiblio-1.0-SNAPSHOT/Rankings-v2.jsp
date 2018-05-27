@@ -1,4 +1,5 @@
 
+<%@page import="com.mycompany.multiplayerbiblio.Library"%>
 <%@page import="db.CareerManagement"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="db.UserManagement"%>
@@ -11,7 +12,7 @@
     <div class="container-fluid p-4" style="background-color: #000">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                 <div class="row">
+                <div class="row">
                     <div class="col-sm mt-2">
                         <h5 class="text-center" style="color: white">Usuarios</h5>
                         <ul class="list-group">
@@ -32,17 +33,38 @@
                             </div>
                         </ul>
                     </div>
+                    <!--                    <div class="col-sm mt-2">
+                                            <h5 class="text-center" style="color: white">Carreras</h5>
+                                            <ul class="list-group">
+                                                <ul class="list-group">
+                    
+                    <%
+                        i = 1;
+                        for (Entry<String, Integer> entry : CareerManagement.getTopCareers().entrySet()) {%>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #333333; color: white;">
+                    <%=entry.getKey()%>
+                    <span class="badge badge-primary badge-pill bg-success"><%=entry.getValue()%> usuarios</span>
+                </li>  
+                    <%
+                            if (i >= 10) {
+                                break;
+                            }
+                            i++;
+                        }
+                    %> 
+                </ul>
+            </ul>
+        </div>-->
                     <div class="col-sm mt-2">
-                        <h5 class="text-center" style="color: white">Carreras</h5>
+                        <h5 class="text-center" style="color: white">Bibliotecas</h5>
                         <ul class="list-group">
                             <ul class="list-group">
-
                                 <%
                                     i = 1;
-                                    for (Entry<String, Integer> entry : CareerManagement.getTopCareers().entrySet()) {%>
+                                    for (Library library : CareerManagement.getTopLibraries()) {%>
                                 <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #333333; color: white;">
-                                    <%=entry.getKey()%>
-                                    <span class="badge badge-primary badge-pill bg-success"><%=entry.getValue()%> usuarios</span>
+                                    <%=library.getName()%>
+                                    <span class="badge badge-primary badge-pill bg-success"><%=library.getStudents()%> usuarios</span>
                                 </li>  
                                 <%
                                         if (i >= 10) {

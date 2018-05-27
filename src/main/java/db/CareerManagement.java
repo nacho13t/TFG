@@ -1,6 +1,7 @@
 package db;
 
 import com.mycompany.multiplayerbiblio.Book;
+import com.mycompany.multiplayerbiblio.Library;
 import static db.UserManagement.connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +27,78 @@ public class CareerManagement {
         con = DriverManager.getConnection(sURL, "y2q1rab10y9ze2gv", "shd02zhmm11i24o2");
 
         return con;
+    }
+
+    public static int getLibraryId(String career) throws SQLException, ClassNotFoundException {
+        int career_id = getCareerId(career);
+        con = connection();
+        int library_id = 0;
+        
+        String query = "SELECT library_id from careersnew where id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, career_id);
+        ResultSet result = preparedStmt.executeQuery();
+        if (result.next()) {
+            library_id = result.getInt("library_id");
+        }
+        
+        con.close();
+        return library_id;
+    }
+
+    public static String getLibraryName(String career) throws SQLException, ClassNotFoundException {
+        int library_id = getLibraryId(career);
+        con = connection();
+        String library_name = "";
+
+        String query = "select name from libraries where id = ?";
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setInt(1, library_id);
+        ResultSet result = stmt.executeQuery();
+        if (result.next()) {
+            library_name = result.getString("name");
+        }
+
+        con.close();
+        return library_name;
+    }
+
+    public static List<Library> getTopLibraries() throws SQLException, ClassNotFoundException {
+        con = connection();
+        List<Library> libraries = new ArrayList<>();
+        String query1 = "select id, name from libraries";
+        String query2 = "select students, library_id from careersnew";
+
+        Statement stmt = con.prepareStatement(query1);
+        ResultSet result = stmt.executeQuery(query1);
+
+        while (result.next()) {
+            libraries.add(new Library(result.getInt("id"), result.getString("name")));
+        }
+
+        Statement stmt2 = con.prepareStatement(query2);
+        ResultSet result2 = stmt.executeQuery(query2);
+
+        while (result2.next()) {
+            for (Library library : libraries) {
+                if (result2.getInt("library_id") == library.getId()) {
+                    library.increseStudents(result2.getInt("students"));
+                    break;
+                }
+            }
+        }
+
+        con.close();
+
+        Collections.sort(libraries, new Comparator<Library>() {
+            @Override
+            public int compare(Library a1, Library a2) {
+                return a2.getStudents() - a1.getStudents();
+            }
+        });
+
+        return libraries;
+
     }
 
     public static Map<String, Integer> getTopCareers() throws ClassNotFoundException {
@@ -119,7 +194,7 @@ public class CareerManagement {
 
             int id_career = getCareerId(career);
             con = connection();
-            
+
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, id_career);
 

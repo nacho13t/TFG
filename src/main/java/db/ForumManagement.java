@@ -64,31 +64,29 @@ public class ForumManagement {
             ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 createPost(user_id, post, generatedKeys.getInt(1));
+            } else {
+                con.close();
             }
-
-            con.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void createPost(int user_id, String body, int thread_id) {
-        try {
-            con = connection();
-            String query = " insert into Posts (user_id, thread_id, body) values (?, ?, ?)";
+    public static void createPost(int user_id, String body, int thread_id) throws SQLException {
+        con.close();
 
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1, user_id);
-            preparedStmt.setInt(2, thread_id);
-            preparedStmt.setString(3, body);
+        con = connection();
+        String query = " insert into Posts (user_id, thread_id, body) values (?, ?, ?)";
 
-            preparedStmt.execute();
-            con.close();
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, user_id);
+        preparedStmt.setInt(2, thread_id);
+        preparedStmt.setString(3, body);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ForumManagement.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        preparedStmt.execute();
+        con.close();
+
     }
 
     public static List<ForumPost> getPosts(int thread_id) {
@@ -106,7 +104,7 @@ public class ForumManagement {
             }
 
             con.close();
-            
+
             return post;
 
         } catch (SQLException ex) {

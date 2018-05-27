@@ -14,6 +14,7 @@
                     <div id="profileInfo" class="text-center">
                         <h5><i> <%=user.nick()%></i></h5>
                         <h5><i><%=user.career()%></i></h5>
+                        <h5><i><%=CareerManagement.getLibraryName(user.career())%></i></h5>
                         <h5><i><%=user.examStats()%> cuestionarios completados</i></h5>
                         <h5><i><%=user.medalStats()%> medallas obtenidas</i></h5>
                     </div>
