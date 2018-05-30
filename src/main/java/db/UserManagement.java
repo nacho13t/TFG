@@ -33,8 +33,8 @@ public class UserManagement {
 
         return con;
     }
-    
-    public static void removeLike(Review review, int id_user) throws SQLException{
+
+    public static void removeLike(Review review, int id_user) throws SQLException {
         con = connection();
         String like_array = review.getLike_array();
         like_array = like_array.replace("'" + id_user + "'", "");
@@ -45,24 +45,24 @@ public class UserManagement {
 
         preparedStmt.executeUpdate();
         con.close();
-        
+
         int currentLikes = getReviewLikes(review.getId());
         con = connection();
         query = "update reviews set likes = ? WHERE id = ? ";
         preparedStmt = con.prepareStatement(query);
-        preparedStmt.setInt(1, currentLikes-1);
+        preparedStmt.setInt(1, currentLikes - 1);
         preparedStmt.setInt(2, review.getId());
 
         preparedStmt.executeUpdate();
         con.close();
     }
-    
-    public static void giveTenLikesExperience(Review review) throws SQLException{
+
+    public static void giveTenLikesExperience(Review review) throws SQLException {
         User userTarget = getUser(review.getUser_id());
         userTarget.gainExperience(50);
-        
+
         con = connection();
-        
+
         String query = "update reviews set exp_given = 1 WHERE id = ? ";
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setInt(1, review.getId());
@@ -83,7 +83,7 @@ public class UserManagement {
 
         preparedStmt.executeUpdate();
         con.close();
-        
+
         int currentLikes = getReviewLikes(review.getId());
         currentLikes++;
         System.out.println("LIKES: " + currentLikes);
@@ -95,8 +95,8 @@ public class UserManagement {
 
         preparedStmt.executeUpdate();
         con.close();
-        
-        if((currentLikes >= 10)&&(!review.expGiven())){
+
+        if ((currentLikes >= 10) && (!review.expGiven())) {
             System.out.println("DANDO EXPERIENCIA");
             giveTenLikesExperience(review);
         }
@@ -187,7 +187,7 @@ public class UserManagement {
     public static int getReviewLikes(int id) throws SQLException {
 
         String query = "SELECT likes from reviews where id = ?";
-    con = connection();
+        con = connection();
         PreparedStatement preparedStmt = con.prepareStatement(query);
         preparedStmt.setInt(1, id);
         ResultSet result = preparedStmt.executeQuery();
@@ -549,8 +549,8 @@ public class UserManagement {
 
         return user;
     }
-    
-    public static User getUser(int id) throws SQLException { 
+
+    public static User getUser(int id) throws SQLException {
         User user = new User();
 
         con = connection();
@@ -574,7 +574,7 @@ public class UserManagement {
             user.id(id);
         }
         con.close();
-        
+
         retrieveProgressFromDatabase(user);
         Inventory.retrieveInventoryFromDB(user);
 
@@ -592,7 +592,7 @@ public class UserManagement {
             ResultSet result = preparedStmt.executeQuery();
             String medalsRaw = "";
             if (result.next()) {
-                boolean[] exms = {result.getBoolean("exm1_completed"), result.getBoolean("exm2_completed"), result.getBoolean("exm3_completed"), result.getBoolean("exm4_completed")};
+                boolean[] exms = {result.getBoolean("exm1_completed"), result.getBoolean("exm2_completed"), result.getBoolean("exm3_completed"), result.getBoolean("exm4_completed"),result.getBoolean("exm5_completed")};
                 user.setCompletedExams(exms);
                 medalsRaw = result.getString("medals");
             }
@@ -851,6 +851,72 @@ public class UserManagement {
             Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public static int validateFBUser(long id) throws SQLException {
+        con = connection();
+        String query = "select * from Users WHERE facebook_id = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setLong(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        int user_id = 0;
+        
+        if(result.next()){
+            user_id = result.getInt("idUsers");
+        }
+        
+        con.close();
+        return user_id;
+    }
+
+    public static User registerUserFB(long id, String raw_username) throws NoSuchAlgorithmException, SQLException {
+        int repeatedUsername = checkRepeatedUsername(raw_username, 0);
+        String username = raw_username;
+        if(repeatedUsername != 0) username = raw_username+="_"+repeatedUsername;
+        
+        con = connection();
+
+        User user = new User(username, "Grado en Arquitectura", null);
+        
+        String query = " insert into Users (username, career, lvl, name, password, expleft, facebook_id)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
+
+        
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, username);
+        preparedStmt.setString(2, user.career());
+        preparedStmt.setInt(3, 1);
+        preparedStmt.setString(4, username);
+        preparedStmt.setBytes(5, null);
+        preparedStmt.setInt(6, 50);
+        preparedStmt.setLong(7, id);
+        preparedStmt.execute();
+        con.close();
+        
+        setId(user);
+        createProgressRegisterForUser(user);
+        CareerManagement.recalculateStats(user.career());
+        
+        return user;
+        
+    }
+    
+    public static int checkRepeatedUsername(String username, int count) throws SQLException{
+        con = connection();
+        
+        String query = "select * from Users WHERE username = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, username);
+        ResultSet result = preparedStmt.executeQuery();
+        if(result.next()){
+            con.close();
+            count++;
+            return checkRepeatedUsername(username+="_"+count, count);
+        }
+        
+        con.close();
+        return count;
     }
 
 }

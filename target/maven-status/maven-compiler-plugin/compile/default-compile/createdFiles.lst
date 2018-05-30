@@ -17,6 +17,7 @@ servlets\OpenItemServlet.class
 com\mycompany\multiplayerbiblio\Review.class
 servlets\SearchUserServlet.class
 com\mycompany\multiplayerbiblio\Library.class
+.netbeans_automatic_build
 inventory\LootBox.class
 servlets\ChangeForExperienceServlet.class
 db\UserManagement.class

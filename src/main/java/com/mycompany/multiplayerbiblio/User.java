@@ -31,7 +31,7 @@ public final class User {
         level = 1;
         noob = true;
         experienceLeft = 50;
-        completedExams = new boolean[]{false, false, false, false};
+        completedExams = new boolean[]{false, false, false, false,false};
         inventory = new Inventory(this);
         
         medals = new ArrayList<>();
@@ -199,7 +199,7 @@ public final class User {
             }
         }
 
-        return completed + "/4";
+        return completed + "/1";
     }
 
     public void completeExam(int id) throws SQLException, SQLException {

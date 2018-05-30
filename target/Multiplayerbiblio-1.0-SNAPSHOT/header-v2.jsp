@@ -15,14 +15,63 @@
 </head>
 
 <body bgcolor="#000000">
-    <%
-        if (request.getSession().getAttribute("user") == null) {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-    %>    
-    <% User user = (User) request.getSession().getAttribute("user");
-        if (user.noob()) {
-            user.noNoob();%>
+        <script>
+            
+            function statusChangeCallback(response) {
+                console.log('statusChangeCallback');
+                console.log(response);
+            }
+
+            function checkLoginState() {
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+            }
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '251303118946517',
+                    cookie: true, // enable cookies to allow the server to access 
+                    // the session
+                    xfbml: true, // parse social plugins on this page
+                    version: 'v2.8' // use graph api version 2.8
+                });
+
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+
+            function testAPI() {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function (response) {
+                    console.log('Successful login for: ' + response.name);
+                    document.getElementById('status').innerHTML =
+                            'Thanks for logging in, ' + response.name + '!';
+                });
+            }
+        </script>
+    
+        <%
+            if (request.getSession().getAttribute("user") == null) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        %>    
+        <% User user = (User) request.getSession().getAttribute("user");
+            if (user.noob()) {
+                user.noNoob();%>
     <div class="alert alert-success alert-dismissible" role="alert">
         <h4 class="alert-heading">¡Bienvenid@ <%=user.nick()%> !</h4>
         <p>Completa lecciones y realiza las diferentes tareas disponibles para conseguir experiencia y subir de nivel. A medida que progreses desbloquearás nuevas características.</p>
@@ -73,19 +122,19 @@
             </div>
             <div class="col pt-1" style="text-align: right">
                 <form action="LogoutServlet">
-                    <button class="btn btn-outline-light btn-sm" type="submit"><span class="font-weight-bold" >Cerrar sesión</span></button>
+                    <button class="btn btn-outline-light btn-sm" type="submit"><span class="font-weight-bold" onclick="FB.logout();">Cerrar sesión</span></button>
                 </form>
 
             </div>
         </div>
     </div>
 
-<!--    <div class="container search-user">
-        <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-1">
-            <div class="form-group mb-2">
-                <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-info mb-2">Buscar</button>
-        </form>
-        <hr>
-    </div>-->
+    <!--    <div class="container search-user">
+            <form action="SearchUserServlet" onsubmit="return validateSearch(this)" class="form-inline p-1">
+                <div class="form-group mb-2">
+                    <input type="text" name="search" placeholder="Busca un usuario" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-info mb-2">Buscar</button>
+            </form>
+            <hr>
+        </div>-->

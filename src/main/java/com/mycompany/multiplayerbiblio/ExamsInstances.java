@@ -3,6 +3,28 @@ package com.mycompany.multiplayerbiblio;
 
 public class ExamsInstances {
     
+    public static Exam tema5Exam(){
+        
+        Exam exam = new Exam("Cuestionario de prueba",4);
+        Question[] questions = new Question[3];
+        
+        questions[0] = new Question("Las zonas interactivas en las imágenes se muestran de color...");
+        questions[1] = new Question("Los iconos que se utilizan para avanzar entre pantallas muestran...");
+        questions[2] = new Question("La plataforma para buscar recursos de la bilbioteca se llama...");
+        
+        questions[0].options(new String[]{"Verde","Azul","Fucsia"});
+        questions[1].options(new String[]{"Flechas","Huellas","Libros"});
+        questions[2].options(new String[]{"Catálogo","Bibliotecas","Faro"});
+        
+        questions[0].correctOption(2);
+        questions[1].correctOption(0);
+        questions[2].correctOption(2);
+        
+        exam.setQuestions(questions);
+        
+        return exam;
+    }
+    
     public static Exam tema1Exam(){
         
         Exam exam = new Exam("Cuestionario tema 1",0);
