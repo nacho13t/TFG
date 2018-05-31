@@ -14,7 +14,7 @@
             <div class="col-sm-12 col-md-8">
                 <div class="container" style="color: white;">
                     <h3 class="mt-2 mb-4">Recomienda un libro</h3>
-                    <form action="AddReviewServlet">
+                    <form action="AddReviewServlet" onsubmit="return validateReview(this)">
                         <div class="form-group">
                             <label for="book_name_input">Nombre del libro</label>
                             <input name="book_name" type="text" class="form-control" id="book_name_input" placeholder="Escribe aquí el nombre del libro del que vas a hablar.">
@@ -68,8 +68,32 @@
         function confirmDelete(id) {
             var ask = confirm("¿Seguro que quieres borrar este análisis?");
             if (ask) {
-                window.location = "RemoveReviewServlet?id="+id;
+                window.location = "RemoveReviewServlet?id=" + id;
             }
+        }
+
+        function validateReview(form) {
+            if (form.elements[0].value === "") {
+                alert("Introduce el título del libro");
+                return false;
+            }
+            
+            if (form.elements[1].value === "") {
+                alert("Escribe una frase que resuma el libro.");
+                return false;
+            }
+            
+            if (form.elements[2].value === "") {
+                alert("Escribe tu opinión sobre el libro.");
+                return false;
+            }
+
+            if (form.elements[2].value.length > 10000) {
+                alert("El texto es demasiado extenso.");
+                return false;
+            }
+
+            return true;
         }
     </script>
 

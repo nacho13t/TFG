@@ -102,17 +102,18 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
         <script>
-                            if (form.elements[0].value === "") {
-                            alert("Introduce el contenido del mensaje");
-                            return false;
-                            }
+                            function validatePost(form) {
+                                if (form.elements[0].value === "") {
+                                    alert("Introduce el contenido del mensaje");
+                                    return false;
+                                }
 
-                            if (form.elements[0].value.length > 255) {
-                            alert("Máximo 255 caracteres, has introducido " + form.elements[0].value.length);
-                            return false;
-                            }
+                                if (form.elements[0].value.length > 255) {
+                                    alert("Máximo 255 caracteres, has introducido " + form.elements[0].value.length);
+                                    return false;
+                                }
 
-                            return true;
+                                return true;
                             }
         </script>
 

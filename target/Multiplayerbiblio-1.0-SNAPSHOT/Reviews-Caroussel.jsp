@@ -7,7 +7,15 @@
         <div class="carousel-inner">
 
             <% User user = (User) request.getSession().getAttribute("user");
-                            List<Review> reviews = UserManagement.getAllReviews();%>
+            List<Review> reviews;
+            if(request.getSession().getAttribute("reviews")==null){
+                reviews = UserManagement.getAllReviews();
+            }else{
+                reviews = (List<Review>) request.getSession().getAttribute("reviews");
+            }
+                             
+               
+            %>
 
             <div class="carousel-item active p-4 text-center">
                 <blockquote class="blockquote">

@@ -43,7 +43,7 @@ public class AddItemServlet extends HttpServlet {
         }
         picture.use(user);
         
-        response.sendRedirect("Content-Image-Room.jsp");
+        response.sendRedirect("Sala-2.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
