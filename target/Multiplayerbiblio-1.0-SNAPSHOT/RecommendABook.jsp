@@ -14,7 +14,7 @@
             <div class="col-sm-12 col-md-8">
                 <div class="container" style="color: white;">
                     <h3 class="mt-2 mb-4">Recomienda un libro</h3>
-                    <form action="AddReviewServlet" onsubmit="return validateReview(this)">
+                    <form action="AddReviewServlet" onsubmit="return validateReview(this)" accept-charset="UTF-8">
                         <div class="form-group">
                             <label for="book_name_input">Título del libro</label>
                             <input name="book_name" type="text" class="form-control" id="book_name_input" placeholder="Escribe aquí el título del libro del que vas a hablar.">
