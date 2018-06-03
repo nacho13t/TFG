@@ -16,20 +16,20 @@
                     <h3 class="mt-2 mb-4">Recomienda un libro</h3>
                     <form action="AddReviewServlet" onsubmit="return validateReview(this)">
                         <div class="form-group">
-                            <label for="book_name_input">Nombre del libro</label>
-                            <input name="book_name" type="text" class="form-control" id="book_name_input" placeholder="Escribe aquí el nombre del libro del que vas a hablar.">
+                            <label for="book_name_input">Título del libro</label>
+                            <input name="book_name" type="text" class="form-control" id="book_name_input" placeholder="Escribe aquí el título del libro del que vas a hablar.">
                         </div>
                         <div class="form-group">
-                            <label for="book_name_input_2">Frase resumen</label>
-                            <input name="quote" type="text" class="form-control" id="book_name_input_2" placeholder="Una frase directa con la que resumirías el libro.">
+                            <label for="book_name_input_2">Autor</label>
+                            <input name="quote" type="text" class="form-control" id="book_name_input_2" placeholder="Autor del libro.">
                         </div>
                         <div class="form-group">
-                            <label for="review_text_area">Escribe tu crítica aquí.</label>
+                            <label for="review_text_area">Escribe tu recomendación aquí.</label>
                             <textarea name="review_content" class="form-control" id="review_text_area" rows="10"></textarea>
                         </div>
 
                         <%if (last_review_likes < 10) {%>
-                        <label for="button">Necesitas más 'me gusta' en tu anterior análisis para escribir uno nueva.</label>
+                        <label for="button">Necesitas más 'me gusta' en tu anterior recomendación para escribir una nueva.</label>
                         <br><button class="btn btn-secondary" disabled>Enviar</button>
                         <%} else {%>
                         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -39,7 +39,7 @@
                 </div>
                 <hr class="mt-4" style="border-color: white; ">
                 <div class="container" style="color: white;">
-                    <h3 class="mt-2 mb-4">Tus otros análisis</h3>
+                    <h3 class="mt-2 mb-4">Tus otras recomendaciones</h3>
                     <%
                         for (Review review : UserManagement.getUserReviews(user.id())) {%>
 
@@ -50,7 +50,7 @@
                         <p><%=review.getReview_content()%></p>
                         <p style="text-align: right"><%=review.getLikes()%> <i class="fas fa-heart"></i></p>
                         <p class="lead">
-                            <a class="btn btn-danger"  onclick='confirmDelete(<%=review.getId()%>)' role="button">Eliminar análisis</a>
+                            <a class="btn btn-danger"  onclick='confirmDelete(<%=review.getId()%>)' role="button">Eliminar recomendación</a>
                         </p>
                     </div>
                     <%}
@@ -66,7 +66,7 @@
 
     <script>
         function confirmDelete(id) {
-            var ask = confirm("¿Seguro que quieres borrar este análisis?");
+            var ask = confirm("¿Seguro que quieres borrar esta recomendación?");
             if (ask) {
                 window.location = "RemoveReviewServlet?id=" + id;
             }
@@ -79,7 +79,7 @@
             }
             
             if (form.elements[1].value === "") {
-                alert("Escribe una frase que resuma el libro.");
+                alert("Escribe el autor del libro");
                 return false;
             }
             

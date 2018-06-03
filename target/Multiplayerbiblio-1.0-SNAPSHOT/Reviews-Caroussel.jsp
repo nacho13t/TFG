@@ -29,8 +29,8 @@
                 for (Review review : reviews) {%>
                 <div class="carousel-item p-4 text-center">
                 <blockquote class="blockquote">
-                    <a class="mb-0" href="ReviewView.jsp?id_review=<%=review.getId()%>"><%=review.getQuote()%></a>
-                    <footer class="blockquote-footer"><%=review.getBook_name()%></footer>
+                    <a class="mb-0" href="ReviewView.jsp?id_review=<%=review.getId()%>"><%=review.getBook_name()%> - <%=review.getQuote()%></a>
+                    <footer class="blockquote-footer"><%=review.getLikes()%> <i class="fas fa-heart"></i></footer>
                 </blockquote>
             </div>
             <%}
