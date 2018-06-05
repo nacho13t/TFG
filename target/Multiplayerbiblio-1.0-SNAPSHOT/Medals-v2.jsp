@@ -6,7 +6,7 @@
     <jsp:include page="header-v2.jsp" />
 
     <% User user = (User) request.getSession().getAttribute("user");%>
-    <div class="container-fluid p-4" style="background-color: #000">
+    <div class="container-fluid p-4">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container clearfix">

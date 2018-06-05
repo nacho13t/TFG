@@ -9,7 +9,7 @@
         User user = (User) request.getSession().getAttribute("user");
         int last_review_likes = UserManagement.getLastReviewLikes(user.id());
     %>
-    <div class="container-fluid p-4" style="background-color: #000">
+    <div class="container-fluid p-4">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <div class="container" style="color: white;">

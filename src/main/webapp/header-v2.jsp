@@ -14,7 +14,7 @@
     <title>TFG</title>
 </head>
 
-<body bgcolor="#000000">
+<body>
         <script>
             
             function statusChangeCallback(response) {

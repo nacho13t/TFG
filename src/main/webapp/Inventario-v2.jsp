@@ -26,7 +26,7 @@
                             }
                         %>
                         <div class="p-2" style="text-align: center">
-                            <img src="Images/<%=item.image()%>" id="img<%=item.id()%>" onclick="displayOpenBoxButton(<%=item.id()%>)" class="img-responsive inventoryImageContainer rounded-circle p-2" alt="Item" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<h5><%=tipo%></h5><p><%=item.description()%></p>">
+                            <img src="Images/<%=item.image()%>" id="img<%=item.id()%>" onclick="displayOpenBoxButton(<%=item.id()%>)" class="img-responsive inventoryImageContainer rounded-circle p-2" alt="Item" data-toggle="tooltip" data-placement="top" data-html="true" title="<h5><%=tipo%></h5><p><%=item.description()%></p>">
                             <div class="itemsActions" id="itemsActions<%=item.id()%>" style="display: none">
                                 <form style="text-align: center" action="OpenItemServlet" onsubmit="return checkJoker(<%=item.id()%>)">
                                     <button style="color: white;" type="submit" id="btn<%=item.id()%>" class="btn btn-outline-secondary btn-sm <%if (item.type().equals("Joker")) {

@@ -19,7 +19,7 @@
                                 <div class="form-group">
                                     <label for="target">Destinatario</label>
                                     <input type="text" class="form-control" id="target" name="target" aria-describedby="targetHelp">
-                                    <small id="target" class="form-text text-muted">Usuario destino.</small>
+                                    <small id="target" class="form-text text-muted">Introduce el nombre de usuario del destinatario.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="targetMessageLabel">Mensaje para el destinatario.</label>
