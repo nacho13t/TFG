@@ -109,6 +109,7 @@
                 <div class="buttons-center">
                     <button class="btn btn-outline-info mt-2" type="button" data-toggle="modal" data-target="#loginModal"><span class="font-weight-bold" >Iniciar sesión</span></button>
                     <button class="btn btn-success mt-2" type="button" data-toggle="modal" data-target="#registerModal"><span class="font-weight-bold" >Registrarse</span></button>
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
                 </div>
             </div>
         </div>
@@ -135,7 +136,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="LoginServlet" onsubmit="return validateLogin(this)">
+                        <form action="LoginServlet" onsubmit="return validateLogin(this)" accept-charset="UTF-8">
                             <div class="form-group">
                                 <label for="yourName">Nombre</label>
                                 <input type="userName" class="form-control" name="name" placeholder="Introduce tu nombre">

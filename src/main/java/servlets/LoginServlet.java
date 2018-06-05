@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
 
         if (request.getParameter("access_token") != null) {
-            System.out.println("LOGIN SERVLET");
             
             String url = "https://graph.facebook.com/v3.0/me?fields=id%2Cname&access_token="+request.getParameter("access_token");
             URL obj = new URL(url);
