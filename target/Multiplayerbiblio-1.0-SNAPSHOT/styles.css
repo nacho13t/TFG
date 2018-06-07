@@ -92,6 +92,10 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
 }
 
+#image-map-pro-container{
+    border-style: solid; border-color: white;
+}
+
 @media screen and (max-width: 700px) { 
     #image-game-container{
         width: 90%;

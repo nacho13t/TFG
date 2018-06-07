@@ -10,7 +10,7 @@
     <div class="container-fluid p-4">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                <div id="image-map-pro-container" class="mb-2" style="border-style: solid; border-color: white;"></div>
+                <div id="image-map-pro-container" class="mb-2"></div>
                 <jsp:include page="Reviews-Caroussel.jsp" />
             </div>
             <jsp:include page="Sidebar.jsp" />
