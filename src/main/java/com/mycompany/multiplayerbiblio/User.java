@@ -205,16 +205,14 @@ public final class User {
     public void completeExam(int id) throws SQLException, SQLException {
         completedExams[id] = true;
         UserManagement.completeNewExam(this, id+1);
-        if (checkIfAllExamCompleted()) {
+        if (checkFourExamsCompleted()) {
             UserManagement.obtainNewMedal(this, 2);
         }
     }
 
-    public boolean checkIfAllExamCompleted() {
-        for (boolean completedExam : completedExams) {
-            if (!completedExam) {
-                return false;
-            }
+    public boolean checkFourExamsCompleted() {
+        for (int i = 0; i < 4; i++) {
+            if(!completedExams[i]) return false;
         }
 
         return true;

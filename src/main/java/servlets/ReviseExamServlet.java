@@ -61,7 +61,7 @@ public class ReviseExamServlet extends HttpServlet {
             session.setAttribute("lessonCompleted", "true");
         }
         session.setAttribute("examInProgress", "false");
-        response.sendRedirect("Sala-1.jsp");
+        response.sendRedirect("Sala-4.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
