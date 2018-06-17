@@ -18,6 +18,7 @@ public final class User {
     private boolean noob;
     private List<Medal> medals;
     private boolean[] completedExams;
+    private boolean[] completedTasks;
     private List<LevelUnlocks> newUnlocks;
 
     public User(String name, String career, String pass) {
@@ -31,7 +32,8 @@ public final class User {
         level = 1;
         noob = true;
         experienceLeft = 50;
-        completedExams = new boolean[]{false, false, false, false,false};
+        completedExams = new boolean[]{false, false, false, false, false};
+        completedTasks = new boolean[]{false, false, false, false, false, false, false};
         inventory = new Inventory(this);
         
         medals = new ArrayList<>();
@@ -41,7 +43,8 @@ public final class User {
 
     public User() {
         noob = false;
-        completedExams = new boolean[]{false, false, false, false};
+        completedExams = new boolean[]{false, false, false, false, false};
+        completedTasks = new boolean[]{false, false, false, false, false, false};
         medals = new ArrayList<>();
         newUnlocks = new ArrayList<>();
     }
@@ -150,8 +153,10 @@ public final class User {
         this.noob = noob;
     }
 
-  
-
+    public void completeTask(int index){
+        completedTasks[index] = true;
+    }
+    
     public void setMedals(Medal[] medals) {
         this.medals.addAll(Arrays.asList(medals));
     }
@@ -159,7 +164,10 @@ public final class User {
     public void setCompletedExams(boolean[] completedExams) {
         this.completedExams = completedExams;
     }
-
+    
+    public void setCompletedTasks(boolean[] completedTasks) {
+        this.completedTasks = completedTasks;
+    }
 
     public String medalStats() {
         int obtained = 0;
@@ -189,6 +197,10 @@ public final class User {
 
     public boolean[] getCompletedExams() {
         return completedExams;
+    }
+    
+    public boolean[] getCompletedTasks() {
+        return completedTasks;
     }
 
     public String examStats() {

@@ -9,6 +9,7 @@
         <div class="col-7">
             <h5 style="color: white" mt-2><%= user.nick()%></h5>
             <h5 style="color: white" mt-2><%= user.career()%></h5>
+            <h5 style="color: white" mt-2>Nivel <%= user.level()%></h5>
         </div>
     </div>
 

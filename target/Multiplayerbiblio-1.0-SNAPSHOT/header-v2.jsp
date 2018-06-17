@@ -102,7 +102,7 @@
 
     <% if (!user.levelUnlocks().isEmpty()) {%>
     <div class="alert alert-info alert-dismissible" role="alert">
-        <h2 class="alert-heading">Nuevas recompensas</h2>
+        <h3 class="alert-heading">Información</h3>
         <% for (LevelUnlocks reward : user.levelUnlocks()) {
                 out.write("<p>" + reward.info() + "</p>");
             }

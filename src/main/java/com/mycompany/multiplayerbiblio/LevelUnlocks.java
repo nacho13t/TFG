@@ -27,7 +27,7 @@ public class LevelUnlocks {
     }
     
     public static LevelUnlocks CorrectQuestion(User user){
-        return new LevelUnlocks("¡La respuesta es correcta! Has ganado 50 puntos de experiencia.");
+        return new LevelUnlocks("¡La respuesta es correcta! Has ganado 30 puntos de experiencia.");
     }
     
     public static LevelUnlocks WrongQuestion(User user){

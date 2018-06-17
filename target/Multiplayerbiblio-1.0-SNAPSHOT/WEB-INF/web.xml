@@ -80,6 +80,10 @@
         <servlet-name>RemoveLikeServlet</servlet-name>
         <servlet-class>servlets.RemoveLikeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TaskServlet</servlet-name>
+        <servlet-class>servlets.TaskServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>RemoveLikeServlet</servlet-name>
         <url-pattern>/RemoveLikeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskServlet</servlet-name>
+        <url-pattern>/TaskServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

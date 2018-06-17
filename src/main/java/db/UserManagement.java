@@ -33,6 +33,25 @@ public class UserManagement {
 
         return con;
     }
+    
+    public static void completeTasks(User user, int number) throws SQLException{
+        try {
+            String colName = "task_"+ number;
+            con = connection();
+
+            String query = "update Progress set " + colName + " = ? WHERE user_id = ? ";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setBoolean(1, true);
+            preparedStmt.setInt(2, user.id());
+
+            preparedStmt.executeUpdate();
+            con.close();
+
+        } catch (SQLException ex) {
+            con.close();
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void removeLike(Review review, int id_user) throws SQLException {
         con = connection();
@@ -593,7 +612,9 @@ public class UserManagement {
             String medalsRaw = "";
             if (result.next()) {
                 boolean[] exms = {result.getBoolean("exm1_completed"), result.getBoolean("exm2_completed"), result.getBoolean("exm3_completed"), result.getBoolean("exm4_completed"),result.getBoolean("exm5_completed")};
+                boolean[] tasks = {result.getBoolean("task_1"), result.getBoolean("task_2"), result.getBoolean("task_3"), result.getBoolean("task_4"),result.getBoolean("task_5"), result.getBoolean("task_6")};
                 user.setCompletedExams(exms);
+                user.setCompletedTasks(tasks);
                 medalsRaw = result.getString("medals");
             }
             con.close();

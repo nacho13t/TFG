@@ -17,7 +17,7 @@
     <script src="jquery-3.3.1.min.js"></script>
     <script src="image-map-pro.min.js"></script>
 
-    <% if ((request.getParameter("answer") != null) && (request.getParameter("answer").equalsIgnoreCase("ciencia compartida"))) { %>
+    <% if (user.getCompletedTasks()[0]) { %>
     <script type="text/javascript">
         ;
         (function ($, window, document, undefined) {
@@ -55,10 +55,13 @@
                         Si has visto este vídeo promocional podrás decirme como se llama el ciclo de charlas que se hacen en la Biblioteca de Ciencias Básicas de la ULPGC. 
                     </p>
 
-                    <form action="Escaleras-1.jsp">
+                    <form action="TaskServlet" accept-charset="UTF-8">
                         <div class="form-group">
                             <label for="answer">Tu respuesta:</label>
                             <input type="text" class="form-control" name="answer" id="answer" aria-describedby="ans">
+                            <input type="hidden" name="place" value="Escaleras-1.jsp">
+                            <input type="hidden" name="correct_answer" value="ciencia compartida">
+                            <input type="hidden" name="task_number" value="1">
                             <button type="submit" class="btn btn-primary mt-1">Enviar</button>
                         </div>
                     </form>
