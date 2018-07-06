@@ -76,6 +76,7 @@
         <h4 class="alert-heading">¡Bienvenid@ <%=user.nick()%> !</h4>
         <p>Completa lecciones y realiza las diferentes tareas disponibles para conseguir experiencia y subir de nivel. A medida que progreses desbloquearás nuevas características.</p>
         <hr>
+        <p>Revisa primero el tutorial, haciendo click en el icono negro con una interrogación en la imagen inferior.</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

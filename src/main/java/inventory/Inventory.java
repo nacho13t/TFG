@@ -1,7 +1,6 @@
 package inventory;
 
 import com.mycompany.multiplayerbiblio.User;
-import static db.ForumManagement.createPost;
 import db.UserManagement;
 import java.sql.Connection;
 import java.sql.DriverManager;

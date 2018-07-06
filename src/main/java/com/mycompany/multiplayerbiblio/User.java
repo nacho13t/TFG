@@ -211,7 +211,7 @@ public final class User {
             }
         }
 
-        return completed + "/1";
+        return completed + "/4";
     }
 
     public void completeExam(int id) throws SQLException, SQLException {
